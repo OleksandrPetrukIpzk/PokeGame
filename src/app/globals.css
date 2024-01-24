@@ -17,11 +17,237 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+}
+.main{
+}
+.block-gradient{
+  background: linear-gradient(52deg, #FFE1C6 4.87%, #FFCB05 94.37%);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.text-subtitle{
+  width: 207px;
+  text-align: center;
+  color: #000;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.image-pocemon{
+  width: 200px;
+  height: 200px;
+}
+.backdrop-pokemon{
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 160vh;
+}
+.types-text{
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  color: white;
+}
+.pokemon-name{
+  font-family: Roboto;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 30px;
+  margin-bottom:16px;
+}
+.stats{
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 36px;
+  color: #1D1D1D;
+}
+.name-stats{
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  color: #666;
+}
+.link-right{
+  left: 85%;
+}
+.swith-pokemon{
+  font-size: 25px;
+  background: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+.swith-pokemon:hover{
+  cursor: pointer;
+  background: black;
+  color: white;
+}
+.hoverBG:hover{
+  cursor: pointer;
+  background: black;
+  color: white;
+}
+.link-swith-pokemon{
+  top: 250px;
+}
+.search-pokemon{
+  padding: 10px;
+  margin-top: 20px;
+  margin-right: 5px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.search-pokemon-button{
+  color: white;
+  background: #DC0A2D;
+  padding: 10px;
+  border-radius: 10px;
+}
+.search-pokemon-button:hover{
+  color:  #DC0A2D;
+  background: white;
+}
+.nav-link{
+  color: black;
+  margin-top: 20px;
+  font-size: 20px;
+}
+.nav-link:hover{
+  color: white;
+  text-decoration: #1D1D1D;
+}
+.filter-element{
+  color: black;
+  margin: 20px;
+  border-radius: 10px;
+  width: 500px;
+  text-align: center;
+  padding: 5px;
+  font-size: 20px;
+}
+.filter-element:hover{
+  color: black;
+}
+.header-text{
+  color: black;
+}
+.login-left{
+  height: 100vh;
+  padding-top: 100px;
+  padding-right: 100px;
+  padding-left: 66px;
+  background: #86cbac;
+  color: #FFF;
+  font-family: Poppins;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.8px;
+}
+.login-left-name{
+  padding-bottom: 253px;
+}
+.login-left-text{
+  padding-bottom: 265px;
+}
+.login-right{
+  color: #000;
+  font-family: Poppins;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  padding-right: 99px;
+  padding-left: 99px;
+  padding-top: 200px;
+}
+.login-right-text{
+  margin-bottom: 100px;
+}
+.login-input{
+  margin-bottom: 30px;
+}
+.login-input{
+ border-bottom: 1px solid black;
+}
+.login-button{
+  border-radius: 20px;
+  background: #000;
+  color: white;
+  padding: 10px;
+  margin-bottom: 100px;
+  border: 1px solid white;
+}
+.login-button:hover{
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+.login-redirect-link{
+  color: #3EC1F3;
+  text-decoration: underline;
+}
+.dialog-block{
+  left: 300px;
+  top: 340px;
+}
+.dialog-block p{
+  width: 500px;
+}
+.dialog-block button{
+  position: relative;
+  left: 400px;
+ padding: 15px;
+  background: #882727;
+  color: white;
+  border-radius: 10px;
+}
+.dialog-trainer{
+  padding: 20px;
+  background: white;
+  display: flex;
+  width: 150px;
+  position: relative;
+  height: 150px;
+  top: 220px;
+  left: 250px;
+  border-radius: 50px;
+}
+.dialig{
+  background-image: url("../../public/5003472.jpg");
+  height: 100vh;
+  background-size: cover;
+  width: 100%;
+}
+.svg-container{
+  left: 400px;
+  top: 300px;
+}
+.get-pokemon{
+  height: 100%;
+  width: 100%;
+}
+.get-pokemon-icon{
+  height: 300px;
+  display: flex;
+  align-items: center;
+}
+.get-pokemon-button{
+  padding: 10px 20px;
+  background: #1D1D1D;
+  color: white;
+  border-radius: 20px;
 }
