@@ -3,7 +3,7 @@
 import {useEffect, useState} from "react";
 import Image from "next/image";
 import {CardPokemon} from "@/app/cardPokemon";
-import {DEFAULT_LINK} from "@/constants/pokemons";
+import { NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import '../../globals.css'
 import {useAppSelector} from "@/redux/store";
 import {useRouter} from "next/navigation";
@@ -13,9 +13,10 @@ import {getAuth} from "@/functions/auth";
 import {useDispatch} from "react-redux";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {randomPokemonNumber} from "@/functions/pocemons";
+import {isTheSame} from "@/functions/logic";
 export default function GetPokemon () {
     const [isClicked, setIsClicked] = useState(false);
-    const [numberPokemon, setNumberPokemon] = useState(1);
+    const [numberPokemon, setNumberPokemon] = useState(NUMBER_ONE);
     const arrPokemons = useAppSelector((state) => state.authReducer.value.arrPokemons);
     const router = useRouter()
     const dispatch = useDispatch()
@@ -27,7 +28,7 @@ export default function GetPokemon () {
     }
     useEmptyAuth()
     useEffect(() => {
-        if(arrPokemons.length !== 0){
+        if(!isTheSame(arrPokemons.length, NUMBER_ZERO)){
             router.push('/menu')
         }
     }, []);
