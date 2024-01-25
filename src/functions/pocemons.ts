@@ -14,6 +14,17 @@ export const errorNotification = (params = 'Something went wrong') =>{
         theme: "colored",})
 }
 
+export const youCantLeave = (params = 'You cant leave') => {
+    return toast.error(params, {position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",})
+}
+
 export const  findTypesById = async (id:string) =>{
  const resolve =  await axios.get(DEFAULT_LINK + 'pokemon/' + id)
     return resolve.data.types
@@ -34,18 +45,7 @@ type Fighter = {
     speed: number
 
 }
-type HitPokemon = {
-    statsCurrentUser: Fighter,
-    selectedUser: Fighter,
-    setStatsCurrentUser: Dispatch<SetStateAction<object>>,
-    setSelectedUser:  Dispatch<SetStateAction<object>>,
-    setGameStatus: Dispatch<SetStateAction<string>>,
-}
-type ChoiceUserForFight = {
-    userInfo:Fighter,
-    setSelectedUser:  Dispatch<SetStateAction<Fighter>>,
-    setIsSelectedUser: Dispatch<SetStateAction<boolean>>
-}
+
 
 export const isHit = (yourPokemon:Fighter, enemyPokemon:Fighter) =>{
     return yourPokemon.sumaryHp - enemyPokemon.sumaryAttack > NUMBER_ZERO && enemyPokemon.sumaryHp - yourPokemon.sumaryAttack > NUMBER_ZERO
@@ -85,4 +85,76 @@ export const randomPokemonNumber = () => {
 
 export const isMoreOneCoin = (coins:number) =>{
     return coins > NUMBER_ZERO
+}
+
+export const hit = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPokemon: Dispatch<SetStateAction<any>>, yourAttack: number, enemyAttack: number) =>{
+    setYourPokemon((prev: any) => {
+        return {
+            ...prev,
+            sumaryHp: prev.sumaryHp - enemyAttack
+        }
+    })
+    setEnemyPokemon((prev: any) => {
+        return {
+            ...prev,
+            sumaryHp: prev.sumaryHp - yourAttack
+        }
+    })
+}
+
+export const youLose = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPokemon: Dispatch<SetStateAction<any>>, yourAttack: number) =>{
+    setYourPokemon((prev: any) => {
+        return {
+            ...prev,
+            sumaryHp: NUMBER_ZERO
+        }
+    })
+    setEnemyPokemon((prev: any) => {
+        return {
+            ...prev,
+            sumaryHp: prev.sumaryHp - yourAttack
+        }
+    })
+}
+
+export const youWin = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPokemon: Dispatch<SetStateAction<any>>, enemyAttack: number) =>{
+    setYourPokemon((prev: any) => {
+        return {
+            ...prev,
+            sumaryHp: prev.sumaryHp - enemyAttack
+        }
+    })
+    setEnemyPokemon((prev: any) => {
+        return {
+            ...prev,
+            sumaryHp: NUMBER_ZERO
+        }
+    })
+}
+
+export const isBiggest = (first: number, second: number) =>{
+    return first > second
+}
+
+export const configurePokemons = (setEnemyPokemon: Dispatch<SetStateAction<any>>, setYourPokemon: Dispatch<SetStateAction<any>>, selectedPokemon: string, stageInOfflineArena: number) =>{
+    axios.get(DEFAULT_LINK + 'pokemon/' + stageInOfflineArena).then(resolve => {
+        setEnemyPokemon({
+            name: resolve.data.name,
+            img: checkCurrentImage(resolve.data.sprites),
+            sumaryHp: (resolve.data.stats[0].base_stat * resolve.data.stats[2].base_stat) * (resolve.data.stats[4].base_stat / 2),
+            sumaryAttack: resolve.data.stats[1].base_stat * resolve.data.stats[3].base_stat,
+            speed: resolve.data.stats[5]?.base_stat
+        })
+    })
+    if(selectedPokemon) {
+        axios.get(DEFAULT_LINK + 'pokemon/' + selectedPokemon).then((resolve: any) => {
+            setYourPokemon({
+                name: resolve.data.name,
+                img: checkCurrentImage(resolve.data.sprites),
+                sumaryHp: (resolve.data.stats[0].base_stat * resolve.data.stats[2].base_stat) * (resolve.data.stats[4].base_stat / 2),
+                sumaryAttack: resolve.data.stats[1].base_stat * resolve.data.stats[3].base_stat,
+                speed: resolve.data.stats[5]?.base_stat
+            })
+        })
+    }
 }

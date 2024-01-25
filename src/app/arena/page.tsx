@@ -43,7 +43,7 @@ type UserInfo = {
 export default function Arena () {
     const [usersList, setUsersList] = useState([{}]);
     const [selectedUser, setSelectedUser] = useState(DEFAULT_TEMPLATE_USER_FOR_FIGHT);
-    const [gameStatus, setGameStatus] = useState('');
+    const [gameStatus, setGameStatus] = useState(EMPTY_STRING);
     const [isSelectedUser, setIsSelectedUser] = useState(false);
     const [isFight, setIsFight] = useState(false);
     const [statsCurrentUser, setStatsCurrentUser] = useState(DEFAULT_TEMPLATE_USER_FOR_FIGHT)
@@ -135,7 +135,7 @@ export default function Arena () {
    useEffect( () => {
        getUsers()
        if(selectedPokemon) {
-           axios.get(DEFAULT_LINK + 'pokemon/' + selectedPokemon).then((userDetailInfo: any) => {
+           axios.get(DEFAULT_LINK + 'pokemon/' + selectedPokemon).then((userDetailInfo) => {
                setStatsCurrentUser({
                    sumaryHp: (userDetailInfo.data.stats[0].base_stat * userDetailInfo.data.stats[2].base_stat) * (userDetailInfo.data.stats[4].base_stat / 2),
                    sumaryAttack: userDetailInfo.data.stats[1].base_stat * userDetailInfo.data.stats[3].base_stat,

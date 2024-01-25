@@ -1,7 +1,6 @@
 'use client'
 import {Header} from "@/Header/Header";
 import Link from "next/link";
-import {useEffect} from "react";
 import {Button} from "@mui/material";
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';

@@ -1,3 +1,10 @@
+export type Fighter = {
+    name: string,
+    img: string,
+    sumaryHp: number,
+    sumaryAttack: number,
+    speed: number,
+}
 export const COLOR_OF_ABILITIES:object = {
     normal: 'black',
     fighting: 'red',
@@ -30,7 +37,7 @@ export const NUMBER_ONE :number = 1;
 
 export const BASE_URL:string = 'http://localhost:5000/api'
 
-export const DEFAULT_TEMPLATE_FOR_FIGHT = {
+export const DEFAULT_TEMPLATE_FOR_FIGHT: Fighter = {
     name: '',
     img: '',
     sumaryHp: 0,
