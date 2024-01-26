@@ -2,36 +2,32 @@
 import {Header} from "@/Header/Header";
 import {useEffect, useState} from "react";
 import UserServices from "@/services/userServices";
-import {getAuth} from "@/functions/auth";
 import {useDispatch} from "react-redux";
 import {User} from "@/app/arena/user";
 import '../globals.css'
-import {Box, Button, Modal} from "@mui/material";
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
-import {Abilities} from "@/app/pokemon/[name]/abilities";
+import {Box, Modal} from "@mui/material";
 import {
-    findNamePokemonById,
-    findTypesById,
-    getPokemonInfoById,
+    getPokemonInfoById, hit,
     isHit,
     isYouLose,
-    isYouWin,
+    isYouWin, youCantLeave, youLose, youWin,
 } from "@/functions/pocemons";
 import {useAppSelector} from "@/redux/store";
 import axios from "axios";
 import {
-    DEFAULT_LINK,
-    DEFAULT_TEMPLATE_FOR_FIGHT, DEFAULT_TEMPLATE_USER_FOR_FIGHT, EMPTY_STRING,
+    DEFAULT_LINK, DEFAULT_TEMPLATE_USER_FOR_FIGHT, EMPTY_STRING,
     LOSE,
     NUMBER_ONE,
-    NUMBER_ZERO,
     STYLES_FOR_MODAL, WIN
 } from "@/constants/pokemons";
 import {buyElement} from "@/redux/features/auth-slice";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
-import SportsMmaOutlinedIcon from "@mui/icons-material/SportsMmaOutlined";
-import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import {isTheSame} from "@/functions/logic";
+import {GameStatus} from "@/app/storyMode/GameStatus";
+import {FightPanel} from "@/app/arena/FIghtPanel";
+import {ButtonsForFight} from "@/app/storyMode/ButtonsForFight";
+import {EnemyPanel} from "@/app/arena/EnemyPanel";
+import {INITIAL_USER} from "@/constants/user";
 type UserInfo = {
     data: object[],
     sumaryHp?: number,
@@ -41,7 +37,7 @@ type UserInfo = {
     selectedPokemon: string,
 }
 export default function Arena () {
-    const [usersList, setUsersList] = useState([{}]);
+    const [usersList, setUsersList] = useState([INITIAL_USER]);
     const [selectedUser, setSelectedUser] = useState(DEFAULT_TEMPLATE_USER_FOR_FIGHT);
     const [gameStatus, setGameStatus] = useState(EMPTY_STRING);
     const [isSelectedUser, setIsSelectedUser] = useState(false);
@@ -66,46 +62,14 @@ export default function Arena () {
     }
     const hitPokemon = () => {
         if(isHit(statsCurrentUser, selectedUser)){
-            setStatsCurrentUser((prev) => {
-                return {
-                    ...prev,
-                    sumaryHp: prev.sumaryHp - selectedUser.sumaryAttack
-                }
-            })
-            setSelectedUser((prev) => {
-                return {
-                    ...prev,
-                    sumaryHp: prev.sumaryHp - statsCurrentUser.sumaryAttack
-                }
-            })
+            hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack)
+
         } else if(isYouLose(statsCurrentUser, selectedUser)){
             setGameStatus(LOSE)
-            setStatsCurrentUser(prev => {
-                return {
-                    ...prev,
-                    sumaryHp: NUMBER_ZERO
-                }
-            })
-            setSelectedUser((prev) => {
-                return {
-                    ...prev,
-                    sumaryHp: prev.sumaryHp - statsCurrentUser.sumaryAttack
-                }
-            })
+            youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
         } else if(isYouWin(statsCurrentUser, selectedUser)){
             setGameStatus(WIN)
-            setStatsCurrentUser((prev) => {
-                return {
-                    ...prev,
-                    sumaryHp: prev.sumaryHp - selectedUser.sumaryAttack
-                }
-            })
-            setSelectedUser(prev => {
-                return {
-                    ...prev,
-                    sumaryHp: 0
-                }
-            })
+            youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
         }
     }
 
@@ -113,12 +77,14 @@ export default function Arena () {
         if(statsCurrentUser.speed > selectedUser.speed){
             setIsSelectedUser(false);
             setIsFight(false);
+        } else{
+            youCantLeave()
         }
     }
     const sendResult = async () =>{
         let winner = EMPTY_STRING;
         let reward = NUMBER_ONE;
-        if(gameStatus === WIN){
+        if(isTheSame(gameStatus, WIN)){
             winner = userEmail;
             reward += userCoins;
             dispatch(buyElement(reward));
@@ -136,15 +102,15 @@ export default function Arena () {
        getUsers()
        if(selectedPokemon) {
            axios.get(DEFAULT_LINK + 'pokemon/' + selectedPokemon).then((userDetailInfo) => {
-               setStatsCurrentUser({
+               setStatsCurrentUser((prev) => ({
+                   ...prev,
                    sumaryHp: (userDetailInfo.data.stats[0].base_stat * userDetailInfo.data.stats[2].base_stat) * (userDetailInfo.data.stats[4].base_stat / 2),
                    sumaryAttack: userDetailInfo.data.stats[1].base_stat * userDetailInfo.data.stats[3].base_stat,
                    speed: userDetailInfo.data.stats[5]?.base_stat,
-               })
+               }))
            })
        }
     }, [isSelectedUser]);
-
     // @ts-ignore
     return(<main>
         <Header/>
@@ -154,25 +120,12 @@ export default function Arena () {
         }}>
                 {isFight ?
                     <Box sx={{ ...STYLES_FOR_MODAL, width: 800 }}>
-                    <p>{!gameStatus ? 'Fight' : 'Finish game'}</p>
-                        {gameStatus && <p>{gameStatus === 'Win' ? 'You win' : selectedUser.userName + ' win'}</p>}
-                     <div className='flex justify-between'>
-                        <div> <p>{statsCurrentUser.sumaryHp}</p>
-                            <IconPokemon id={selectedPokemon}/>  </div>
-                         <p>VS</p>
-                         <div> <p>{selectedUser.sumaryHp}</p>
-                         <IconPokemon id={selectedUser.selectedPokemon}/>
-                         </div>
-                         </div>
-                        {!gameStatus && <Button endIcon={<SportsMmaOutlinedIcon/>} onClick={() => hitPokemon()}>Hit</Button>}
-                        {!gameStatus && <Button endIcon={<DirectionsRunIcon/>} onClick={() => handleLeave()}>Leave</Button>}
-                        {gameStatus && <Button endIcon={<AssignmentTurnedInIcon/>} onClick={() => sendResult()}>Finish game</Button>}
+                        <GameStatus gameStatus={gameStatus}/>
+                        <FightPanel statsCurrentUser={statsCurrentUser} selectedPokemon={selectedPokemon} selectedUser={selectedUser}/>
+                        <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon}/>
                     </Box>
-                    :<Box sx={{ ...STYLES_FOR_MODAL, width: 400 }}> <IconPokemon id={selectedUser?.data?.name}/>
-                <p>User: {selectedUser.userName}</p>
-                <p>Pokemon name: {selectedUser?.data?.name}</p>
-              <div className='flex'> <p>Types:</p> <Abilities types={selectedUser?.data?.types} isLoaded={false}/></div>
-                <Button endIcon={<SportsMmaOutlinedIcon/>} onClick={() => setIsFight(true)}>Lets fight</Button></Box>}
+                    : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight}/>
+                    }
         </Modal>
         <div className='flex items-center'>
             {usersList.map((user) => user.selectedPokemon && <User name={user.userName} selectedPokemon={user.selectedPokemon} coins={user.coins} email={user.email} choiceUserForFight={choiceUserForFight}/>)}

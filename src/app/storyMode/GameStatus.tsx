@@ -1,8 +1,8 @@
-import {WIN} from "@/constants/pokemons";
+import {ifTheFight, ifYouWin} from "@/functions/logicPages";
 
 export const GameStatus = ({gameStatus}: {gameStatus: string}) =>{
     return  (<div>
-        <p>{!gameStatus ? 'Fight' : 'Finish game'}</p>
-        {gameStatus && <p>{gameStatus === WIN ? 'You win' : 'You lose'}</p>}
+        <p>{ifTheFight(gameStatus)}</p>
+        {gameStatus && <p>{ifYouWin(gameStatus)}</p>}
     </div>)
 }

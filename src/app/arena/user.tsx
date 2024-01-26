@@ -8,7 +8,7 @@ type CreatedUserArena = {
     selectedPokemon: string,
     coins: number,
     email: string,
-    choiceUserForFight: void
+    choiceUserForFight: Function
 }
 export const User = ({name, selectedPokemon,coins, email, choiceUserForFight}: CreatedUserArena) =>{
     // @ts-ignore

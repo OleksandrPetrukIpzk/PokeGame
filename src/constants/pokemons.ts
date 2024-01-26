@@ -1,6 +1,6 @@
 export type Fighter = {
     name: string,
-    img: string,
+    img?: string,
     sumaryHp: number,
     sumaryAttack: number,
     speed: number,
