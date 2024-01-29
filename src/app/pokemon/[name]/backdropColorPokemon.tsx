@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {COLOR_OF_ABILITIES, EMPTY_STRING, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
+import {Ability} from "@/constants/types";
 type Type = {
     type:{
         name: string,
@@ -10,7 +11,7 @@ type Types = {
     types: Type[],
 }
 
-export const BackdropColorPokemon = ({types}:Types) =>{
+export const BackdropColorPokemon = ({types}: Ability[]) =>{
     const [selectedColor, setSelectedColor] = useState(EMPTY_STRING);
     const [currentIndex, setCurrentIndex] = useState(NUMBER_ZERO);
     const [isChange, setIsChange] = useState(true);

@@ -3,21 +3,10 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import {errorNotification} from "@/functions/pocemons";
-import {DEFAULT_IMAGE} from "@/constants/pokemons";
+import {DEFAULT_IMAGE, DEFAULT_POKEMON_INFO} from "@/constants/pokemons";
 
 export const CardPokemon = ({pokemon, isLoaded}: any): JSX.Element => {
-    const [pokemonInfo, setPokemonInfo] = useState({
-        name: '',
-        photoURL: '',
-        altPhotoURL: '',
-        height: 0,
-        hp: 0,
-        attack: 0,
-        defense: 0,
-        specialAttack: 0,
-        specialDefense: 0,
-        speed: 0
-    });
+    const [pokemonInfo, setPokemonInfo] = useState(DEFAULT_POKEMON_INFO);
     useEffect(() => {
         axios.get(pokemon?.url).then(info => {
             let currentImage = info.data?.sprites?.other?.home?.front_default;
