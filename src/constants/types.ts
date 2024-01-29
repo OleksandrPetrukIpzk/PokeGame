@@ -5,3 +5,19 @@ export type OnlineFighters  = Fighter & {
     userName: string,
     data: any
 }
+
+export interface ColorOfAbilities {
+    [key: string]: string;
+}
+
+export type AbilitiesType = {
+    types: Array<Ability>,
+    isLoaded: boolean,
+}
+export type Ability = {
+    type:{
+        name: string;
+        slot?: number;
+        url?: string
+    }
+}

@@ -1,3 +1,5 @@
+import {ColorOfAbilities} from "@/constants/types";
+
 export type Fighter = {
     name: string,
     img?: string,
@@ -5,7 +7,7 @@ export type Fighter = {
     sumaryAttack: number,
     speed: number,
 }
-export const COLOR_OF_ABILITIES:object = {
+export const COLOR_OF_ABILITIES: ColorOfAbilities = {
     normal: 'black',
     fighting: 'red',
     flying: 'aqua',
@@ -82,4 +84,17 @@ export const DEFAULT_TEMPLATE_USER_FOR_FIGHT = {
         types: []
     },
 
+}
+
+export const DEFAULT_POKEMON_INFO = {
+    name: '',
+    photoURL: '',
+    altPhotoURL: '',
+    height: 0,
+    hp: 0,
+    attack: 0,
+    defense: 0,
+    specialAttack: 0,
+    specialDefense: 0,
+    speed: 0
 }

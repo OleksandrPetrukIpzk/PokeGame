@@ -1,39 +1,36 @@
 'use client'
 import React, {useEffect, useState} from "react";
-import axios from "axios";
 import Image from "next/image";
-import Link from "next/link";
 import {Abilities} from "@/app/pokemon/[name]/abilities";
 import {BackdropColorPokemon} from "@/app/pokemon/[name]/backdropColorPokemon";
 import '../../globals.css'
 import {Header} from "@/Header/Header";
-import {DEFAULT_IMAGE, DEFAULT_LINK, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import {useDispatch} from "react-redux";
-import {getAuth} from "@/functions/auth";
 import {useAppSelector} from "@/redux/store";
 import {selectPokemon} from "@/redux/features/auth-slice";
 import UserServices from "@/services/userServices";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
-import {checkCurrentImage} from "@/functions/pocemons";
 import {Button} from "@mui/material";
-import {choicePokemon, choisePokemon} from "@/functions/choicePokemon";
+import {choicePokemon} from "@/functions/choicePokemon";
 import {Error} from "@/app/pokemon/[name]/Error";
 import {SwitchButton} from "@/app/pokemon/[name]/SwithButton";
 import {isTheSame} from "@/functions/logic";
 import {PokemonInfo} from "@/app/pokemon/[name]/PokemonInfo";
+import {Ability} from "@/constants/types";
 
 type Props = {
     params: {
         name: string,
     }
 }
+
 export default function Pokemon({params: {name}}: Props) {
     const [pokemonInfo, setPokemonInfo] = useState({});
     const [nextId, setNextId] = useState("1");
     const [prevId, setPrevId] = useState("1");
     const [isError, setIsError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(true);
-    const [types, setTypes] = useState([{}, {}]);
+    const [types, setTypes] = useState<Ability[]>([{type:{ name: '', slot: 0, url: '' }}] );
     const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
     const arrPokemons = useAppSelector((state) => state.authReducer.value.arrPokemons);
     const dispatch = useDispatch()
