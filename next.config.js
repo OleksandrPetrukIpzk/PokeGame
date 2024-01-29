@@ -15,7 +15,11 @@ module.exports = {
                 hostname: 'www.google.com',
                 port: '',
             },
-
+            {
+                protocol: 'https',
+                hostname: 'w7.pngwing.com',
+                port: '',
+            },
         ],
     },
 }

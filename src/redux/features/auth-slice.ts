@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {retry} from "@reduxjs/toolkit/query";
+import {EMPTY_STRING, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 
 type InitialState = {
     value: AuthState;
@@ -18,12 +19,12 @@ type AuthState = {
 const initialState = {
     value:{
         isAuth: false,
-        userName: '',
-        selectedPokemon: '',
+        userName: EMPTY_STRING,
+        selectedPokemon:EMPTY_STRING,
         arrPokemons: [],
-        coins: 0,
-        stageInOfflineArena: 1,
-        email: ''
+        coins: NUMBER_ZERO,
+        stageInOfflineArena: NUMBER_ONE,
+        email: EMPTY_STRING
     } as AuthState,
 } as InitialState
 

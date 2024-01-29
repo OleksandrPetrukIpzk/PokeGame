@@ -29,8 +29,9 @@ export const CardPokemon = ({pokemon, isLoaded}: any): JSX.Element => {
                     speed: info.data?.stats[5]?.base_stat,
                 });
             }
-        ).catch(() => errorNotification('Pokemon does not exist'));
+        ).catch();
     }, [pokemon]);
+    console.log(pokemonInfo)
     return (
         <>
         {isLoaded &&
