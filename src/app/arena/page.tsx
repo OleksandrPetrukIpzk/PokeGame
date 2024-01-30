@@ -123,7 +123,6 @@ export default function Arena () {
            })
        }
     }, [isSelectedUser]);
-
     return(<main>
         <Header/>
         <Modal open={isSelectedUser} onClose={() => {
@@ -131,7 +130,7 @@ export default function Arena () {
             setIsFight(false);
         }}>
                 {isFight ?
-                    <Box sx={{ ...STYLES_FOR_MODAL, width: 800 }}>
+                    <Box sx={{ ...STYLES_FOR_MODAL, width: 500 }} className='box__fight'>
                         <GameStatus gameStatus={gameStatus}/>
                         <FightPanel statsCurrentUser={statsCurrentUser} selectedPokemon={selectedPokemon} selectedUser={selectedUser}/>
                         <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon}/>
@@ -139,8 +138,8 @@ export default function Arena () {
                     : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight}/>
                     }
         </Modal>
-        <div className='flex items-center'>
-            {usersList.map((user) => user.selectedPokemon && <User name={user.userName} selectedPokemon={user.selectedPokemon} coins={user.coins} email={user.email} choiceUserForFight={choiceUserForFight}/>)}
+        <div className=''>
+            {usersList.map((user) => user.selectedPokemon && <User name={user.userName} selectedPokemon={user.selectedPokemon} coins={user.coins} email={user.email} choiceUserForFight={choiceUserForFight} userHp={statsCurrentUser.sumaryHp} userAttack={statsCurrentUser.sumaryAttack} userSpeed={statsCurrentUser.speed}/>)}
         </div>
     </main>)
 }

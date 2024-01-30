@@ -10,7 +10,6 @@ export  const getAuth = async (dispatch: AppDispatch) =>{
     try {
         const response = await axios.get<AuthResponse>(`${BASE_URL}/refresh`, {withCredentials: true})
         localStorage.setItem('token', response.data.accessToken)
-        console.log(response.data);
         dispatch(logIn({
             userName: response.data.user.userName,
             selectedPokemon: response.data.user.selectedPokemon,

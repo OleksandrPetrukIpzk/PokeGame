@@ -251,3 +251,9 @@ body {
   color: white;
   border-radius: 20px;
 }
+.box__fight{
+  background-image: url("../../public/pokemon-nature-pikachu-charmander-wallpaper-preview.jpg");
+}
+.button_margin{
+  margin-right: 20px !important;
+}

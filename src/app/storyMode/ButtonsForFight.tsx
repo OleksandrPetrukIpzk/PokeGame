@@ -14,8 +14,8 @@ export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon
         sendResult()
     }
     return  (<div>
-        {!gameStatus && <Button endIcon={<SportsMmaOutlinedIcon/>} onClick={hit}>Hit</Button>}
-        {!gameStatus && <Button endIcon={<DirectionsRunIcon/>} onClick={leave}>Leave</Button>}
-        {gameStatus && <Button endIcon={<AssignmentTurnedInIcon/>} onClick={send}>Finish game</Button>}
+        {!gameStatus && <Button className='button_margin' variant="contained" endIcon={<SportsMmaOutlinedIcon/>} onClick={hit}>Hit</Button>}
+        {!gameStatus && <Button variant="contained" endIcon={<DirectionsRunIcon/>} onClick={leave}>Leave</Button>}
+        {gameStatus && <Button variant="contained" endIcon={<AssignmentTurnedInIcon/>} onClick={send}>Finish game</Button>}
     </div>)
 }

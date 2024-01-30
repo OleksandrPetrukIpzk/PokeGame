@@ -6,5 +6,5 @@ export const ifYouWin = (gameStatus: string) =>{
 }
 
 export const ifTheFight = (gameStatus: string) =>{
-    return !gameStatus ? 'Fight' : 'Finish game'
+    return !gameStatus && 'Fight'
 }

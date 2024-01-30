@@ -36,7 +36,6 @@ export default function Store () {
         if(isMoreOneCoin(coins)) {
             let randomNumber = randomPokemonNumber();
             const isPokemon = await isRealPokemon(randomNumber)
-            console.log(isPokemon)
                 if(isIncludesPokemon(arrPokemons, randomNumber) && isPokemon){
                     setNumberPokemon(randomNumber);
                     const number = coins - NUMBER_ONE;

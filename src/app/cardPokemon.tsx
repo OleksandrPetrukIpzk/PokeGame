@@ -31,7 +31,6 @@ export const CardPokemon = ({pokemon, isLoaded}: any): JSX.Element => {
             }
         ).catch();
     }, [pokemon]);
-    console.log(pokemonInfo)
     return (
         <>
         {isLoaded &&
