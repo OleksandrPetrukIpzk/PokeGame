@@ -88,7 +88,8 @@ export default function AfkArena () {
     return(<>
         <main className='main'>
             <Header/>
-            {isFight && <Box sx={{...STYLES_FOR_MODAL, width: 800}}>
+            <p className='text-center text-2xl'>Stage of arena {stageInOfflineArena}</p>
+            {isFight && <Box sx={{...STYLES_FOR_MODAL, width: 800}} className='box__fight'>
               <GameStatus gameStatus={gameStatus}/>
             <Fighters yourPokemon={yourPokemon} enemyPokemon={enemyPokemon} />
                 <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon}/>

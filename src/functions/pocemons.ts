@@ -155,7 +155,8 @@ export const configurePokemons = (setEnemyPokemon: Dispatch<SetStateAction<any>>
             img: checkCurrentImage(resolve.data.sprites),
             sumaryHp: (resolve.data.stats[0].base_stat * resolve.data.stats[2].base_stat) * (resolve.data.stats[4].base_stat / 2),
             sumaryAttack: resolve.data.stats[1].base_stat * resolve.data.stats[3].base_stat,
-            speed: resolve.data.stats[5]?.base_stat
+            speed: resolve.data.stats[5]?.base_stat,
+            types: resolve.data.types
         })
     })
     if(selectedPokemon) {
@@ -165,7 +166,8 @@ export const configurePokemons = (setEnemyPokemon: Dispatch<SetStateAction<any>>
                 img: checkCurrentImage(resolve.data.sprites),
                 sumaryHp: (resolve.data.stats[0].base_stat * resolve.data.stats[2].base_stat) * (resolve.data.stats[4].base_stat / 2),
                 sumaryAttack: resolve.data.stats[1].base_stat * resolve.data.stats[3].base_stat,
-                speed: resolve.data.stats[5]?.base_stat
+                speed: resolve.data.stats[5]?.base_stat,
+                types: resolve.data.types
             })
         })
     }

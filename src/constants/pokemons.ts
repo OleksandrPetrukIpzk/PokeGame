@@ -6,6 +6,7 @@ export type Fighter = {
     sumaryHp: number,
     sumaryAttack: number,
     speed: number,
+    types?: any[]
 }
 export const COLOR_OF_ABILITIES: ColorOfAbilities = {
     normal: 'black',
@@ -45,6 +46,7 @@ export const DEFAULT_TEMPLATE_FOR_FIGHT: Fighter = {
     sumaryHp: 0,
     sumaryAttack: 0,
     speed: 0,
+    types: [{}]
 }
 
 export const STYLES_FOR_MODAL:object = {
