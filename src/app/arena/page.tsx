@@ -28,6 +28,8 @@ import {FightPanel} from "@/app/arena/FIghtPanel";
 import {ButtonsForFight} from "@/app/storyMode/ButtonsForFight";
 import {EnemyPanel} from "@/app/arena/EnemyPanel";
 import {INITIAL_USER} from "@/constants/user";
+import {addAchives} from "@/functions/achives";
+import {addClick, addCountOfLose, addCountOfRichCoins, addCountOfWins} from "@/redux/features/achievements";
 type UserInfo = {
     data: object[],
     sumaryHp?: number,
@@ -47,6 +49,11 @@ export default function Arena () {
     const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
     const userEmail = useAppSelector((state) => state.authReducer.value.email);
     const userCoins = useAppSelector((state) => state.authReducer.value.coins);
+    const click = useAppSelector((state) => state.achiveReducer.value.click)
+    const countOfWins = useAppSelector(state => state.achiveReducer.value.countOfWins)
+    const countOfLose = useAppSelector(state => state.achiveReducer.value.countOfLose)
+    const countOfRichCoins = useAppSelector(state => state.achiveReducer.value.countOfRichCoins)
+    const ids  = useAppSelector((state) => state.achiveReducer.value.ids)
     const getUsers = async () =>{
         const response = await UserServices.fetchUsers();
         setUsersList(response.data);
@@ -63,13 +70,17 @@ export default function Arena () {
     const hitPokemon = () => {
         if(isHit(statsCurrentUser, selectedUser)){
             hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack)
+            addAchives('click', click, dispatch, ids, 'you hit enemy ', addClick)
 
         } else if(isYouLose(statsCurrentUser, selectedUser)){
             setGameStatus(LOSE)
             youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
+            addAchives('countOfLose', countOfLose, dispatch, ids, 'you lose enemy ', addCountOfLose)
         } else if(isYouWin(statsCurrentUser, selectedUser)){
             setGameStatus(WIN)
             youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
+            addAchives('countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins)
+            addAchives('countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
         }
     }
 
@@ -97,6 +108,7 @@ export default function Arena () {
         setIsFight(false);
         setGameStatus(EMPTY_STRING);
     }
+
     useEmptyAuth()
    useEffect( () => {
        getUsers()
@@ -111,7 +123,7 @@ export default function Arena () {
            })
        }
     }, [isSelectedUser]);
-    // @ts-ignore
+
     return(<main>
         <Header/>
         <Modal open={isSelectedUser} onClose={() => {

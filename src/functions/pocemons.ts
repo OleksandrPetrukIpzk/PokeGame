@@ -25,6 +25,18 @@ export const youCantLeave = (params = 'You cant leave') => {
         theme: "colored",})
 }
 
+export const youHaveAchive = (params = '🥇 Congratulation') => {
+    return toast.success(params + " 🥇", {position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",})
+}
+
+
 export const  findTypesById = async (id:string) =>{
  const resolve =  await axios.get(DEFAULT_LINK + 'pokemon/' + id)
     return resolve.data.types
@@ -157,4 +169,14 @@ export const configurePokemons = (setEnemyPokemon: Dispatch<SetStateAction<any>>
             })
         })
     }
+}
+
+export const isRealPokemon = async (randomNumber:number) =>{
+    try{
+       await axios.get(DEFAULT_LINK + 'pokemon/' + randomNumber)
+        return true
+    } catch (err){
+        return false
+    }
+
 }

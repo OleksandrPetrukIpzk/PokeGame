@@ -30,6 +30,8 @@ import {ButtonsForFight} from "@/app/storyMode/ButtonsForFight";
 import {isTheSame} from "@/functions/logic";
 import {FightersPreview} from "@/app/storyMode/FightersPrewiev";
 import '../globals.css'
+import {addAchives} from "@/functions/achives";
+import {addClick, addCountOfRichCoins, addCountOfStage} from "@/redux/features/achievements";
 export default function AfkArena () {
     const [isFight, setIsFight] = useState(false);
     const [gameStatus, setGameStatus] = useState(EMPTY_STRING);
@@ -39,17 +41,24 @@ export default function AfkArena () {
     const coins = useAppSelector((state) => state.authReducer.value.coins);
     const stageInOfflineArena = useAppSelector((state) => state.authReducer.value.stageInOfflineArena);
     const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
+    const click = useAppSelector((state) => state.achiveReducer.value.click)
+    const countOfRichCoins = useAppSelector(state => state.achiveReducer.value.countOfRichCoins)
+    const countOfStage = useAppSelector((state) => state.achiveReducer.value.countOfStage)
+    const ids  = useAppSelector((state) => state.achiveReducer.value.ids)
     const dispatch = useDispatch();
 
     const hitPokemon = () =>{
         if(isHit(yourPokemon, enemyPokemon)){
             hit(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack, enemyPokemon.sumaryAttack)
+            addAchives('click', click, dispatch, ids, 'you hit enemy ', addClick)
         } else if(isYouLose(yourPokemon, enemyPokemon)){
             setGameStatus(LOSE)
             youLose(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack);
         } else if(isYouWin(yourPokemon, enemyPokemon)){
             setGameStatus(WIN)
             youWin(setYourPokemon, setEnemyPokemon, enemyPokemon.sumaryAttack)
+            addAchives('countOfStage', countOfStage, dispatch, ids, 'you get the stage ', addCountOfStage)
+            addAchives('countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
         }
     }
     const handleLeave = () =>{

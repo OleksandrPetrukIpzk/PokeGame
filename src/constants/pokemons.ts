@@ -30,7 +30,7 @@ export const COLOR_OF_ABILITIES: ColorOfAbilities = {
     shadow: '#c5c5c5'
 }
 
-export const DEFAULT_IMAGE:string = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3AUnknown_person.jpg&psig=AOvVaw0aOzdKHl_ACMbxIDncyXar&ust=1696672327033000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCMCopoyT4YEDFQAAAAAdAAAAABAE'
+export const DEFAULT_IMAGE:string = 'https://w7.pngwing.com/pngs/540/278/png-transparent-unown-pokemon-go-pokedex-poke-ball-formes-game-cat-like-mammal-carnivoran.png'
 
 export const DEFAULT_LINK:string = 'https://pokeapi.co/api/v2/'
 

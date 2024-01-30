@@ -44,7 +44,6 @@ export default function Pokemon({params: {name}}: Props) {
         choicePokemon(setNextId, setPrevId, setPokemonInfo, setTypes, setIsError, name)
         setIsLoaded(false);
     }, []);
-
     return (<div>
         <Header/>
         {isLoaded ? <p>loading...</p> : isError ? <Error name={name}/> :

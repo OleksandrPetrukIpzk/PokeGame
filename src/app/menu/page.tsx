@@ -8,6 +8,7 @@ import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStore
 import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import StadiumOutlinedIcon from '@mui/icons-material/StadiumOutlined';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import '../globals.css'
 export default function Menu (){
@@ -35,6 +36,9 @@ export default function Menu (){
             <Link href='/storyMode'>
                 <Button endIcon={<StadiumOutlinedIcon/>}>Offline arena</Button>
             </Link>
+                <Link href='/achievements'>
+                    <Button endIcon={<WorkspacePremiumIcon/>}>Achievements</Button>
+                </Link>
             </div>
         </main>
         </>)
