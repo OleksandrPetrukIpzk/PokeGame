@@ -8,16 +8,14 @@ import {Dispatch, SetStateAction} from "react";
 
 export const EnemyPanel = ({selectedUser, setIsFight}: {selectedUser: OnlineFighters, setIsFight: Dispatch<SetStateAction<boolean>>}) =>{
     return <Box sx={{ ...STYLES_FOR_MODAL, width: 400 }}>
-
         <div className='flex justify-between items-center mb-5'>
             <IconPokemon id={selectedUser?.data?.name}/>
             <div className='flex flex-col'>
-        <p>Name: {selectedUser.data.name}</p>
-        <p>Types:</p> <Abilities types={selectedUser?.data?.types} isLoaded={false}/>
+                <p>Name: {selectedUser.data.name}</p>
+                <p>Types:</p>
+                <Abilities types={selectedUser?.data?.types} isLoaded={false}/>
                 <Button variant="contained" color="error" endIcon={<SportsMmaOutlinedIcon/>} onClick={() => setIsFight(true)}>Lets fight</Button>
             </div>
-
         </div>
-
        </Box>
 }

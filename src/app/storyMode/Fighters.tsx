@@ -1,14 +1,10 @@
-import Image from "next/image";
 import {Fighter} from "@/constants/pokemons";
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {Health} from "@/app/arena/Health";
 
 export const Fighters = ({yourPokemon, enemyPokemon}: {yourPokemon:Fighter, enemyPokemon:Fighter}) =>{
-    return(<div className='flex justify-between '>
-        <div> <p className='text-white text-lg'>❤️ {yourPokemon.sumaryHp}</p>
-            <IconPokemon id={yourPokemon.name}/>  </div>
-        <div>
-            <p className='text-white text-lg'>❤️ {enemyPokemon.sumaryHp}</p>
-            <IconPokemon id={enemyPokemon.name}/>
-        </div>
+    return(
+        <div className='flex justify-between '>
+            <Health sumaryHp={yourPokemon.sumaryHp} selectedPokemon={yourPokemon.name}/>
+            <Health sumaryHp={enemyPokemon.sumaryHp} selectedPokemon={enemyPokemon.name}/>
     </div>)
 }

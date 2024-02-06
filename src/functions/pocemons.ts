@@ -1,7 +1,7 @@
 import {toast} from "react-toastify";
 import axios from "axios";
 import {COUNT_OF_POKEMONS, DEFAULT_IMAGE, DEFAULT_LINK, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
-import React, {Dispatch, SetStateAction} from "react";
+import {Dispatch, SetStateAction} from "react";
 
 export const errorNotification = (params = 'Something went wrong') =>{
     return toast.error(params, {position: "top-right",

@@ -1,13 +1,9 @@
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
 import {OnlineFighters} from "@/constants/types";
+import {Health} from "@/app/arena/Health";
 
 export const FightPanel = ({statsCurrentUser, selectedPokemon, selectedUser}: {statsCurrentUser: OnlineFighters, selectedPokemon: string, selectedUser: OnlineFighters}) =>{
     return <div className='flex justify-between '>
-        <div> <p className='text-white text-lg'>❤️ {statsCurrentUser.sumaryHp}</p>
-            <IconPokemon id={selectedPokemon}/>  </div>
-        <div>
-            <p className='text-white text-lg'>❤️ {selectedUser.sumaryHp}</p>
-            <IconPokemon id={selectedUser.selectedPokemon}/>
-        </div>
+        <Health sumaryHp={statsCurrentUser.sumaryHp} selectedPokemon={selectedPokemon}/>
+        <Health sumaryHp={selectedUser.sumaryHp} selectedPokemon={selectedUser.selectedPokemon}/>
     </div>
 }

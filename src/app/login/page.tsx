@@ -1,15 +1,13 @@
 "use client"
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import '../globals.css'
 import Link from "next/link";
 import AuthServices from "@/services/authServices";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, useAppSelector} from "@/redux/store";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "@/redux/store";
 import {logIn} from "@/redux/features/auth-slice";
-import {getAuth} from "@/functions/auth";
 import {useRouter} from "next/navigation";
 import {EMPTY_STRING, NAME_OF_TOKEN} from "@/constants/pokemons";
-import {errorNotification} from "@/functions/pocemons";
 import {useAuth} from "@/hooks/useAuth";
 export default function Login () {
     const [email, setEmail] = useState(EMPTY_STRING);

@@ -13,7 +13,6 @@ import {Box} from "@mui/material";
 import UserServices from "@/services/userServices";
 import {changeStage} from "@/redux/features/auth-slice";
 import {
-    checkCurrentImage,
     configurePokemons,
     hit,
     isBiggest,

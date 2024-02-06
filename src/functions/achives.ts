@@ -1,7 +1,7 @@
 import {ACHIEVEMENT} from "@/constants/achievement";
 import {Dispatch} from "react";
 import {AnyAction} from "redux";
-import {addClick, addId} from "@/redux/features/achievements";
+import {addId} from "@/redux/features/achievements";
 import {youHaveAchive} from "@/functions/pocemons";
 import UserServices from "@/services/userServices";
 

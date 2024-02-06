@@ -5,7 +5,6 @@ import { useState} from "react";
 import {useAppSelector} from "@/redux/store";
 import {useDispatch} from "react-redux";
 import {Header} from "@/Header/Header";
-import AuthServices from "@/services/authServices";
 import UserServices from "@/services/userServices";
 import {NUMBER_ONE} from "@/constants/pokemons";
 import {

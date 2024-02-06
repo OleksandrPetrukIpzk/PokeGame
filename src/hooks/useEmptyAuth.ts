@@ -2,7 +2,6 @@ import {useEffect} from "react";
 import {getAuth} from "@/functions/auth";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "@/redux/store";
-import {NAME_OF_TOKEN} from "@/constants/pokemons";
 
 export const useEmptyAuth = (dependence= []) =>{
     const dispatch = useDispatch();

@@ -21,3 +21,9 @@ export type Ability = {
         url?: string
     }
 }
+
+export type InitialPokemon = {
+    sumaryHp: number,
+    sumaryAttack: number,
+    speed: number,
+}

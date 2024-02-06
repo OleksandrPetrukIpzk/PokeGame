@@ -1,8 +1,7 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import {errorNotification} from "@/functions/pocemons";
 import {DEFAULT_IMAGE, DEFAULT_POKEMON_INFO} from "@/constants/pokemons";
 
 export const CardPokemon = ({pokemon, isLoaded}: any): JSX.Element => {

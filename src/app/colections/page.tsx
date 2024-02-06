@@ -1,9 +1,6 @@
 'use client'
 import {Header} from "@/Header/Header";
-import {useEffect} from "react";
-import {getAuth} from "@/functions/auth";
 import {useAppSelector} from "@/redux/store";
-import {useDispatch} from "react-redux";
 import {CardPokemon} from "@/app/cardPokemon";
 import '../globals.css'
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";

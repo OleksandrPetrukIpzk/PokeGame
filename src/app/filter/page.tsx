@@ -6,8 +6,6 @@ import axios from "axios";
 import Link from "next/link";
 import {COLOR_OF_ABILITIES, DEFAULT_LINK, EMPTY_STRING} from "@/constants/pokemons";
 import {errorNotification} from "@/functions/pocemons";
-import {getAuth} from "@/functions/auth";
-import {useDispatch} from "react-redux";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 export default function Filter() {
     const [filter, setFilter] = useState([{name:EMPTY_STRING, url: EMPTY_STRING}]);
