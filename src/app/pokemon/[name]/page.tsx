@@ -33,9 +33,10 @@ export default function Pokemon({params: {name}}: Props) {
     const [types, setTypes] = useState<Ability[]>([{type:{ name: '', slot: 0, url: '' }}] );
     const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
     const arrPokemons = useAppSelector((state) => state.authReducer.value.arrPokemons);
+    const id = useAppSelector((state) => state.authReducer.value.id);
     const dispatch = useDispatch()
     const clickHandleSelectPokemon = async () =>{
-        const response = await UserServices.changeSelectedPokemon(pokemonInfo.id?.toString())
+        const response = await UserServices.changeCurrentPokemonById(id, pokemonInfo.id?.toString())
         dispatch(selectPokemon(pokemonInfo.id?.toString()));
 
     }

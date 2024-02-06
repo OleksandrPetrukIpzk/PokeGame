@@ -1,30 +1,40 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {retry} from "@reduxjs/toolkit/query";
-import {EMPTY_STRING, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
+import {EMPTY_STRING, NUMBER_ZERO} from "@/constants/pokemons";
+import {Potions} from "@/models/user";
 
 type InitialState = {
     value: AuthState;
 }
 
 type AuthState = {
-    isAuth: boolean,
-    userName: string,
-    selectedPokemon: string,
-    arrPokemons: Array<string>,
-    coins: number,
-    stageInOfflineArena: number,
-    email: string
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    img: string;
+    selectedPokemon: string;
+    coins: number;
+    rang: number;
+    stageInOfflineArena: number;
+    arrPokemons: string[];
+    arrAchives: number[];
+    arrPotions: Potions[];
 }
 
 const initialState = {
     value:{
-        isAuth: false,
-        userName: EMPTY_STRING,
-        selectedPokemon:EMPTY_STRING,
-        arrPokemons: [],
+        id: EMPTY_STRING,
+        name: EMPTY_STRING,
+        email: EMPTY_STRING,
+        password: EMPTY_STRING,
+        img: EMPTY_STRING,
+        selectedPokemon: EMPTY_STRING,
         coins: NUMBER_ZERO,
-        stageInOfflineArena: NUMBER_ONE,
-        email: EMPTY_STRING
+        rang: NUMBER_ZERO,
+        stageInOfflineArena: NUMBER_ZERO,
+        arrPokemons: [],
+        arrAchives: [],
+        arrPotions: [],
     } as AuthState,
 } as InitialState
 
@@ -35,28 +45,98 @@ export const auth = createSlice({
     logOut: () =>{
         return initialState;
     },
-  logIn: (state, action: PayloadAction<{userName: string, selectedPokemon:string, arrPokemons: string[], coins: number, stageInOfflineArena: number, email: string}>) =>{
+        changePassword:(state, action: PayloadAction<string>) =>{
         return {
-            value:{
-                isAuth: true,
-                userName: action.payload.userName,
-                selectedPokemon: action.payload.selectedPokemon,
-                arrPokemons: action.payload.arrPokemons,
-                coins: action.payload.coins,
-                stageInOfflineArena: action.payload.stageInOfflineArena,
-                email: action.payload.email,
-            }
-        }
-},
-    buyElement(state, action: PayloadAction<number>){
-        return{
             ...state,
             value:{
                 ...state.value,
-                coins: action.payload
+                password: action.payload
             }
         }
-     },
+        },
+        changeName:(state, action: PayloadAction<string>) =>{
+            return {
+                ...state,
+                value:{
+                    ...state.value,
+                    name: action.payload
+                }
+            }
+        },
+        changeEmail:(state, action: PayloadAction<string>) =>{
+            return {
+                ...state,
+                value:{
+                    ...state.value,
+                    email: action.payload
+                }
+            }
+        },
+        changeImg:(state, action: PayloadAction<string>) =>{
+            return {
+                ...state,
+                value:{
+                    ...state.value,
+                    img: action.payload
+                }
+            }
+        },
+        changeRang:(state, action: PayloadAction<number>) =>{
+            return {
+                ...state,
+                value:{
+                    ...state.value,
+                    rang: action.payload
+                }
+            }
+        },
+        setPotions:(state, action: PayloadAction<Potions[]>) =>{
+            return {
+                ...state,
+                value:{
+                    ...state.value,
+                    arrPotions: action.payload
+                }
+            }
+        },
+        changeCountOfMoney:(state, action: PayloadAction<number>) =>{
+            return {
+                ...state,
+                value:{
+                    ...state.value,
+                    coins: action.payload
+                }
+            }
+        },
+  logIn: (state, action: PayloadAction<{id: string,
+      name: string,
+      email: string,
+      password: string,
+      img: string,
+      selectedPokemon: string,
+      coins: number,
+      rang: number,
+      stageInOfflineArena: number,
+      arrPokemons: string[],
+      arrAchives: number[],
+      arrPotions: Potions[]}>) =>{
+        return {
+            value:{
+                id: action.payload.id,
+                name: action.payload.name,
+                email: action.payload.email,
+                password: action.payload.password,
+                img: action.payload.img,
+                selectedPokemon: action.payload.selectedPokemon,
+                coins: action.payload.coins,
+                rang: action.payload.rang,
+                stageInOfflineArena: action.payload.stageInOfflineArena,
+                arrPokemons: action.payload.arrPokemons,
+                arrAchives: action.payload.arrAchives,
+                arrPotions: action.payload.arrPotions,
+            }
+        }
+},
         selectPokemon(state, action: PayloadAction<string>){
             return{
                 ...state,
@@ -78,5 +158,5 @@ export const auth = createSlice({
     }
 })
 
-export const {logIn, logOut, buyElement, selectPokemon, changeStage} = auth.actions
+export const {logIn, setPotions,  logOut, changeRang, changeImg, changeEmail, changePassword, changeName, changeCountOfMoney, selectPokemon, changeStage} = auth.actions
 export default auth.reducer

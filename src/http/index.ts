@@ -1,14 +1,15 @@
 import axios from "axios";
-import {BASE_URL} from "@/constants/pokemons";
+import {BASE_URL, NAME_OF_TOKEN} from "@/constants/pokemons";
+
+const token = localStorage.getItem(NAME_OF_TOKEN)
 
 const $api = axios.create({
     withCredentials: true,
-    baseURL: BASE_URL
+    baseURL: BASE_URL,
+    headers:{
+        authorization: `Bearer ${token}`
+    }
 })
 
-$api.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-    return config
-})
 
 export default $api

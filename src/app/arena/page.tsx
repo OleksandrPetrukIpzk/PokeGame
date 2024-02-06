@@ -20,7 +20,6 @@ import {
     NUMBER_ONE,
     STYLES_FOR_MODAL, WIN
 } from "@/constants/pokemons";
-import {buyElement} from "@/redux/features/auth-slice";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {isTheSame} from "@/functions/logic";
 import {GameStatus} from "@/app/storyMode/GameStatus";
@@ -30,6 +29,7 @@ import {EnemyPanel} from "@/app/arena/EnemyPanel";
 import {INITIAL_USER} from "@/constants/user";
 import {addAchives} from "@/functions/achives";
 import {addClick, addCountOfLose, addCountOfRichCoins, addCountOfWins} from "@/redux/features/achievements";
+import {changeCountOfMoney} from "@/redux/features/auth-slice";
 type UserInfo = {
     data: object[],
     sumaryHp?: number,
@@ -47,7 +47,7 @@ export default function Arena () {
     const [statsCurrentUser, setStatsCurrentUser] = useState(DEFAULT_TEMPLATE_USER_FOR_FIGHT)
     const dispatch = useDispatch()
     const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
-    const userEmail = useAppSelector((state) => state.authReducer.value.email);
+    const userId = useAppSelector((state) => state.authReducer.value.id);
     const userCoins = useAppSelector((state) => state.authReducer.value.coins);
     const click = useAppSelector((state) => state.achiveReducer.value.click)
     const countOfWins = useAppSelector(state => state.achiveReducer.value.countOfWins)
@@ -55,7 +55,7 @@ export default function Arena () {
     const countOfRichCoins = useAppSelector(state => state.achiveReducer.value.countOfRichCoins)
     const ids  = useAppSelector((state) => state.achiveReducer.value.ids)
     const getUsers = async () =>{
-        const response = await UserServices.fetchUsers();
+        const response = await UserServices.getAll();
         setUsersList(response.data);
     }
     const choiceUserForFight = async (userInfo:UserInfo) =>{
@@ -96,14 +96,14 @@ export default function Arena () {
         let winner = EMPTY_STRING;
         let reward = NUMBER_ONE;
         if(isTheSame(gameStatus, WIN)){
-            winner = userEmail;
+            winner = userId;
             reward += userCoins;
-            dispatch(buyElement(reward));
+            dispatch(changeCountOfMoney(reward));
         }else{
-            winner = selectedUser.email
+            winner = selectedUser._id
             reward += selectedUser.coins
         }
-        const response = await UserServices.addCoins(winner, reward);
+        const response = await UserServices.changeCountOfMoney(winner, reward);
         setIsSelectedUser(false);
         setIsFight(false);
         setGameStatus(EMPTY_STRING);
