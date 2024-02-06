@@ -20,7 +20,8 @@ export default function Login () {
     const  clickLogin = async () =>{
         try {
             const response = await AuthServices.logIn(userName, email, password);
-            localStorage.setItem(NAME_OF_TOKEN, response.data.accessToken);
+            console.log(response.data.access_token)
+            localStorage.setItem(NAME_OF_TOKEN, response.data.access_token);
             dispatch(logIn({
                 id: response.data.user._id,
                 name: response.data.user.name,
@@ -37,7 +38,6 @@ export default function Login () {
             }));
             router.push('/menu')
         } catch (e) {
-            errorNotification('Not true credentials')
         }
     }
     const changeEmail = (value:string) =>{

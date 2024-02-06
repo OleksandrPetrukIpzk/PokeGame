@@ -8,8 +8,6 @@ export const useEmptyAuth = (dependence= []) =>{
     const dispatch = useDispatch();
     const id = useAppSelector(state => state.authReducer.value.id)
     useEffect(() => {
-        if (localStorage.getItem(NAME_OF_TOKEN)) {
             getAuth(dispatch, id);
-        }
     }, dependence);
 }

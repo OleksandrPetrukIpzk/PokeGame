@@ -50,15 +50,15 @@ export default function AfkArena () {
     const hitPokemon = () =>{
         if(isHit(yourPokemon, enemyPokemon)){
             hit(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack, enemyPokemon.sumaryAttack)
-            addAchives('click', click, dispatch, ids, 'you hit enemy ', addClick)
+            addAchives(id, 'click', click, dispatch, ids, 'you hit enemy ', addClick)
         } else if(isYouLose(yourPokemon, enemyPokemon)){
             setGameStatus(LOSE)
             youLose(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack);
         } else if(isYouWin(yourPokemon, enemyPokemon)){
             setGameStatus(WIN)
             youWin(setYourPokemon, setEnemyPokemon, enemyPokemon.sumaryAttack)
-            addAchives('countOfStage', countOfStage, dispatch, ids, 'you get the stage ', addCountOfStage)
-            addAchives('countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
+            addAchives(id, 'countOfStage', countOfStage, dispatch, ids, 'you get the stage ', addCountOfStage)
+            addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
         }
     }
     const handleLeave = () =>{
