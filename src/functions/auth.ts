@@ -1,6 +1,4 @@
-import axios from "axios";
-import {BASE_URL, NAME_OF_TOKEN} from "@/constants/pokemons";
-import AuthServices from "@/services/authServices";
+import {NAME_OF_TOKEN} from "@/constants/pokemons";
 import {logIn, logOut} from "@/redux/features/auth-slice";
 import {AppDispatch} from "@/redux/store";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";

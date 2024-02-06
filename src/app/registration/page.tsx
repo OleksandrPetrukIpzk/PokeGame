@@ -1,12 +1,11 @@
 "use client"
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import '../globals.css'
 import Link from "next/link";
 import AuthServices from "@/services/authServices";
 import {logIn} from "@/redux/features/auth-slice";
 import {useDispatch} from "react-redux";
 import {useRouter} from "next/navigation";
-import {getAuth} from "@/functions/auth";
 import {useAuth} from "@/hooks/useAuth";
 import {EMPTY_STRING, NAME_OF_TOKEN} from "@/constants/pokemons";
 export default function Registration () {

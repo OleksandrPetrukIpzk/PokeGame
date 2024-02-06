@@ -125,6 +125,6 @@ export const achive = createSlice({
     }
 })
 
-export const {remove, start, addCountOfLoseCoins, addCountOfPokemons, addCountOfRichCoins, addCountOfStage, addCountOfWins, addId, addClick  } = achive.actions
+export const {remove, start, addCountOfLose, addCountOfLoseCoins, addCountOfPokemons, addCountOfRichCoins, addCountOfStage, addCountOfWins, addId, addClick  } = achive.actions
 
 export default achive.reducer

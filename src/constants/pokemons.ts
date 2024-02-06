@@ -89,14 +89,20 @@ export const DEFAULT_TEMPLATE_USER_FOR_FIGHT = {
 }
 
 export const DEFAULT_POKEMON_INFO = {
-    name: '',
-    photoURL: '',
-    altPhotoURL: '',
-    height: 0,
-    hp: 0,
-    attack: 0,
-    defense: 0,
-    specialAttack: 0,
-    specialDefense: 0,
-    speed: 0
+    name: EMPTY_STRING,
+    photoURL: EMPTY_STRING,
+    altPhotoURL: EMPTY_STRING,
+    height: NUMBER_ZERO,
+    hp: NUMBER_ZERO,
+    attack: NUMBER_ZERO,
+    defense: NUMBER_ZERO,
+    specialAttack: NUMBER_ZERO,
+    specialDefense: NUMBER_ZERO,
+    speed: NUMBER_ZERO
+}
+
+export const INITIAL_POKEMON = {
+    sumaryHp: NUMBER_ZERO,
+    sumaryAttack: NUMBER_ZERO,
+    speed: NUMBER_ZERO,
 }

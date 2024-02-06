@@ -5,8 +5,6 @@ import {CardPokemon} from "@/app/cardPokemon";
 import '../globals.css'
 import {Header} from "@/Header/Header";
 import {errorNotification} from "@/functions/pocemons";
-import {getAuth} from "@/functions/auth";
-import {useDispatch} from "react-redux";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {EMPTY_STRING} from "@/constants/pokemons";
 
@@ -24,7 +22,6 @@ export default function Home() {
   const [previousUrl, setPreviousUrl] = useState(EMPTY_STRING);
   const [pokemons, setPokemons] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-    const dispatch = useDispatch()
   useEmptyAuth();
   useEffect(() =>{
   axios.get(baseUrl).then((info: GetAxios):void => {
