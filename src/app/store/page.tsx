@@ -42,8 +42,8 @@ export default function Store () {
                     await UserServices.addPokemon(id, randomNumber.toString())
                     setIsClicked(true);
                     dispatch(changeCountOfMoney(coins - NUMBER_ONE))
-                    addAchives('countOfPokemons', countOfPokemons, dispatch, ids, 'you have a pokemons ', addCountOfPokemons)
-                    addAchives('countOfLoseCoins', countOfLoseCoins, dispatch, ids, 'You lose coins ', addCountOfLoseCoins)
+                    addAchives(id, 'countOfPokemons', countOfPokemons, dispatch, ids, 'you have a pokemons ', addCountOfPokemons)
+                    addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, 'You lose coins ', addCountOfLoseCoins)
                 } else{
                     dispatch(changeCountOfMoney(coins + NUMBER_ONE))
                     const number = coins + NUMBER_ONE;

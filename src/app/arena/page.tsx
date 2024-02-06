@@ -70,17 +70,17 @@ export default function Arena () {
     const hitPokemon = () => {
         if(isHit(statsCurrentUser, selectedUser)){
             hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack)
-            addAchives('click', click, dispatch, ids, 'you hit enemy ', addClick)
+            addAchives(userId, 'click', click, dispatch, ids, 'you hit enemy ', addClick)
 
         } else if(isYouLose(statsCurrentUser, selectedUser)){
             setGameStatus(LOSE)
             youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
-            addAchives('countOfLose', countOfLose, dispatch, ids, 'you lose enemy ', addCountOfLose)
+            addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, 'you lose enemy ', addCountOfLose)
         } else if(isYouWin(statsCurrentUser, selectedUser)){
             setGameStatus(WIN)
             youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
-            addAchives('countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins)
-            addAchives('countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
+            addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins)
+            addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
         }
     }
 

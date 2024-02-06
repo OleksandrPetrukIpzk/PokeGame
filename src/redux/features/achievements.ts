@@ -32,6 +32,24 @@ export const achive = createSlice({
     name: 'achive',
     initialState,
     reducers: {
+        remove:(state, payload) =>{
+          return initialState
+        },
+        start: (state, action: PayloadAction<{ids: number[], click: number, countOfWins: number, countOfLose: number, countOfPokemons: number, countOfStage: number, countOfLoseCoins: number, countOfRichCoins: number}>) =>{
+          return {
+              ...state,
+              value: {
+                  ids: action.payload.ids,
+                  click: action.payload.click,
+                  countOfWins: action.payload.countOfWins,
+                  countOfLose: action.payload.countOfLose,
+                  countOfPokemons: action.payload.countOfPokemons,
+                  countOfStage: action.payload.countOfStage,
+                  countOfLoseCoins: action.payload.countOfLoseCoins,
+                  countOfRichCoins: action.payload.countOfRichCoins,
+              }
+          }
+        },
         addId: (state, action: PayloadAction<number[]>) =>{
           return {
               ...state,
@@ -107,6 +125,6 @@ export const achive = createSlice({
     }
 })
 
-export const {addCountOfLose, addCountOfLoseCoins, addCountOfPokemons, addCountOfRichCoins, addCountOfStage, addCountOfWins, addId, addClick  } = achive.actions
+export const {remove, start, addCountOfLoseCoins, addCountOfPokemons, addCountOfRichCoins, addCountOfStage, addCountOfWins, addId, addClick  } = achive.actions
 
 export default achive.reducer
