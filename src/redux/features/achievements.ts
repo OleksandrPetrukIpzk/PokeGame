@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {NUMBER_ZERO} from "@/constants/pokemons";
 
 type InitialState = {
     value: AchievementsState
@@ -17,13 +18,13 @@ type AchievementsState = {
 const initialState = {
     value:{
         ids: [],
-        click: 0,
-        countOfWins: 0,
-        countOfLose: 0,
-        countOfPokemons: 0,
-        countOfStage: 0,
-        countOfLoseCoins: 0,
-        countOfRichCoins: 0,
+        click: NUMBER_ZERO,
+        countOfWins: NUMBER_ZERO,
+        countOfLose: NUMBER_ZERO,
+        countOfPokemons: NUMBER_ZERO,
+        countOfStage: NUMBER_ZERO,
+        countOfLoseCoins: NUMBER_ZERO,
+        countOfRichCoins: NUMBER_ZERO,
     } as AchievementsState
 } as InitialState
 
@@ -31,27 +32,6 @@ export const achive = createSlice({
     name: 'achive',
     initialState,
     reducers: {
-        logOut:() => {
-            return initialState
-},
-logIn: (state, action: PayloadAction<{ids: number[], click: number, countOfWins: number,  countOfLose: number,
-    countOfPokemons: number,
-    countOfStage: number,
-    countOfLoseCoins: number,
-    countOfRichCoins: number}>) =>{
-            return {
-                value: {
-                    ids: action.payload.ids,
-                    click: action.payload.click,
-                    countOfWins: action.payload.countOfWins,
-                    countOfLose: action.payload.countOfLose,
-                    countOfPokemons: action.payload.countOfPokemons,
-                    countOfStage: action.payload.countOfStage,
-                    countOfLoseCoins: action.payload.countOfLoseCoins,
-                    countOfRichCoins: action.payload.countOfRichCoins
-                }
-            }
-},
         addId: (state, action: PayloadAction<number[]>) =>{
           return {
               ...state,
@@ -127,6 +107,6 @@ logIn: (state, action: PayloadAction<{ids: number[], click: number, countOfWins:
     }
 })
 
-export const {logIn, logOut, addCountOfLose, addCountOfLoseCoins, addCountOfPokemons, addCountOfRichCoins, addCountOfStage, addCountOfWins, addId, addClick  } = achive.actions
+export const {addCountOfLose, addCountOfLoseCoins, addCountOfPokemons, addCountOfRichCoins, addCountOfStage, addCountOfWins, addId, addClick  } = achive.actions
 
 export default achive.reducer

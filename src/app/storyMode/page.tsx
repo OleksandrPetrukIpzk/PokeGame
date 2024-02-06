@@ -37,7 +37,7 @@ export default function AfkArena () {
     const [gameStatus, setGameStatus] = useState(EMPTY_STRING);
     const [yourPokemon, setYourPokemon] = useState(DEFAULT_TEMPLATE_FOR_FIGHT);
     const [enemyPokemon, setEnemyPokemon] = useState(DEFAULT_TEMPLATE_FOR_FIGHT);
-    const email = useAppSelector((state) => state.authReducer.value.email);
+    const id = useAppSelector((state) => state.authReducer.value.id);
     const coins = useAppSelector((state) => state.authReducer.value.coins);
     const stageInOfflineArena = useAppSelector((state) => state.authReducer.value.stageInOfflineArena);
     const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
@@ -72,8 +72,8 @@ export default function AfkArena () {
 
     const sendResult = async () =>{
         if(isTheSame(gameStatus, WIN)){
-            const response = await UserServices.addCoins(email, coins + NUMBER_ONE);
-            await UserServices.nextStage(stageInOfflineArena + NUMBER_ONE);
+            const response = await UserServices.changeCountOfMoney(id, coins + NUMBER_ONE);
+            await UserServices.changeStage(id, stageInOfflineArena + NUMBER_ONE);
             dispatch(changeStage(stageInOfflineArena + NUMBER_ONE));
         }
         setIsFight(false);

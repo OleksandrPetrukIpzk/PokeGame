@@ -8,7 +8,7 @@ import {useDispatch} from "react-redux";
 import {useRouter} from "next/navigation";
 import {Button} from "@mui/material";
 export const Header = () =>{
-    const userName =  useAppSelector((state) => state.authReducer.value.userName);
+    const userName =  useAppSelector((state) => state.authReducer.value.name);
     const coins = useAppSelector((state) => state.authReducer.value.coins)
     const dispatch = useDispatch()
     const router = useRouter()

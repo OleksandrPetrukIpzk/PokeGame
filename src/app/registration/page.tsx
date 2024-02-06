@@ -26,17 +26,22 @@ export default function Registration () {
     }
     const  clickRegistration = async () =>{
         try {
-            const response = await AuthServices.registration(name, email, password);
-            localStorage.setItem(NAME_OF_TOKEN, response.data.accessToken);
+            const response = await AuthServices.create(name, email, password);
             dispatch(logIn({
-                userName: response.data.user.userName,
-                selectedPokemon: response.data.user.selectedPokemon,
-                arrPokemons: response.data.user.arrPokemons,
-                coins: response.data.user.coins,
-                stageInOfflineArena: response.data.user.stageInOfflineArena,
+                id: response.data.user._id,
+                name: response.data.user.name,
                 email: response.data.user.email,
-
+                password: response.data.user.password,
+                img: response.data.user.img,
+                selectedPokemon: response.data.user.selectedPokemon,
+                coins: response.data.user.coins,
+                rang: response.data.user.rang,
+                stageInOfflineArena: response.data.user.stageInOfflineArena,
+                arrPokemons: response.data.user.arrPokemons,
+                arrAchives: response.data.user.arrAchives,
+                arrPotions: response.data.user.arrPotions,
             }));
+            localStorage.setItem(NAME_OF_TOKEN, response.data.access_token)
             router.push('/introduction')
         } catch (e) {
             console.log('func')
