@@ -5,7 +5,13 @@ import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-
 import UserServices from "@/services/userServices";
 import {remove, start} from "@/redux/features/achievements";
 import {ACHIEVEMENT, KEYS_ACHIEVEMENTS} from "@/constants/achievement";
+import {Dispatch, SetStateAction} from "react";
+import {IUser} from "@/models/user";
 
+export const validateEmail = (email: string) =>{
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
 const applyAllAchives = (ids: number[], arrCounts: number[]) =>{
     KEYS_ACHIEVEMENTS.map(key => {
         let lastIndex = -1;
@@ -22,6 +28,11 @@ const applyAllAchives = (ids: number[], arrCounts: number[]) =>{
         }
     })
 
+}
+
+export const getUserById = async (id: string, setState: Dispatch<SetStateAction<IUser>>) => {
+    const response = await UserServices.getUserById(id)
+    setState(response.data)
 }
 
 export  const getAuth = async (dispatch: AppDispatch, id: string) =>{

@@ -8,6 +8,10 @@ import {useDispatch} from "react-redux";
 import {useRouter} from "next/navigation";
 import {useAuth} from "@/hooks/useAuth";
 import {EMPTY_STRING, NAME_OF_TOKEN} from "@/constants/pokemons";
+import {errorNotification} from "@/functions/pocemons";
+import {validateEmail} from "@/functions/auth";
+import {InputsContainer} from "@/app/login/InputsContainer";
+import Button from "@mui/joy/Button";
 export default function Registration () {
     const [email, setEmail] = useState(EMPTY_STRING);
     const [password, setPassword] = useState(EMPTY_STRING);
@@ -23,7 +27,7 @@ export default function Registration () {
     const changeName = (value:string) =>{
         setName(value);
     }
-    const  clickRegistration = async () =>{
+    const  clickRegistration = async () => {
         try {
             const response = await AuthServices.create(name, email, password);
             dispatch(logIn({
@@ -43,27 +47,25 @@ export default function Registration () {
             localStorage.setItem(NAME_OF_TOKEN, response.data.access_token)
             router.push('/introduction')
         } catch (e) {
-            console.log('func')
         }
     }
     useAuth('menu', 'registration');
 
     return(
-        <>
-            <main className='flex'>
-                <div className='flex flex-col login-left'>
-                    <p className='login-left-name'>PokeGame.com</p>
-                    <p className='login-left-text'>PokeGame.com is the best place to enjoy a good game.</p>
-                </div>
-                <div className='flex flex-col login-right'>
-                    <p className='login-right-text'>Register your account</p>
-                    <input className='login-input' value={name} placeholder='Name' onChange={(e) => changeName(e.target.value)} type='text'/>
-                    <input className='login-input' value={email} placeholder='Email' onChange={(e) => changeEmail(e.target.value)} type='text'/>
-                    <input className='login-input' value={password} placeholder='Password' onChange={(e) => changePassword(e.target.value)} type='password'/>
-                    <button onClick={() => clickRegistration()} className='login-button'>Register</button>
-                    <p className='login-redirect'>You does have an Account? <Link className='login-redirect-link' href='/login'>Log in</Link></p>
-                </div>
-            </main>
-        </>
+        <main  className='h-screen flex justify-stretch items-stretch'>
+            <div className='bg-sky-300 text-center flex flex-col items-center place-items-center place-content-center px-40'>
+                <p className='mb-10 font-sans text-2xl font-bold italic '>PokeGame.com</p>
+                <p className='text-lg font-sans '>PokeGame.com is the best place to enjoy a good game.</p>
+            </div>
+            <div className='flex flex-col items-center w-screen justify-center '>
+                <p className=' font-sans text-lg mb-4 font-medium' >Register an your account</p>
+                <InputsContainer email={email} name={name} setEmail={setEmail} setName={setName} password={password} setPassword={setPassword}/>
+                <Button onClick={() => clickRegistration()}   size="lg" color="success" variant="solid">Register</Button>
+                <span className=' font-sans text-lg mt-4 font-medium'>
+                You have an Account?
+               <Link className='font-light text-cyan-800 underline ' href='/login'> Login</Link>
+            </span>
+            </div>
+        </main>
     )
 }

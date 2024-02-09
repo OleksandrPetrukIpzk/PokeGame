@@ -7,6 +7,9 @@ import {IconUser} from "@/app/arena/IconUser";
 import {PokemonInfo} from "@/app/arena/PokemonInfo";
 
 type CreatedUserArena = {
+    id: string,
+    img: string,
+    rang: number,
     name: string,
     selectedPokemon: string,
     coins: number,
@@ -16,7 +19,7 @@ type CreatedUserArena = {
     userHp: number,
     userSpeed: number
 }
-export const User = ({name, selectedPokemon, coins, email, choiceUserForFight, userAttack, userHp, userSpeed}: CreatedUserArena) =>{
+export const User = ({id, img, rang, name, selectedPokemon, coins, email, choiceUserForFight, userAttack, userHp, userSpeed}: CreatedUserArena) =>{
 
     const [statsPokemon, setStatsPokemon] = useState(INITIAL_POKEMON);
     useEffect(() => {
@@ -35,10 +38,10 @@ export const User = ({name, selectedPokemon, coins, email, choiceUserForFight, u
         fetchData();
     }, [selectedPokemon]);
     return(<div className='flex justify-between items-center m-6 bg-sky-200 rounded-md py-4 px-4'>
-       <IconUser selectedPokemon={selectedPokemon} name={name}/>
+       <IconUser id={id} rang={rang} img={img} name={name}/>
         <PokemonInfo selectedPokemon={selectedPokemon} userHp={userHp} statsPokemon={statsPokemon} userAttack={userAttack} userSpeed={userSpeed}/>
         <Button  color="danger" size="lg"
-                variant="soft" onClick={() => choiceUserForFight({userName: name, selectedPokemon, coins, email,})}>Fight</Button>
+                variant="soft" onClick={() => choiceUserForFight({id, name, selectedPokemon, coins, email,})}>Fight</Button>
         </div>)
 
 }

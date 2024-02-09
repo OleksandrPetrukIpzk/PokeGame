@@ -147,7 +147,17 @@ export const youWin = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPo
 export const isBiggest = (first: number, second: number) =>{
     return first > second
 }
+export const getPokemonImg = async (pokemon: string, setPokemonImg: Dispatch<SetStateAction<string>>, setPokemonName: Dispatch<SetStateAction<string>>) => {
+    try{
+       const resolve = await axios.get(DEFAULT_LINK + 'pokemon/' + pokemon)
+        const img = checkCurrentImage(resolve.data.sprites);
+         setPokemonImg(img)
+        setPokemonName(resolve.data.name)
+    }
+    catch (e) {
 
+    }
+}
 export const configurePokemons = (setEnemyPokemon: Dispatch<SetStateAction<any>>, setYourPokemon: Dispatch<SetStateAction<any>>, selectedPokemon: string, stageInOfflineArena: number) =>{
     axios.get(DEFAULT_LINK + 'pokemon/' + stageInOfflineArena).then(resolve => {
         setEnemyPokemon({

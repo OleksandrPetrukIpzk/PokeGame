@@ -100,7 +100,7 @@ export default function Arena () {
             reward += userCoins;
             dispatch(changeCountOfMoney(reward));
         }else{
-            winner = selectedUser._id
+            winner = selectedUser.id
             reward += selectedUser.coins
         }
         const response = await UserServices.changeCountOfMoney(winner, reward);
@@ -139,7 +139,7 @@ export default function Arena () {
                     }
         </Modal>
         <div className=''>
-            {usersList.map((user) => user.selectedPokemon && <User name={user.userName} selectedPokemon={user.selectedPokemon} coins={user.coins} email={user.email} choiceUserForFight={choiceUserForFight} userHp={statsCurrentUser.sumaryHp} userAttack={statsCurrentUser.sumaryAttack} userSpeed={statsCurrentUser.speed}/>)}
+            {usersList.map((user) => user.selectedPokemon && <User id={user._id} img={user.img} rang={user.rang} name={user.name} selectedPokemon={user.selectedPokemon} coins={user.coins} email={user.email} choiceUserForFight={choiceUserForFight} userHp={statsCurrentUser.sumaryHp} userAttack={statsCurrentUser.sumaryAttack} userSpeed={statsCurrentUser.speed}/>)}
         </div>
     </main>)
 }

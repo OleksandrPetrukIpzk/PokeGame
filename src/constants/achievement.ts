@@ -351,3 +351,5 @@ export const ACHIEVEMENT = {
         },
     ],
 }
+
+export const COUNT_ACHIVES = 84

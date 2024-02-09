@@ -1,4 +1,4 @@
-import {ACHIEVEMENT} from "@/constants/achievement";
+import {ACHIEVEMENT, COUNT_ACHIVES} from "@/constants/achievement";
 import {Dispatch} from "react";
 import {AnyAction} from "redux";
 import {addId} from "@/redux/features/achievements";
@@ -18,4 +18,8 @@ export const addAchives = async (userId: string, key:  keyof typeof ACHIEVEMENT,
              }
     }
 
+}
+
+export const achivePercent = (achiveList: number) =>{
+    return (achiveList * 100) / COUNT_ACHIVES
 }
