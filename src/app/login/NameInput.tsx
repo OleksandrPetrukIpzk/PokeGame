@@ -16,7 +16,7 @@ export const NameInput = ({name, setName}: {name: string, setName: Dispatch<SetS
     }}
 >
     <Input
-        type="password"
+        type="text"
     placeholder="Type in here your name…"
     startDecorator={<SupervisedUserCircle />}
     value={name}
