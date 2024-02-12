@@ -17,6 +17,7 @@ export const Header = () =>{
             <p className='stats pt-2 header-text'>PokeGame</p>
             <Search/>
             <Link className='nav-link' href='/menu'>Menu</Link>
+            <Link className='nav-link' href='/cabinet/my'>My profile</Link>
             <p className='nav-link'>Hello {userName} you have coins: {coins}</p>
             <Button  color='error' onClick={() => logout(dispatch, router)}>LogOut</Button>
             <ToastContainer/>

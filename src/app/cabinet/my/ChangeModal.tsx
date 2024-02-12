@@ -1,5 +1,5 @@
 import {Box, Button, Modal} from "@mui/material";
-import {Dispatch, SetStateAction, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {STYLES_FOR_MODAL} from "@/constants/pokemons";
 import Input from '@mui/joy/Input';
@@ -13,7 +13,13 @@ export const ChangeModal = ({mainText, children, func, open, setOpen}: {mainText
     const [inputValue, setInputValue] = useState('');
     const [colorInput, setColorInput] = useState('neutral')
     const userId = useAppSelector((state) => state.authReducer.value.id);
-   const dispatch = useDispatch()
+   const [error, setError] = useState('');
+    const dispatch = useDispatch()
+    useEffect(() => {
+        setInputValue('');
+            setColorInput('neutral');
+            setError('');
+    }, [open]);
     const handleChange = (value: string) =>{
         setInputValue(value)
     }
@@ -27,8 +33,10 @@ export const ChangeModal = ({mainText, children, func, open, setOpen}: {mainText
                         setColorInput('success')
                         dispatch(changeName(inputValue))
                     }
-                    catch (e) {
-                        setColorInput('danger')
+                    catch (e: any) {
+                        console.log(e)
+                        setColorInput('danger');
+                        setError(e.response.data.error)
                     }
                 } else {
                     setColorInput('danger')
@@ -42,8 +50,9 @@ export const ChangeModal = ({mainText, children, func, open, setOpen}: {mainText
                         setColorInput('success')
                         dispatch(changeEmail(inputValue))
                     }
-                    catch (e) {
+                    catch (e: any) {
                         setColorInput('danger')
+                        setError(e.response.data.error)
                     }
                 } else {
                     setColorInput('danger')
@@ -59,6 +68,7 @@ export const ChangeModal = ({mainText, children, func, open, setOpen}: {mainText
                     }
                     catch (e) {
                         setColorInput('danger')
+                        setError("Server Error")
                     }
                 } else {
                     setColorInput('danger')
@@ -96,6 +106,7 @@ export const ChangeModal = ({mainText, children, func, open, setOpen}: {mainText
                     variant="soft"
                     onChange={e => handleChange(e.target.value)}
                 />
+                {error.length > 0 && <p className='my-2 text-red-800'>{error}</p>}
                 <Button onClick={() => handleClick()}>{children}</Button>
             </Typography>
         </Box>

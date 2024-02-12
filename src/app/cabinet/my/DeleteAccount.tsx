@@ -20,7 +20,7 @@ export const DeleteAccount = () =>{
             await AuthServices.delete(userId)
             dispatch(logOut())
             localStorage.removeItem(NAME_OF_TOKEN)
-          router.push('/login/')
+          router.push('/registration/')
         } catch (e) {
             errorNotification('Server is not work')
         }
