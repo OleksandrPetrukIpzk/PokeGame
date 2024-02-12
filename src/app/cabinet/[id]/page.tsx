@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 import {IUser} from "@/models/user";
 import {getUserById} from "@/functions/auth";
 import {INITIAL_USER} from "@/constants/user";
+import '../../globals.css'
+
 type Props = {
     params:{
         id: string,

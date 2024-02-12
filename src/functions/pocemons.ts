@@ -63,11 +63,11 @@ export const isHit = (yourPokemon:Fighter, enemyPokemon:Fighter) =>{
     return yourPokemon.sumaryHp - enemyPokemon.sumaryAttack > NUMBER_ZERO && enemyPokemon.sumaryHp - yourPokemon.sumaryAttack > NUMBER_ZERO
 }
 export const isYouLose= (yourPokemon:Fighter, enemyPokemon:Fighter) => {
-    return yourPokemon.sumaryHp - enemyPokemon.sumaryAttack < NUMBER_ZERO
+    return yourPokemon.sumaryHp - enemyPokemon.sumaryAttack <= NUMBER_ZERO
 }
 
 export const isYouWin = (yourPokemon:Fighter, enemyPokemon:Fighter) => {
-    return enemyPokemon.sumaryHp - yourPokemon.sumaryAttack < 0
+    return enemyPokemon.sumaryHp - yourPokemon.sumaryAttack <= 0
 }
 type CurrentImage = {
     other: {

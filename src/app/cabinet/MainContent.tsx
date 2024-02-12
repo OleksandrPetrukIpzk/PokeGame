@@ -1,13 +1,11 @@
 import Image from "next/image";
-import {getPokemonImg} from "@/functions/pocemons";
-import {useEffect, useState} from "react";
-import Link from "next/link";
 import LinearBarWithLabel from "@/app/cabinet/LinearBarWithLabel";
 import {COUNT_ACHIVES} from "@/constants/achievement";
 import {achivePercent} from "@/functions/achives";
 import {isTheSame} from "@/functions/logic";
 import {AccordionPokemons} from "@/app/cabinet/Accordion";
 import {ImagePokemonWithLinks} from "@/app/cabinet/my/ImagePokemonWithLinks";
+import {AccordionRang} from "@/app/cabinet/AccordionRang";
 
 type Content = {
     img: string,
@@ -19,7 +17,6 @@ type Content = {
     arrPokemons: string[]
 }
 export const MainContent = ({img, name, email, achiveList, rang, selectedPokemon, arrPokemons}: Content) =>{
-
 
 return<div>
       <div className='flex justify-around'>
@@ -41,5 +38,6 @@ return<div>
           </div>
       </div>
         <AccordionPokemons arrPokemons={arrPokemons}/>
+    <AccordionRang name={name}/>
     </div>
 }

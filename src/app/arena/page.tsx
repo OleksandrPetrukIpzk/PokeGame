@@ -30,6 +30,7 @@ import {INITIAL_USER} from "@/constants/user";
 import {addAchives} from "@/functions/achives";
 import {addClick, addCountOfLose, addCountOfRichCoins, addCountOfWins} from "@/redux/features/achievements";
 import {changeCountOfMoney} from "@/redux/features/auth-slice";
+import {sendWinner} from "@/functions/figts";
 type UserInfo = {
     data: object[],
     sumaryHp?: number,
@@ -48,6 +49,8 @@ export default function Arena () {
     const dispatch = useDispatch()
     const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
     const userId = useAppSelector((state) => state.authReducer.value.id);
+    const rang = useAppSelector((state) => state.authReducer.value.rang);
+    const name =  useAppSelector((state) => state.authReducer.value.name);
     const userCoins = useAppSelector((state) => state.authReducer.value.coins);
     const click = useAppSelector((state) => state.achiveReducer.value.click)
     const countOfWins = useAppSelector(state => state.achiveReducer.value.countOfWins)
@@ -75,10 +78,12 @@ export default function Arena () {
         } else if(isYouLose(statsCurrentUser, selectedUser)){
             setGameStatus(LOSE)
             youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
-            addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, 'you lose enemy ', addCountOfLose)
+            sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, userId, rang)
+            addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, 'you lose enemy ', addCountOfLose);
         } else if(isYouWin(statsCurrentUser, selectedUser)){
             setGameStatus(WIN)
             youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
+            sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang,)
             addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins)
             addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
         }
@@ -139,7 +144,7 @@ export default function Arena () {
                     }
         </Modal>
         <div className=''>
-            {usersList.map((user) => user.selectedPokemon && <User id={user._id} img={user.img} rang={user.rang} name={user.name} selectedPokemon={user.selectedPokemon} coins={user.coins} email={user.email} choiceUserForFight={choiceUserForFight} userHp={statsCurrentUser.sumaryHp} userAttack={statsCurrentUser.sumaryAttack} userSpeed={statsCurrentUser.speed}/>)}
+            {usersList.map((user) => user.selectedPokemon && user.name !== name && <User id={user._id} img={user.img} rang={user.rang} name={user.name} selectedPokemon={user.selectedPokemon} coins={user.coins} email={user.email} choiceUserForFight={choiceUserForFight} userHp={statsCurrentUser.sumaryHp} userAttack={statsCurrentUser.sumaryAttack} userSpeed={statsCurrentUser.speed}/>)}
         </div>
     </main>)
 }
