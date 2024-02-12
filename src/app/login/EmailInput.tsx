@@ -6,13 +6,26 @@ import Typography from '@mui/joy/Typography';
 import Key from '@mui/icons-material/Key';
 import {validateEmail} from "@/functions/auth";
 import {Email} from "@mui/icons-material";
-export const EmailInput = ({email, setEmail}: {email: string, setEmail: Dispatch<SetStateAction<string>>}) =>{
+export const EmailInput = ({email, setEmail, setErrors}: {email: string, setEmail: Dispatch<SetStateAction<string>>, setErrors: Dispatch<SetStateAction<string[]>>}) =>{
     const [isValid, setIsValid] = useState(false);
     const handleChange = (value: string) => {
         if(validateEmail(value)){
             setIsValid(true)
+            setErrors((prev: string[]) => {
+                if (prev.includes('email')) {
+                    const index = prev.findIndex(item => item === 'email');
+                    prev.splice(index, 1);
+                }
+                return prev;
+            });
         } else{
             setIsValid(false)
+            setErrors((prev: string[]) => {
+                if (!prev.includes('email')) {
+                    prev.push('email');
+                }
+                return prev;
+            });
         }
         setEmail(value);
     }

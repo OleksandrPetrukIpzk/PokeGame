@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction} from "react";
+import {Dispatch, SetStateAction, useEffect} from "react";
 import Stack from '@mui/joy/Stack';
 import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
@@ -6,8 +6,26 @@ import Typography from '@mui/joy/Typography';
 import Key from '@mui/icons-material/Key';
 import {SupervisedUserCircle, VerifiedUser} from "@mui/icons-material";
 
-export const NameInput = ({name, setName}: {name: string, setName: Dispatch<SetStateAction<string>>}) =>{
+export const NameInput = ({name, setName, setErrors}: {name: string, setName: Dispatch<SetStateAction<string>>, setErrors: Dispatch<SetStateAction<string[]>>}) =>{
     const minLength = 20;
+    useEffect(() => {
+        if(name.length < 3){
+            setErrors((prev: string[]) => {
+                if (!prev.includes('name')) {
+                    prev.push('name');
+                }
+                return prev;
+            });
+        } else{
+            setErrors((prev: string[]) => {
+                if (prev.includes('name')) {
+                    const index = prev.findIndex(item => item === 'name');
+                    prev.splice(index, 1);
+                }
+                return prev;
+            });
+        }
+    }, [name]);
     return (
         <Stack
             spacing={0.5}

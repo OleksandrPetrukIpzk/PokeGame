@@ -20,6 +20,8 @@ export default function Login () {
     const [password, setPassword] = useState(EMPTY_STRING);
     const [name, setName] = useState(EMPTY_STRING);
     const dispatch = useDispatch<AppDispatch>();
+    const [errors, setErrors] = useState<string[]>([]);
+    const [errorFromBack, setErrorFromBack] = useState('');
     const router = useRouter();
     const  clickLogin = async () =>{
         try {
@@ -40,8 +42,8 @@ export default function Login () {
                     arrPotions: response.data.user.arrPotions,
                 }));
                 router.push('/menu')
-        } catch (e) {
-            console.log('error')
+        } catch (e: any) {
+           setErrorFromBack(e.response.data.error);
         }
     }
     const changeEmail = (value:string) =>{
@@ -65,8 +67,9 @@ export default function Login () {
             </div>
                 <div className='flex flex-col items-center w-screen justify-center '>
                  <p className=' font-sans text-lg mb-4 font-medium' >Login an your account</p>
-                <InputsContainer email={email} name={name} setEmail={setEmail} setName={setName} password={password} setPassword={setPassword}/>
-                    <Button onClick={() => clickLogin()}   size="lg" color="success" variant="solid">Login</Button>
+                <InputsContainer setErrors={setErrors} email={email} name={name} setEmail={setEmail} setName={setName} password={password} setPassword={setPassword}/>
+                    <Button onClick={() => clickLogin()}   size="lg" color="success" variant="solid" disabled={errors.length !== 0 || name.length === 0}>Login</Button>
+                    {errorFromBack.length > 0 && <p className='mt-2 mb-1 text-red-800'>{errorFromBack}</p>}
             <span className=' font-sans text-lg mt-4 font-medium'>
                 You doesnt have an Account?
                <Link className='font-light text-cyan-800 underline ' href='/registration'> Sign in</Link>

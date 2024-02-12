@@ -1,11 +1,30 @@
-import {Dispatch, SetStateAction} from "react";
+import {Dispatch, SetStateAction, useEffect} from "react";
 import Stack from '@mui/joy/Stack';
 import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
 import Typography from '@mui/joy/Typography';
 import Key from '@mui/icons-material/Key';
-export const PasswordInput = ({password, setPassword}: {password: string, setPassword: Dispatch<SetStateAction<string>>}) => {
+export const PasswordInput = ({password, setPassword, setErrors}: {password: string, setPassword: Dispatch<SetStateAction<string>>, setErrors: Dispatch<SetStateAction<string[]>>}) => {
     const minLength = 12;
+
+    useEffect(() => {
+        if(password.length < 3){
+            setErrors((prev: string[]) => {
+                if (!prev.includes('password')) {
+                    prev.push('password');
+                }
+                return prev;
+            });
+        } else{
+            setErrors((prev: string[]) => {
+                if (prev.includes('password')) {
+                    const index = prev.findIndex(item => item === 'password');
+                    prev.splice(index, 1);
+                }
+                return prev;
+            });
+        }
+    }, [password]);
     return (
         <Stack
             spacing={0.5}
