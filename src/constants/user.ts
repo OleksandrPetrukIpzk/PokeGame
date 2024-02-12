@@ -1,5 +1,5 @@
 import {EMPTY_STRING, NUMBER_ZERO} from "@/constants/pokemons";
-import {IUser, Potions} from "@/models/user";
+import {IUser} from "@/models/user";
 
 export const INITIAL_USER: IUser = {
     id: EMPTY_STRING,
@@ -15,3 +15,5 @@ export const INITIAL_USER: IUser = {
     arrAchives: [],
     arrPotions: []
 }
+
+export const RANG_FOR_WIN = 20;

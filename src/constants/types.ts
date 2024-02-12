@@ -27,3 +27,11 @@ export type InitialPokemon = {
     sumaryAttack: number,
     speed: number,
 }
+
+export type Rang = {
+    id: number,
+    whoStart: string,
+    whoDefence: string,
+    whoWin: string,
+    timeFight: Date
+}

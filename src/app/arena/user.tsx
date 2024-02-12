@@ -41,7 +41,7 @@ export const User = ({id, img, rang, name, selectedPokemon, coins, email, choice
        <IconUser id={id} rang={rang} img={img} name={name}/>
         <PokemonInfo selectedPokemon={selectedPokemon} userHp={userHp} statsPokemon={statsPokemon} userAttack={userAttack} userSpeed={userSpeed}/>
         <Button  color="danger" size="lg"
-                variant="soft" onClick={() => choiceUserForFight({id, name, selectedPokemon, coins, email,})}>Fight</Button>
+                variant="soft" onClick={() => choiceUserForFight({id, name, selectedPokemon, coins, email, rang})}>Fight</Button>
         </div>)
 
 }
