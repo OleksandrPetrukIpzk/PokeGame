@@ -9,7 +9,7 @@ import {Dispatch, SetStateAction} from "react";
 export const EnemyPanel = ({selectedUser, setIsFight}: {selectedUser: OnlineFighters, setIsFight: Dispatch<SetStateAction<boolean>>}) =>{
     return <Box sx={{ ...STYLES_FOR_MODAL, width: 400 }}>
         <div className='flex justify-between items-center mb-5'>
-            <IconPokemon id={selectedUser?.data?.name}/>
+            <IconPokemon id={selectedUser?.data?.name} size={100}/>
             <div className='flex flex-col'>
                 <p>Name: {selectedUser.data.name}</p>
                 <p>Types:</p>

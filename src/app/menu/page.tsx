@@ -9,10 +9,10 @@ import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import StadiumOutlinedIcon from '@mui/icons-material/StadiumOutlined';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import '../globals.css'
+import {useAuth} from "@/hooks/useAuth";
 export default function Menu (){
-    useEmptyAuth()
+    useAuth('menu', 'login')
     return(<>
 
         <main className='main'>

@@ -21,6 +21,7 @@ import '../globals.css'
 import {addAchives} from "@/functions/achives";
 import {addCountOfLoseCoins, addCountOfPokemons} from "@/redux/features/achievements";
 import {changeCountOfMoney} from "@/redux/features/auth-slice";
+import {IconPokemon} from "@/IconPokemon/iconPokemon";
 export default function Store () {
     const [isClicked, setIsClicked] = useState(false);
     const [numberPokemon, setNumberPokemon] = useState(1);
@@ -55,12 +56,12 @@ export default function Store () {
     return(<>
             <main className='get-pokemon flex  flex-col main'>
                 <Header/>
-                <div className='flex align-middle flex-col justify-center items-center'>
-                <div className='get-pokemon-icon'>
-                    {isClicked ? <CardPokemon pokemon={{url:'https://pokeapi.co/api/v2/pokemon/' + numberPokemon, name: numberPokemon}} isLoaded={true} /> : <Image width={100} height={100} src='/Daco_659762.png' alt='Daco_659762.png'/>}
-                </div>
+                <div className='flex align-middle justify-center items-center'>
+                    <div className='flex flex-col items-center'>
+                    {isClicked ? <IconPokemon id={numberPokemon.toString()} size={150} /> : <Image width={150} height={150} src='/Daco_659762.png' alt='Daco_659762.png'/>}
                 {<Button endIcon={<AddShoppingCartIcon/>} className='get-pokemon-button' onClick={() => handleClickButton()}> {coins >= NUMBER_ONE ? 'Get Lucky 1 coin' : 'Yo doesnt have enough money'}</Button>}
-                </div>
+                    </div>
+                    </div>
             </main>
         </>)
 }

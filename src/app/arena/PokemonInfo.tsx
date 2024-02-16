@@ -7,7 +7,7 @@ import {InitialPokemon} from "@/constants/types";
 export const PokemonInfo = ({selectedPokemon, userHp, statsPokemon, userAttack, userSpeed}: {selectedPokemon: string, userHp: number, statsPokemon: InitialPokemon, userAttack: number, userSpeed: number}) =>{
 
     return <div className='flex flex-col items-center'>
-        <IconPokemon id={selectedPokemon}/>
+        <IconPokemon id={selectedPokemon} size={100}/>
         <div className='flex'>
             <Tooltip title={`You have ${userHp}`}>
                 <div className='flex items-center mr-5'>

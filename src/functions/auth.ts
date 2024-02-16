@@ -35,7 +35,7 @@ export const getUserById = async (id: string, setState: Dispatch<SetStateAction<
     setState(response.data)
 }
 
-export  const getAuth = async (dispatch: AppDispatch, id: string) =>{
+export  const getAuth = async (dispatch: AppDispatch, id: string, router: AppRouterInstance) =>{
     try {
         const arrCounts: number[] = []
         const response = await UserServices.getUserById(id)
@@ -65,7 +65,7 @@ export  const getAuth = async (dispatch: AppDispatch, id: string) =>{
             countOfRichCoins: arrCounts[6]
         }))
     } catch (e) {
-        console.log('problem')
+        router.push('login')
     }
 }
 

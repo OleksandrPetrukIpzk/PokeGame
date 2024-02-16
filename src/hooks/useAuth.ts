@@ -11,7 +11,7 @@ export const useAuth = (mainRouterPath:string, routerPath:string) =>{
     const router = useRouter()
     useEffect(() => {
         if(localStorage.getItem(NAME_OF_TOKEN)){
-            getAuth(dispatch, id);
+            getAuth(dispatch, id, router);
             router.push(`/${mainRouterPath}`)
         } else{
             router.push(`/${routerPath}`)
