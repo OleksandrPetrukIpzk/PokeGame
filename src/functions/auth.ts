@@ -7,6 +7,7 @@ import {remove, start} from "@/redux/features/achievements";
 import {ACHIEVEMENT, KEYS_ACHIEVEMENTS} from "@/constants/achievement";
 import {Dispatch, SetStateAction} from "react";
 import {IUser} from "@/models/user";
+import Cookies from "js-cookie";
 
 export const validateEmail = (email: string) =>{
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,7 +18,8 @@ const applyAllAchives = (ids: number[], arrCounts: number[]) =>{
         let lastIndex = -1;
         ACHIEVEMENT[key].map(element => {
             if(ids.includes(element.id)){
-                lastIndex = ids.findIndex(i => i === element.id)
+                const idx = ids.findIndex(i => i === element.id)
+                lastIndex = ACHIEVEMENT[key].findIndex(i => i.id === ids[idx])
             }
         })
         if(lastIndex >= 0){
@@ -37,7 +39,6 @@ export const getUserById = async (id: string, setState: Dispatch<SetStateAction<
 
 export  const getAuth = async (dispatch: AppDispatch, id: string, router: AppRouterInstance) =>{
     try {
-        const arrCounts: number[] = []
         const response = await UserServices.getUserById(id)
         dispatch(logIn({
             id: response.data._id,
@@ -53,25 +54,29 @@ export  const getAuth = async (dispatch: AppDispatch, id: string, router: AppRou
             arrAchives: response.data.arrAchives,
             arrPotions: response.data.arrPotions,
         }));
-        applyAllAchives(response.data.arrAchives, arrCounts)
-        dispatch(start({
-            ids: response.data.arrAchives,
-            click: arrCounts[0],
-            countOfWins: arrCounts[1],
-            countOfLose: arrCounts[2],
-            countOfPokemons: arrCounts[3],
-            countOfStage: arrCounts[4],
-            countOfLoseCoins: arrCounts[5],
-            countOfRichCoins: arrCounts[6]
-        }))
     } catch (e) {
         router.push('login')
     }
 }
 
+export const configureAchives = async (response: any, dispatch: AppDispatch) =>{
+    const arrCounts: number[] = []
+    applyAllAchives(response, arrCounts)
+    dispatch(start({
+        ids: response,
+        click: arrCounts[0],
+        countOfWins: arrCounts[1],
+        countOfLose: arrCounts[2],
+        countOfPokemons: arrCounts[3],
+        countOfStage: arrCounts[4],
+        countOfLoseCoins: arrCounts[5],
+        countOfRichCoins: arrCounts[6]
+    }))
+}
+
 export const logout = async (dispatch: AppDispatch, router: AppRouterInstance) =>{
     try {
-        localStorage.removeItem(NAME_OF_TOKEN);
+        Cookies.remove(NAME_OF_TOKEN);
         dispatch(logOut)
         dispatch(remove)
         router.push('/login')

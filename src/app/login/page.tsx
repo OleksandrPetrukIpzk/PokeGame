@@ -9,12 +9,10 @@ import {logIn} from "@/redux/features/auth-slice";
 import {useRouter} from "next/navigation";
 import {EMPTY_STRING, NAME_OF_TOKEN} from "@/constants/pokemons";
 import {useAuth} from "@/hooks/useAuth";
-import {errorNotification, youCantLeave} from "@/functions/pocemons";
-import {EmailInput} from "@/app/login/EmailInput";
-import {PasswordInput} from "@/app/login/PasswordInput";
-import {NameInput} from "@/app/login/NameInput";
 import {InputsContainer} from "@/app/login/InputsContainer";
 import Button from "@mui/joy/Button";
+import Cookies from 'js-cookie';
+import {configureAchives} from "@/functions/auth";
 export default function Login () {
     const [email, setEmail] = useState(EMPTY_STRING);
     const [password, setPassword] = useState(EMPTY_STRING);
@@ -26,7 +24,7 @@ export default function Login () {
     const  clickLogin = async () =>{
         try {
                 const response = await AuthServices.logIn(name, email, password);
-                localStorage.setItem(NAME_OF_TOKEN, response.data.access_token);
+                Cookies.set(NAME_OF_TOKEN, response.data.access_token);
                 dispatch(logIn({
                     id: response.data.user._id,
                     name: response.data.user.name,
@@ -41,6 +39,7 @@ export default function Login () {
                     arrAchives: response.data.user.arrAchives,
                     arrPotions: response.data.user.arrPotions,
                 }));
+               await configureAchives(response.data.user.arrAchives, dispatch);
                 router.push('/menu')
         } catch (e: any) {
            setErrorFromBack(e.response.data.error);

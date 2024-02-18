@@ -10,6 +10,7 @@ import {logOut} from "@/redux/features/auth-slice";
 import AuthServices from "@/services/authServices";
 import Typography from "@mui/material/Typography";
 import {NAME_OF_TOKEN} from "@/constants/pokemons";
+import Cookies from "js-cookie";
 export const DeleteAccount = () =>{
     const [isOpen, setIsOpen] = useState(false);
     const userId = useAppSelector((state) => state.authReducer.value.id);
@@ -19,7 +20,7 @@ export const DeleteAccount = () =>{
         try{
             await AuthServices.delete(userId)
             dispatch(logOut())
-            localStorage.removeItem(NAME_OF_TOKEN)
+            Cookies.remove(NAME_OF_TOKEN)
           router.push('/registration/')
         } catch (e) {
             errorNotification('Server is not work')

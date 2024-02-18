@@ -34,7 +34,6 @@ export const ChangeModal = ({mainText, children, func, open, setOpen}: {mainText
                         dispatch(changeName(inputValue))
                     }
                     catch (e: any) {
-                        console.log(e)
                         setColorInput('danger');
                         setError(e.response.data.error)
                     }

@@ -25,9 +25,9 @@ export const COLOR_OF_ABILITIES: ColorOfAbilities = {
     psychic: 'pink',
     ice: ' #b9e8ea',
     dragon: '#0096b6',
-    dark: 'dark',
+    dark: '#282828',
     fairy: '#e5eec5',
-    unknown: 'white',
+    unknown: 'CadetBlue',
     shadow: '#c5c5c5'
 }
 

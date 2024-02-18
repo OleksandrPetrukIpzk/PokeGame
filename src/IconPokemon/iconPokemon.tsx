@@ -20,6 +20,6 @@ export const IconPokemon = ({id, size}:IconPokemon,) =>{
             }
             setIconPokemon(currentImage);
         })
-    }, []);
+    }, [id]);
     return(<Image src={iconPokemon} alt={iconPokemon} width={size} height={size}/>)
 }

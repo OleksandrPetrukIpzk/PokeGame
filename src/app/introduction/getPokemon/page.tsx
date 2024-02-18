@@ -11,6 +11,7 @@ import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {randomPokemonNumber} from "@/functions/pocemons";
 import {isTheSame} from "@/functions/logic";
 import UserServices from "@/services/userServices";
+import {IconPokemon} from "@/IconPokemon/iconPokemon";
 export default function GetPokemon () {
     const [isClicked, setIsClicked] = useState(false);
     const [numberPokemon, setNumberPokemon] = useState(NUMBER_ONE);
@@ -35,7 +36,7 @@ export default function GetPokemon () {
         <>
             <main className='get-pokemon flex justify-center flex-col align-middle items-center'>
                 <div className='get-pokemon-icon'>
-                {isClicked ? <CardPokemon pokemon={{url:'https://pokeapi.co/api/v2/pokemon/' + numberPokemon, name: numberPokemon}} isLoaded={true} /> : <Image width={100} height={100} src='/Daco_659762.png' alt='Daco_659762.png'/>}
+                {isClicked ? <IconPokemon id={numberPokemon.toString()} size={200}/> : <Image width={150} height={150} src='/Daco_659762.png' alt='Daco_659762.png'/>}
                 </div>
                 <p>{isClicked ? 'Here your first Pokemon' : 'Get your first Pokemon'}</p>
                 {!isClicked ? <button className='get-pokemon-button' onClick={() => handleClickButton()}>Get Lucky</button> : <Link href='/menu'><button  className='get-pokemon-button'>Go to adventure</button></Link>}

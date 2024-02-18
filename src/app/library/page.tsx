@@ -7,6 +7,8 @@ import {Header} from "@/Header/Header";
 import {errorNotification} from "@/functions/pocemons";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {EMPTY_STRING} from "@/constants/pokemons";
+import Button from "@mui/joy/Button";
+import {ControlButtons} from "@/app/library/ControlButtons";
 
 type GetAxios = {
         data:{
@@ -36,17 +38,16 @@ export default function Home() {
   return (
       <div className='main'>
           <Header/>
-    <main className='h-max flex flex-wrap pl-20 pt-10'>
-      {isLoaded ? pokemons.map((pokemon:object):JSX.Element => <CardPokemon key={pokemon.name} pokemon={pokemon} isLoaded={isLoaded}></CardPokemon>) : <p>Loading...</p>}
-        <button className='flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300 border border-slate-200' onClick={() => {setBaseUrl(previousUrl);
-            setIsLoaded(false);
-        }}>Prev</button>
-        <button className='flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300 border border-slate-200' onClick={() => {
-            setBaseUrl(nextUrl);
-            setIsLoaded(false);
-        }
-        }>Next</button>
-    </main>
+          <main className='h-max pl-20 pt-10'>
+              <ControlButtons previousUrl={previousUrl} setBaseUrl={setBaseUrl} setIsLoaded={setIsLoaded} nextUrl={nextUrl}/>
+              <div className='flex flex-wrap justify-center'>
+              {isLoaded ? pokemons.map((pokemon: object): JSX.Element => <CardPokemon key={pokemon.name}
+                                                                                      pokemon={pokemon}
+                                                                                      isLoaded={isLoaded}></CardPokemon>) :
+                  <p>Loading...</p>}
+              </div>
+              <ControlButtons previousUrl={previousUrl} setBaseUrl={setBaseUrl} setIsLoaded={setIsLoaded} nextUrl={nextUrl}/>
+          </main>
       </div>
   )
 }

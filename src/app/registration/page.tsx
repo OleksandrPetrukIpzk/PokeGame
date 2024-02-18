@@ -12,6 +12,7 @@ import {errorNotification} from "@/functions/pocemons";
 import {validateEmail} from "@/functions/auth";
 import {InputsContainer} from "@/app/login/InputsContainer";
 import Button from "@mui/joy/Button";
+import Cookies from "js-cookie";
 export default function Registration () {
     const [email, setEmail] = useState(EMPTY_STRING);
     const [password, setPassword] = useState(EMPTY_STRING);
@@ -37,7 +38,7 @@ export default function Registration () {
                 arrAchives: response.data.user.arrAchives,
                 arrPotions: response.data.user.arrPotions,
             }));
-            localStorage.setItem(NAME_OF_TOKEN, response.data.access_token)
+            Cookies.set(NAME_OF_TOKEN, response.data.access_token)
             router.push('/introduction')
         } catch (e: any) {
             setErrorFromBack(e.response.data.error);

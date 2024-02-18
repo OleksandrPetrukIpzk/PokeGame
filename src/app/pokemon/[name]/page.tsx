@@ -58,7 +58,7 @@ export default function Pokemon({params: {name}}: Props) {
                 <Abilities types={types} isLoaded={isLoaded}/>
                 <div className='flex flex-col'>
                     {isTheSame(selectedPokemon, pokemonInfo.id?.toString()) && <Button color='success'>Selected</Button>}
-                    {arrPokemons.includes(pokemonInfo.id?.toString()) && <Button onClick={() => clickHandleSelectPokemon()}>Select pokemon</Button>}
+                    {arrPokemons.includes(pokemonInfo.id?.toString()) && !isTheSame(selectedPokemon, pokemonInfo.id?.toString()) && <Button onClick={() => clickHandleSelectPokemon()}>Select pokemon</Button>}
                 </div>
                     <PokemonInfo pokemonInfo={pokemonInfo}/>
                 </div>

@@ -6,7 +6,7 @@ import {useAppSelector} from "@/redux/store";
 import {useDispatch} from "react-redux";
 import {Header} from "@/Header/Header";
 import UserServices from "@/services/userServices";
-import {NUMBER_ONE} from "@/constants/pokemons";
+import {DEFAULT_LINK, NUMBER_ONE} from "@/constants/pokemons";
 import {
     errorNotification,
     isIncludesPokemon,
@@ -22,6 +22,7 @@ import {addAchives} from "@/functions/achives";
 import {addCountOfLoseCoins, addCountOfPokemons} from "@/redux/features/achievements";
 import {changeCountOfMoney} from "@/redux/features/auth-slice";
 import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import Link from "next/link";
 export default function Store () {
     const [isClicked, setIsClicked] = useState(false);
     const [numberPokemon, setNumberPokemon] = useState(1);
@@ -39,7 +40,8 @@ export default function Store () {
                 if(isIncludesPokemon(arrPokemons, randomNumber) && isPokemon){
                     setNumberPokemon(randomNumber);
                     const number = coins - NUMBER_ONE;
-                    await UserServices.addPokemon(id, randomNumber.toString())
+                    await UserServices.addPokemon(id, randomNumber.toString());
+                    await UserServices.changeCountOfMoney(id, number);
                     setIsClicked(true);
                     dispatch(changeCountOfMoney(coins - NUMBER_ONE))
                     addAchives(id, 'countOfPokemons', countOfPokemons, dispatch, ids, 'you have a pokemons ', addCountOfPokemons)
@@ -58,7 +60,7 @@ export default function Store () {
                 <Header/>
                 <div className='flex align-middle justify-center items-center'>
                     <div className='flex flex-col items-center'>
-                    {isClicked ? <IconPokemon id={numberPokemon.toString()} size={150} /> : <Image width={150} height={150} src='/Daco_659762.png' alt='Daco_659762.png'/>}
+                    {isClicked ?<Link href={'/pokemon/' + numberPokemon.toString()}><IconPokemon id={numberPokemon.toString()} size={200} /></Link>  : <Image width={150} height={150} src='/Daco_659762.png' alt='Daco_659762.png'/>}
                 {<Button endIcon={<AddShoppingCartIcon/>} className='get-pokemon-button' onClick={() => handleClickButton()}> {coins >= NUMBER_ONE ? 'Get Lucky 1 coin' : 'Yo doesnt have enough money'}</Button>}
                     </div>
                     </div>

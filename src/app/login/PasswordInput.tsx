@@ -8,7 +8,7 @@ export const PasswordInput = ({password, setPassword, setErrors}: {password: str
     const minLength = 12;
 
     useEffect(() => {
-        if(password.length < 3){
+        if(password.length < 4){
             setErrors((prev: string[]) => {
                 if (!prev.includes('password')) {
                     prev.push('password');
