@@ -24,7 +24,7 @@ export default class UserServices {
         return $api.post<IUser>('user/stage/'+id, {stage})
     }
 
-    static async setPotions(id: string, potion: Potions){
+    static async setPotions(id: string, potion: Potions[]){
         return $api.post<IUser>('user/setPotion/'+id, {potion})
     }
 

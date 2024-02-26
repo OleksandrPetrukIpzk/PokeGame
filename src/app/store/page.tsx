@@ -1,12 +1,11 @@
 'use client'
-import {CardPokemon} from "@/app/cardPokemon";
 import Image from "next/image";
 import { useState} from "react";
 import {useAppSelector} from "@/redux/store";
 import {useDispatch} from "react-redux";
 import {Header} from "@/Header/Header";
 import UserServices from "@/services/userServices";
-import {DEFAULT_LINK, NUMBER_ONE} from "@/constants/pokemons";
+import {NUMBER_ONE} from "@/constants/pokemons";
 import {
     errorNotification,
     isIncludesPokemon,
@@ -36,7 +35,6 @@ export default function Store () {
     const arrPotions = useAppSelector((state) => state.authReducer.value.arrPotions)
     const ids  = useAppSelector((state) => state.achiveReducer.value.ids)
     const dispatch = useDispatch()
-    console.log(arrPotions);
     const handleClickButton = async () => {
         if(isMoreOneCoin(coins)) {
             let randomNumber = randomPokemonNumber();
@@ -72,8 +70,8 @@ export default function Store () {
             }
             dispatch(setPotions(updatedArrPotions));
             dispatch(changeCountOfMoney(coins - NUMBER_ONE));
-            addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, 'You lose coins ', addCountOfLoseCoins)
-            await UserServices.setPotions(id, POTIONS[index]);
+            addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, 'You lose coins ', addCountOfLoseCoins);
+            await UserServices.setPotions(id, updatedArrPotions);
             await UserServices.changeCountOfMoney(id, coins - NUMBER_ONE);
         }
     }

@@ -45,7 +45,8 @@ export default function Arena () {
     const [gameStatus, setGameStatus] = useState(EMPTY_STRING);
     const [isSelectedUser, setIsSelectedUser] = useState(false);
     const [isFight, setIsFight] = useState(false);
-    const [statsCurrentUser, setStatsCurrentUser] = useState(DEFAULT_TEMPLATE_USER_FOR_FIGHT)
+    const [statsCurrentUser, setStatsCurrentUser] = useState(DEFAULT_TEMPLATE_USER_FOR_FIGHT);
+    const [activeID, setActiveID] = useState(0);
     const dispatch = useDispatch()
     const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
     const userId = useAppSelector((state) => state.authReducer.value.id);
@@ -71,28 +72,47 @@ export default function Arena () {
         setIsSelectedUser(true);
     }
     const hitPokemon = () => {
-        if(isHit(statsCurrentUser, selectedUser)){
-            hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack)
-            addAchives(userId, 'click', click, dispatch, ids, 'you hit enemy ', addClick)
+        if(activeID === 5){
+            setGameStatus(WIN);
+            youWin(setStatsCurrentUser, setSelectedUser, 0);
+            sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang);
+            addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins);
+            addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins);
+        } else{
+            if(isHit(statsCurrentUser, selectedUser)){
+                if(activeID === 7){
+                    hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack + selectedUser.sumaryAttack, selectedUser.sumaryAttack / 2);
+                } else{
+                    hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack);
+                }
 
-        } else if(isYouLose(statsCurrentUser, selectedUser)){
-            setGameStatus(LOSE)
-            youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
-            sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, userId, rang)
-            addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, 'you lose enemy ', addCountOfLose);
-        } else if(isYouWin(statsCurrentUser, selectedUser)){
-            setGameStatus(WIN)
-            youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
-            sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang,)
-            addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins)
-            addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
+                addAchives(userId, 'click', click, dispatch, ids, 'you hit enemy ', addClick)
+
+            } else if(isYouLose(statsCurrentUser, selectedUser)){
+                setGameStatus(LOSE)
+                youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
+                sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, userId, rang)
+                addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, 'you lose enemy ', addCountOfLose);
+            } else if(isYouWin(statsCurrentUser, selectedUser)){
+                setGameStatus(WIN)
+                youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
+                if(activeID === 4){
+                    sendWinner(name, selectedUser.name,  name, userId, rang + 20, selectedUser.id, selectedUser.rang)
+                }
+                else {
+                    sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang,)
+                }
+                addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins)
+                addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
+            }
         }
     }
 
     const handleLeave = () =>{
-        if(statsCurrentUser.speed > selectedUser.speed){
+        if(statsCurrentUser.speed > selectedUser.speed || activeID === 1){
             setIsSelectedUser(false);
             setIsFight(false);
+            setActiveID(0);
         } else{
             youCantLeave()
         }
@@ -102,7 +122,12 @@ export default function Arena () {
         let reward = NUMBER_ONE;
         if(isTheSame(gameStatus, WIN)){
             winner = userId;
-            reward += userCoins;
+            if(activeID === 6){
+                reward += userCoins + reward;
+            }
+            else{
+                reward += userCoins;
+            }
             dispatch(changeCountOfMoney(reward));
         }else{
             winner = selectedUser.id
@@ -112,6 +137,7 @@ export default function Arena () {
         setIsSelectedUser(false);
         setIsFight(false);
         setGameStatus(EMPTY_STRING);
+        setActiveID(0);
     }
 
     useEmptyAuth()
@@ -140,7 +166,7 @@ export default function Arena () {
                         <FightPanel statsCurrentUser={statsCurrentUser} selectedPokemon={selectedPokemon} selectedUser={selectedUser}/>
                         <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon}/>
                     </Box>
-                    : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight}/>
+                    : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight} activeID={activeID} setActiveID={setActiveID} setStatsCurrentUser={setStatsCurrentUser}/>
                     }
         </Modal>
         <div className=''>
