@@ -33,9 +33,6 @@ export default class UserServices {
     }
 
     static async addPokemon(id: string, idPokemon: string){
-
-
-
         return $api.post<IUser>('user/pokemon/'+ id, {idPokemon})
     }
 
