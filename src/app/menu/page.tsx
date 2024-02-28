@@ -9,6 +9,7 @@ import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import StadiumOutlinedIcon from '@mui/icons-material/StadiumOutlined';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import '../globals.css'
 import {useAuth} from "@/hooks/useAuth";
 export default function Menu (){
@@ -17,27 +18,30 @@ export default function Menu (){
 
         <main className='main'>
             <Header/>
-            <div className='flex justify-around'>
+            <div className='flex justify-around flex-col items-center gap-5'>
             <Link href='/library'>
-               <Button endIcon={<LibraryBooksOutlinedIcon/>}>Library Pokemons</Button>
+               <Button startIcon={<LibraryBooksOutlinedIcon/>}>Library Pokemons</Button>
             </Link>
             <Link href='/filter'>
-                <Button endIcon={<FilterListOutlinedIcon/>}>Filter Pokemons</Button>
+                <Button startIcon={<FilterListOutlinedIcon/>}>Filter Pokemons</Button>
             </Link>
             <Link href='/store'>
-                <Button endIcon={<LocalGroceryStoreOutlinedIcon/>}>Store Pokemons</Button>
+                <Button startIcon={<LocalGroceryStoreOutlinedIcon/>}>Store Pokemons</Button>
             </Link>
             <Link href='/colections'>
-                <Button endIcon={<CollectionsOutlinedIcon/>}>Your colection Pokemons</Button>
+                <Button startIcon={<CollectionsOutlinedIcon/>}>Your colection Pokemons</Button>
             </Link>
             <Link href='/arena'>
-                <Button endIcon={<LanguageOutlinedIcon/>}>Online arena</Button>
+                <Button startIcon={<LanguageOutlinedIcon/>}>Online arena</Button>
             </Link>
             <Link href='/storyMode'>
-                <Button endIcon={<StadiumOutlinedIcon/>}>Offline arena</Button>
+                <Button startIcon={<StadiumOutlinedIcon/>}>Offline arena</Button>
             </Link>
                 <Link href='/achievements'>
-                    <Button endIcon={<WorkspacePremiumIcon/>}>Achievements</Button>
+                    <Button startIcon={<WorkspacePremiumIcon/>}>Achievements</Button>
+                </Link>
+                <Link href='/achievements'>
+                    <Button startIcon={<MilitaryTechIcon/>}>Top players</Button>
                 </Link>
             </div>
         </main>
