@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {Option, Select} from "@mui/joy";
 import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 export default function BestPlayers (){
     const [users, setUsers] = useState<IUser[]>([]);
     const [defaultUsers, setDefaultUsers] = useState<IUser[]>([]);
@@ -27,6 +28,7 @@ export default function BestPlayers (){
             setUsers(defaultUsers);
         }
     }
+    useEmptyAuth();
     console.log(users);
     return(<main>
         <Header />

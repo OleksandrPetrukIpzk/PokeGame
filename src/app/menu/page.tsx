@@ -14,36 +14,17 @@ import '../globals.css'
 import {useAuth} from "@/hooks/useAuth";
 export default function Menu (){
     useAuth('menu', 'login')
-    return(<>
-
-        <main className='main'>
+    return(<main className='main'>
             <Header/>
             <div className='flex justify-around flex-col items-center gap-5'>
-            <Link href='/library'>
-               <Button startIcon={<LibraryBooksOutlinedIcon/>}>Library Pokemons</Button>
-            </Link>
-            <Link href='/filter'>
-                <Button startIcon={<FilterListOutlinedIcon/>}>Filter Pokemons</Button>
-            </Link>
-            <Link href='/store'>
-                <Button startIcon={<LocalGroceryStoreOutlinedIcon/>}>Store Pokemons</Button>
-            </Link>
-            <Link href='/colections'>
-                <Button startIcon={<CollectionsOutlinedIcon/>}>Your colection Pokemons</Button>
-            </Link>
-            <Link href='/arena'>
-                <Button startIcon={<LanguageOutlinedIcon/>}>Online arena</Button>
-            </Link>
-            <Link href='/storyMode'>
-                <Button startIcon={<StadiumOutlinedIcon/>}>Offline arena</Button>
-            </Link>
-                <Link href='/achievements'>
-                    <Button startIcon={<WorkspacePremiumIcon/>}>Achievements</Button>
-                </Link>
-                <Link href='/achievements'>
-                    <Button startIcon={<MilitaryTechIcon/>}>Top players</Button>
-                </Link>
+                <Button variant='contained' aria-label='Library of pokemons' href='/library' startIcon={<LibraryBooksOutlinedIcon/>}>Library Pokemons</Button>
+                <Button variant='contained' aria-label='Library of filtered pokemons' href='/filter' startIcon={<FilterListOutlinedIcon/>}>Filter Pokemons</Button>
+                <Button variant='contained' aria-label='Store of pokemons' href='/store' startIcon={<LocalGroceryStoreOutlinedIcon/>}>Store Pokemons</Button>
+                <Button variant='contained' aria-label='Your colection of pokemons' href='/colections' startIcon={<CollectionsOutlinedIcon/>}>Your colection Pokemons</Button>
+                <Button variant='contained' aria-label='Arena' href='/arena' startIcon={<LanguageOutlinedIcon/>}>Online arena</Button>
+                <Button variant='contained' aria-label='Offline arena' href='/storyMode' startIcon={<StadiumOutlinedIcon/>}>Offline arena</Button>
+                <Button variant='contained' aria-label='Library of pokemons' href='/achievements' startIcon={<WorkspacePremiumIcon/>}>Achievements</Button>
+                <Button variant='contained' aria-label='Top players in simulator' href='/bestPlayers' startIcon={<MilitaryTechIcon/>}>Top players</Button>
             </div>
-        </main>
-        </>)
+        </main>)
 }
