@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {NUMBER_ONE, STYLES_FOR_MODAL} from "@/constants/pokemons";
+import {NUMBER_ONE, NUMBER_ZERO, STYLES_FOR_MODAL} from "@/constants/pokemons";
 import {IconPokemon} from "@/IconPokemon/iconPokemon";
 import {Abilities} from "@/app/pokemon/[name]/abilities";
 import {Box, Button} from "@mui/material";
@@ -11,27 +11,29 @@ import {IMAGE_POTIONS, POTIONS} from "@/constants/user";
 import {setPotions} from "@/redux/features/auth-slice";
 import {useDispatch} from "react-redux";
 import UserServices from "@/services/userServices";
+import {isTheSame} from "@/functions/logic";
+import {checkTypes} from "@/functions/figts";
 
-export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, setStatsCurrentUser}: {selectedUser: OnlineFighters, setIsFight: Dispatch<SetStateAction<boolean>>, activeID: number, setActiveID: Dispatch<SetStateAction<number>>, statsCurrentUser: Dispatch<SetStateAction<any>>}) =>{
+export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, setStatsCurrentUser, statsCurrentUser, setSelectedUser}: {selectedUser: OnlineFighters, setIsFight: Dispatch<SetStateAction<boolean>>, activeID: number, setActiveID: Dispatch<SetStateAction<number>>, setStatsCurrentUser: Dispatch<SetStateAction<any>>, statsCurrentUser: any, setSelectedUser: Dispatch<SetStateAction<any>>}) =>{
     const arrPotions = useAppSelector((state) => state.authReducer.value.arrPotions);
     const id = useAppSelector((state) => state.authReducer.value.id);
     const dispatch = useDispatch();
     const startFight = async () =>{
         setIsFight(true);
-        if(activeID > 0){
+        if(activeID > NUMBER_ZERO){
             const updatedArrPotions = JSON.parse(JSON.stringify(arrPotions));
-            let index = 0;
-            if(arrPotions.findIndex(item => item.id.toString() === activeID.toString()) !== -1){
-                index = arrPotions.findIndex(item => item.id === activeID);
+            let index = NUMBER_ZERO;
+            if(!isTheSame(arrPotions.findIndex(item => isTheSame(item.id.toString(), activeID.toString())), -1)){
+                index = arrPotions.findIndex(item => isTheSame(item.id, activeID));
                 const updateCount = updatedArrPotions[index].count - NUMBER_ONE;
                 updatedArrPotions[index].count = updateCount;
             } else {
-                index = POTIONS.findIndex(item => item.id === activeID);
+                index = POTIONS.findIndex(item => isTheSame(item.id, activeID));
                 updatedArrPotions?.push(POTIONS[index]);
             }
             dispatch(setPotions(updatedArrPotions));
             await UserServices.setPotions(id, updatedArrPotions);
-            if(activeID === 2){
+            if(isTheSame(activeID, 2)){
                 setStatsCurrentUser(prev =>{
                     return {
                         ...prev,
@@ -39,7 +41,7 @@ export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, set
                     }
                 })
             }
-            if(activeID === 3){
+            if(isTheSame(activeID, 3)){
                 setStatsCurrentUser(prev =>{
                     return {
                         ...prev,
@@ -48,6 +50,26 @@ export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, set
                 })
             }
         }
+        let startDmgCurrentUser = 1;
+        let startDmgSelectedUser = 1;
+        selectedUser.types?.forEach(item => {
+            statsCurrentUser.types.forEach((type: any) => {
+                startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
+                startDmgSelectedUser *= checkTypes(item.type.name, type.type.name);
+            })
+        })
+        setStatsCurrentUser(prev => {
+            return{
+                ...prev,
+                sumaryAttack: prev.sumaryAttack * startDmgCurrentUser
+            }
+        })
+        setSelectedUser(prev => {
+            return{
+                ...prev,
+                sumaryAttack: prev.sumaryAttack * startDmgSelectedUser
+            }
+        })
     }
     return <Box sx={{ ...STYLES_FOR_MODAL, width: 400 }}>
         <div className='flex justify-between  items-start mb-5'>
@@ -55,7 +77,7 @@ export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, set
             <div className='flex flex-col'>
                 <p>Name: {selectedUser.data.name}</p>
                 <p>Types:</p>
-                <Abilities types={selectedUser?.data?.types} isLoaded={false}/>
+                <Abilities types={selectedUser?.types} isLoaded={false}/>
                 <p>Select potions:</p>
                 {arrPotions.map(potion => {
                     const indexIMG = IMAGE_POTIONS.findIndex(item => item.id === potion.id);

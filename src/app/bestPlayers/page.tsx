@@ -29,7 +29,7 @@ export default function BestPlayers (){
         }
     }
     useEmptyAuth();
-    console.log(users);
+
     return(<main>
         <Header />
         <div>

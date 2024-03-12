@@ -18,7 +18,7 @@ import {
     isBiggest,
     isHit,
     isYouLose,
-    isYouWin, youCantLeave,
+    isYouWin, scaleDMG, youCantLeave,
     youLose,
     youWin
 } from "@/functions/pocemons";
@@ -79,13 +79,18 @@ export default function AfkArena () {
         setGameStatus(EMPTY_STRING);
     }
 
+    const startFight = () => {
+        setIsFight(true);
+        scaleDMG(enemyPokemon, yourPokemon, setYourPokemon, setEnemyPokemon);
+    }
+
     useEmptyAuth([stageInOfflineArena])
     useEffect(() => {
-       configurePokemons(setEnemyPokemon, setYourPokemon, selectedPokemon, stageInOfflineArena)
-    },[stageInOfflineArena, isFight])
+       configurePokemons(setEnemyPokemon, setYourPokemon, selectedPokemon, stageInOfflineArena);
 
-    return(<>
-        <main className='main'>
+    },[stageInOfflineArena, gameStatus])
+
+    return(<main className='main'>
             <Header/>
             <p className='text-center text-2xl'>Stage of arena {stageInOfflineArena}</p>
             {isFight && <Box sx={{...STYLES_FOR_MODAL, width: 800}} className='box__fight'>
@@ -93,7 +98,6 @@ export default function AfkArena () {
             <Fighters yourPokemon={yourPokemon} enemyPokemon={enemyPokemon} />
                 <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon}/>
             </Box>}
-            <FightersPreview yourPokemon={yourPokemon} setIsFight={setIsFight} isFight={isFight} enemyPokemon={enemyPokemon}/>
-        </main>
-    </>)
+            <FightersPreview yourPokemon={yourPokemon} startFight={startFight} isFight={isFight} enemyPokemon={enemyPokemon}/>
+        </main>)
 }

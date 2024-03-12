@@ -2,6 +2,7 @@ import {toast} from "react-toastify";
 import axios from "axios";
 import {COUNT_OF_POKEMONS, DEFAULT_IMAGE, DEFAULT_LINK, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import {Dispatch, SetStateAction} from "react";
+import {checkTypes} from "@/functions/figts";
 
 export const errorNotification = (params = 'Something went wrong') =>{
     return toast.error(params, {position: "top-right",
@@ -191,4 +192,27 @@ export const isRealPokemon = async (randomNumber:number) =>{
         return false
     }
 
+}
+
+export const scaleDMG = (enemyPokemon: any, yourPokemon: any, setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPokemon: Dispatch<SetStateAction<any>>) => {
+    let startDmgCurrentUser = 1;
+    let startDmgSelectedUser = 1;
+    enemyPokemon.types?.forEach((item: any) => {
+        yourPokemon.types.forEach((type: any) => {
+            startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
+            startDmgSelectedUser *= checkTypes(item.type.name, type.type.name);
+        })
+    })
+    setYourPokemon(prev => {
+        return{
+            ...prev,
+            sumaryAttack: prev.sumaryAttack * startDmgCurrentUser
+        }
+    })
+    setEnemyPokemon(prev => {
+        return{
+            ...prev,
+            sumaryAttack: prev.sumaryAttack * startDmgSelectedUser
+        }
+    })
 }

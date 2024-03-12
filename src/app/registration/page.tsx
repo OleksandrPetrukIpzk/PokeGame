@@ -44,7 +44,7 @@ export default function Registration () {
             setErrorFromBack(e.response.data.error);
         }
     }
-    useAuth('menu', 'registration');
+
     return(
         <main  className='h-screen flex justify-stretch items-stretch'>
             <div className='bg-sky-300 text-center flex flex-col items-center place-items-center place-content-center px-40'>

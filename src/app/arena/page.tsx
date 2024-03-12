@@ -68,6 +68,7 @@ export default function Arena () {
         userDetailInfo.sumaryHp = (userDetailInfo.data.stats[0].base_stat * userDetailInfo.data.stats[2].base_stat) * (userDetailInfo.data.stats[4].base_stat / 2);
         userDetailInfo.sumaryAttack = userDetailInfo.data.stats[1].base_stat * userDetailInfo.data.stats[3].base_stat;
         userDetailInfo.speed = userDetailInfo.data.stats[5]?.base_stat;
+        userDetailInfo.types = userDetailInfo.data.types;
         setSelectedUser(userDetailInfo);
         setIsSelectedUser(true);
     }
@@ -150,6 +151,7 @@ export default function Arena () {
                    sumaryHp: (userDetailInfo.data.stats[0].base_stat * userDetailInfo.data.stats[2].base_stat) * (userDetailInfo.data.stats[4].base_stat / 2),
                    sumaryAttack: userDetailInfo.data.stats[1].base_stat * userDetailInfo.data.stats[3].base_stat,
                    speed: userDetailInfo.data.stats[5]?.base_stat,
+                   types: userDetailInfo.data.types
                }))
            })
        }
@@ -166,7 +168,7 @@ export default function Arena () {
                         <FightPanel statsCurrentUser={statsCurrentUser} selectedPokemon={selectedPokemon} selectedUser={selectedUser}/>
                         <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon}/>
                     </Box>
-                    : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight} activeID={activeID} setActiveID={setActiveID} setStatsCurrentUser={setStatsCurrentUser}/>
+                    : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight} activeID={activeID} setActiveID={setActiveID} setStatsCurrentUser={setStatsCurrentUser} statsCurrentUser={statsCurrentUser} setSelectedUser={setSelectedUser}/>
                     }
         </Modal>
         <div className=''>
