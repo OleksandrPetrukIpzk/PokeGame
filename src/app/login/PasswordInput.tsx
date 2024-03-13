@@ -4,7 +4,9 @@ import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
 import Typography from '@mui/joy/Typography';
 import Key from '@mui/icons-material/Key';
+import {useTranslate} from "@tolgee/react";
 export const PasswordInput = ({password, setPassword, setErrors}: {password: string, setPassword: Dispatch<SetStateAction<string>>, setErrors: Dispatch<SetStateAction<string[]>>}) => {
+    const {t} = useTranslate();
     const minLength = 12;
 
     useEffect(() => {
@@ -34,7 +36,7 @@ export const PasswordInput = ({password, setPassword, setErrors}: {password: str
         >
             <Input
                 type="password"
-                placeholder="Type in here your password…"
+                placeholder={t('Login.passwordPlaceholder')}
                 startDecorator={<Key />}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
@@ -53,10 +55,10 @@ export const PasswordInput = ({password, setPassword, setErrors}: {password: str
                 level="body-xs"
                 sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
             >
-                {password.length < 5 && 'Very weak'}
-                {password.length >= 5 && password.length < 8 && 'Weak'}
-                {password.length >= 8 && password.length < 11 && 'Strong'}
-                {password.length >= 11 && 'Very strong'}
+                {password.length < 5 && t('Login.veryWeak')}
+                {password.length >= 5 && password.length < 8 && t('Login.weak')}
+                {password.length >= 8 && password.length < 11 && t('Login.strong')}
+                {password.length >= 11 && t('Login.veryStrong')}
             </Typography>
         </Stack>
     );

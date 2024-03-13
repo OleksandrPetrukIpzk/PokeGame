@@ -17,6 +17,7 @@ import {SwitchButton} from "@/app/pokemon/[name]/SwithButton";
 import {isTheSame} from "@/functions/logic";
 import {PokemonInfo} from "@/app/pokemon/[name]/PokemonInfo";
 import {Ability} from "@/constants/types";
+import {useTranslate} from "@tolgee/react";
 
 type Props = {
     params: {
@@ -25,6 +26,7 @@ type Props = {
 }
 
 export default function Pokemon({params: {name}}: Props) {
+    const {t} = useTranslate();
     const [pokemonInfo, setPokemonInfo] = useState({});
     const [nextId, setNextId] = useState("1");
     const [prevId, setPrevId] = useState("1");
@@ -47,18 +49,19 @@ export default function Pokemon({params: {name}}: Props) {
     }, []);
     return (<div>
         <Header/>
-        {isLoaded ? <p>loading...</p> : isError ? <Error name={name}/> :
+        {isLoaded ? <p>{t('Library.loading')}</p> : isError ? <Error name={name}/> :
             <div>
-                <SwitchButton id={prevId} styles={'absolute link-swith-pokemon left-4'} text={'Prev'}/>
+                <SwitchButton id={prevId} styles={'absolute link-swith-pokemon left-4'} text={t('Library.prev')}/>
                 <BackdropColorPokemon types={types}/>
-                <SwitchButton id={nextId} styles={'absolute link-swith-pokemon link-right'} text={'Next'}/>
+                <SwitchButton id={nextId} styles={'absolute link-swith-pokemon link-right'} text={t('Library.next')}/>
                 <Image className='m-auto relative top-5' style={{width: '400px', height: '400px'}} width={300} height={300} src={pokemonInfo.photoURL} decoding={"async"}
                        alt={pokemonInfo.altPhotoURL}/>
                 <div className='flex m-auto text-center items-center flex-col pt-10 rounded-3xl ml-10 mr-10' style={{background: '#FFF'}}>
                 <Abilities types={types} isLoaded={isLoaded}/>
                 <div className='flex flex-col'>
-                    {isTheSame(selectedPokemon, pokemonInfo.id?.toString()) && <Button color='success'>Selected</Button>}
-                    {arrPokemons.includes(pokemonInfo.id?.toString()) && !isTheSame(selectedPokemon, pokemonInfo.id?.toString()) && <Button onClick={() => clickHandleSelectPokemon()}>Select pokemon</Button>}
+                    {isTheSame(selectedPokemon, pokemonInfo.id?.toString()) && <Button color='success'>{t('Pokemon.selected')}</Button>}
+                    {arrPokemons.includes(pokemonInfo.id?.toString()) && !isTheSame(selectedPokemon, pokemonInfo.id?.toString()) &&
+                        <Button onClick={() => clickHandleSelectPokemon()}>{t('Pokemon.select')}</Button>}
                 </div>
                     <PokemonInfo pokemonInfo={pokemonInfo}/>
                 </div>

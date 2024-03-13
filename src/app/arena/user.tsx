@@ -5,6 +5,7 @@ import axios from "axios";
 import {DEFAULT_LINK, INITIAL_POKEMON} from "@/constants/pokemons";
 import {IconUser} from "@/app/arena/IconUser";
 import {PokemonInfo} from "@/app/arena/PokemonInfo";
+import {useTranslate} from "@tolgee/react";
 
 type CreatedUserArena = {
     id: string,
@@ -20,7 +21,7 @@ type CreatedUserArena = {
     userSpeed: number
 }
 export const User = ({id, img, rang, name, selectedPokemon, coins, email, choiceUserForFight, userAttack, userHp, userSpeed}: CreatedUserArena) =>{
-
+    const { t } = useTranslate();
     const [statsPokemon, setStatsPokemon] = useState(INITIAL_POKEMON);
     useEffect(() => {
         const fetchData = async () => {
@@ -37,11 +38,12 @@ export const User = ({id, img, rang, name, selectedPokemon, coins, email, choice
 
         fetchData();
     }, [selectedPokemon]);
+
     return(<div className='flex justify-between items-center m-6 bg-sky-200 rounded-md py-4 px-4'>
        <IconUser id={id} rang={rang} img={img} name={name}/>
         <PokemonInfo selectedPokemon={selectedPokemon} userHp={userHp} statsPokemon={statsPokemon} userAttack={userAttack} userSpeed={userSpeed}/>
         <Button  color="danger" size="lg"
-                variant="soft" onClick={() => choiceUserForFight({id, name, selectedPokemon, coins, email, rang})}>Fight</Button>
+                variant="soft" onClick={() => choiceUserForFight({id, name, selectedPokemon, coins, email, rang})}>{t('Arena.fightButton')}</Button>
         </div>)
 
 }

@@ -24,7 +24,9 @@ import {IconPokemon} from "@/IconPokemon/iconPokemon";
 import Link from "next/link";
 import {IMAGE_POTIONS, POTIONS} from "@/constants/user";
 import $api from "@/http";
+import {useTranslate} from "@tolgee/react";
 export default function Store () {
+    const {t} = useTranslate()
     const [isClicked, setIsClicked] = useState(false);
     const [numberPokemon, setNumberPokemon] = useState(1);
     const coins = useAppSelector((state) => state.authReducer.value.coins);
@@ -46,13 +48,13 @@ export default function Store () {
                     await UserServices.changeCountOfMoney(id, number);
                     setIsClicked(true);
                     dispatch(changeCountOfMoney(coins - NUMBER_ONE))
-                    addAchives(id, 'countOfPokemons', countOfPokemons, dispatch, ids, 'you have a pokemons ', addCountOfPokemons)
-                    addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, 'You lose coins ', addCountOfLoseCoins)
+                    addAchives(id, 'countOfPokemons', countOfPokemons, dispatch, ids, t('Notification.pokemons'), addCountOfPokemons)
+                    addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, t('Notification.loseCoins'), addCountOfLoseCoins)
                 } else{
                     dispatch(changeCountOfMoney(coins + NUMBER_ONE))
                     const number = coins + NUMBER_ONE;
                     await UserServices.changeCountOfMoney(id, number);
-                    errorNotification('You have this pokemon you get 1 more coin')
+                    errorNotification(t('You have this pokemon you get 1 more coin'))
                 }
         }
     }
@@ -81,8 +83,11 @@ export default function Store () {
                 <Header/>
                 <div className='flex align-middle justify-center items-center'>
                     <div className='flex flex-col items-center'>
-                    {isClicked ?<Link href={'/pokemon/' + numberPokemon.toString()}><IconPokemon id={numberPokemon.toString()} size={200} /></Link>  : <Image width={150} height={150} src='/Daco_659762.png' alt='Daco_659762.png'/>}
-                {<Button endIcon={<AddShoppingCartIcon/>} className='get-pokemon-button' onClick={() => handleClickButton()}> {coins >= NUMBER_ONE ? 'Get Lucky 1 coin' : 'Yo doesnt have enough money'}</Button>}
+                    {isClicked ?<Link href={'/pokemon/' + numberPokemon.toString()}>
+                        <IconPokemon id={numberPokemon.toString()} size={200} /></Link>
+                        :
+                        <Image width={150} height={150} src='/Daco_659762.png' alt='Daco_659762.png'/>}
+                {<Button endIcon={<AddShoppingCartIcon/>} className='get-pokemon-button' onClick={() => handleClickButton()}> {coins >= NUMBER_ONE ? t('Store.buy') : t('Store.no')}</Button>}
                     </div>
                     {
                         POTIONS.map(potion => {
@@ -94,9 +99,12 @@ export default function Store () {
                                     width={200}
                                     height={200}
                                 />
-                                <Button endIcon={<AddShoppingCartIcon/>}
-                                        className='get-pokemon-button' onClick={() => handleBuyPotions(potion.id)}>{coins >= NUMBER_ONE ? `Buy ${potion.name} potion` : 'Yo doesnt have enough money'}
-                                </Button>
+                               <Button
+                                   endIcon={<AddShoppingCartIcon/>}
+                                   className='get-pokemon-button'
+                                   onClick={() => handleBuyPotions(potion.id)}>
+                                   {coins >= NUMBER_ONE ? (t('Store.potion') + potion.name ): t('Store.no')}
+                               </Button>
                             </div>)
                         })
                     }

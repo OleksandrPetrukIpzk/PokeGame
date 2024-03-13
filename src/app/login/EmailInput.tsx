@@ -3,10 +3,11 @@ import Stack from '@mui/joy/Stack';
 import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
 import Typography from '@mui/joy/Typography';
-import Key from '@mui/icons-material/Key';
 import {validateEmail} from "@/functions/auth";
 import {Email} from "@mui/icons-material";
+import {useTranslate} from "@tolgee/react";
 export const EmailInput = ({email, setEmail, setErrors}: {email: string, setEmail: Dispatch<SetStateAction<string>>, setErrors: Dispatch<SetStateAction<string[]>>}) =>{
+   const {t} = useTranslate()
     const [isValid, setIsValid] = useState(false);
     const handleChange = (value: string) => {
         if(validateEmail(value)){
@@ -37,7 +38,7 @@ export const EmailInput = ({email, setEmail, setErrors}: {email: string, setEmai
         >
             <Input
                 type="email"
-                placeholder="Type in here your email…"
+                placeholder={t('Login.emailPlaceholder')}
                 startDecorator={<Email />}
                 value={email}
                 onChange={(event) => handleChange(event.target.value)}
@@ -56,7 +57,7 @@ export const EmailInput = ({email, setEmail, setErrors}: {email: string, setEmai
                 level="body-xs"
                 sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
             >
-                {isValid ? 'Email is good' : 'Email didnt good'}
+                {isValid ? t('Login.emailGood') : t('Login.emailBad')}
             </Typography>
         </Stack>)
 }

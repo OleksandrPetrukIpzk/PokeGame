@@ -1,10 +1,12 @@
 import {isTheSame} from "@/functions/logic";
 import {WIN} from "@/constants/pokemons";
+import {useTranslate} from "@tolgee/react";
 
-export const ifYouWin = (gameStatus: string) =>{
-    return isTheSame(gameStatus, WIN)  ? 'You win' : 'You lose'
+export const ifYouWin = (gameStatus: string, t: any) =>{
+    return isTheSame(gameStatus, WIN)  ? t('Arena.win') : t('Arena.lose')
 }
 
 export const ifTheFight = (gameStatus: string) =>{
-    return !gameStatus && 'Fight'
+    const {t} = useTranslate()
+    return !gameStatus && t('Arena.fightPanel')
 }

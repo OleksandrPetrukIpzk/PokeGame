@@ -3,10 +3,11 @@ import Stack from '@mui/joy/Stack';
 import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
 import Typography from '@mui/joy/Typography';
-import Key from '@mui/icons-material/Key';
-import {SupervisedUserCircle, VerifiedUser} from "@mui/icons-material";
+import {SupervisedUserCircle} from "@mui/icons-material";
+import {useTranslate} from "@tolgee/react";
 
 export const NameInput = ({name, setName, setErrors}: {name: string, setName: Dispatch<SetStateAction<string>>, setErrors: Dispatch<SetStateAction<string[]>>}) =>{
+   const {t} = useTranslate();
     const minLength = 20;
     useEffect(() => {
         if(name.length < 3){
@@ -35,7 +36,7 @@ export const NameInput = ({name, setName, setErrors}: {name: string, setName: Di
 >
     <Input
         type="text"
-    placeholder="Type in here your name…"
+    placeholder={t('Login.namePlaceholder')}
     startDecorator={<SupervisedUserCircle />}
     value={name}
     onChange={(event) => setName(event.target.value)}
@@ -52,12 +53,11 @@ export const NameInput = ({name, setName, setErrors}: {name: string, setName: Di
     />
     <Typography
     level="body-xs"
-    sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
->
-    {name.length < 3 && 'Very weak'}
-    {name.length >= 3 && name.length < 6 && 'Weak'}
-    {name.length >= 6 && name.length < 11 && 'Strong'}
-    {name.length >= 10 && 'Very strong'}
+    sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}>
+    {name.length < 3 && t('Login.veryWeak')}
+    {name.length >= 3 && name.length < 6 && t('Login.weak')}
+    {name.length >= 6 && name.length < 11 && t('Login.strong')}
+    {name.length >= 11 && t('Login.veryStrong')}
     </Typography>
     </Stack>
 );

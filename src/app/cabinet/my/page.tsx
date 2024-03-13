@@ -16,7 +16,6 @@ export default function MyCabinet(){
    useEmptyAuth();
     return<main>
     <Header/>
-
         <MainContent img={img} name={name} email={email} achiveList={achiveList} rang={rang} selectedPokemon={selectedPokemon} arrPokemons={arrPokemons}/>
         <ChangePanel/>
     </main>

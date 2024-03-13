@@ -6,6 +6,7 @@ import {isTheSame} from "@/functions/logic";
 import {AccordionPokemons} from "@/app/cabinet/Accordion";
 import {ImagePokemonWithLinks} from "@/app/cabinet/my/ImagePokemonWithLinks";
 import {AccordionRang} from "@/app/cabinet/AccordionRang";
+import {useTranslate} from "@tolgee/react";
 
 type Content = {
     img: string,
@@ -17,7 +18,7 @@ type Content = {
     arrPokemons: string[]
 }
 export const MainContent = ({img, name, email, achiveList, rang, selectedPokemon, arrPokemons}: Content) =>{
-
+    const {t} = useTranslate();
 return<div>
       <div className='flex justify-around'>
           <div>
@@ -26,11 +27,11 @@ return<div>
               </div>
               <div>
               <p>{name}</p>
-              <p>Rang: {rang}</p>
-              <p>Email: {email}</p>
+              <p>{t("Arena.rangOfPlayer")} {rang}</p>
+              <p>{t("Profile.email")} {email}</p>
 
               </div>
-              <p>Achives:</p>
+              <p>{t("Profile.achives")}</p>
               <LinearBarWithLabel value={isTheSame(achiveList.length, COUNT_ACHIVES) ? 100 : achivePercent(achiveList.length)}/>
           </div>
           <div>

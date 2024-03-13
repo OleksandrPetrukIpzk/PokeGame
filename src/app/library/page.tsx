@@ -9,6 +9,7 @@ import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {EMPTY_STRING} from "@/constants/pokemons";
 import Button from "@mui/joy/Button";
 import {ControlButtons} from "@/app/library/ControlButtons";
+import {useTranslate} from "@tolgee/react";
 
 type GetAxios = {
         data:{
@@ -19,6 +20,7 @@ type GetAxios = {
 
 }
 export default function Home() {
+  const {t} = useTranslate();
   const [baseUrl, setBaseUrl] = useState('https://pokeapi.co/api/v2/pokemon/');
   const [nextUrl, setNextUrl] = useState(EMPTY_STRING);
   const [previousUrl, setPreviousUrl] = useState(EMPTY_STRING);
@@ -44,7 +46,7 @@ export default function Home() {
               {isLoaded ? pokemons.map((pokemon: object): JSX.Element => <CardPokemon key={pokemon.name}
                                                                                       pokemon={pokemon}
                                                                                       isLoaded={isLoaded}></CardPokemon>) :
-                  <p>Loading...</p>}
+                  <p>{t('Library.loading')}</p>}
               </div>
               <ControlButtons previousUrl={previousUrl} setBaseUrl={setBaseUrl} setIsLoaded={setIsLoaded} nextUrl={nextUrl}/>
           </main>

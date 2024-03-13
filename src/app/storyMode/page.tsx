@@ -31,7 +31,9 @@ import {FightersPreview} from "@/app/storyMode/FightersPrewiev";
 import '../globals.css'
 import {addAchives} from "@/functions/achives";
 import {addClick, addCountOfRichCoins, addCountOfStage} from "@/redux/features/achievements";
+import {useTranslate} from "@tolgee/react";
 export default function AfkArena () {
+    const {t} = useTranslate();
     const [isFight, setIsFight] = useState(false);
     const [gameStatus, setGameStatus] = useState(EMPTY_STRING);
     const [yourPokemon, setYourPokemon] = useState(DEFAULT_TEMPLATE_FOR_FIGHT);
@@ -49,15 +51,15 @@ export default function AfkArena () {
     const hitPokemon = () =>{
         if(isHit(yourPokemon, enemyPokemon)){
             hit(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack, enemyPokemon.sumaryAttack)
-            addAchives(id, 'click', click, dispatch, ids, 'you hit enemy ', addClick)
+            addAchives(id, 'click', click, dispatch, ids, t('Notification.hit'), addClick)
         } else if(isYouLose(yourPokemon, enemyPokemon)){
             setGameStatus(LOSE)
             youLose(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack);
         } else if(isYouWin(yourPokemon, enemyPokemon)){
             setGameStatus(WIN)
             youWin(setYourPokemon, setEnemyPokemon, enemyPokemon.sumaryAttack)
-            addAchives(id, 'countOfStage', countOfStage, dispatch, ids, 'you get the stage ', addCountOfStage)
-            addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
+            addAchives(id, 'countOfStage', countOfStage, dispatch, ids, t('Notification.stage'), addCountOfStage)
+            addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t('Notification.winCoins'), addCountOfRichCoins)
         }
     }
     const handleLeave = () =>{
@@ -92,7 +94,7 @@ export default function AfkArena () {
 
     return(<main className='main'>
             <Header/>
-            <p className='text-center text-2xl'>Stage of arena {stageInOfflineArena}</p>
+            <p className='text-center text-2xl'>{t('Arena.Stage')} {stageInOfflineArena}</p>
             {isFight && <Box sx={{...STYLES_FOR_MODAL, width: 800}} className='box__fight'>
               <GameStatus gameStatus={gameStatus}/>
             <Fighters yourPokemon={yourPokemon} enemyPokemon={enemyPokemon} />

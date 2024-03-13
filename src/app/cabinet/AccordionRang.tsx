@@ -6,8 +6,10 @@ import {useEffect, useState} from "react";
 import {Rang} from "@/constants/types";
 import ArenaService from "@/services/arenaService";
 import {ElementFight} from "@/ElementFight/ElementFight";
+import {useTranslate} from "@tolgee/react";
 
 export const AccordionRang = ({name}: {name: string}) => {
+    const {t} = useTranslate()
     const [fights, setFights] = useState<Rang[]>([]);
 
     useEffect(() => {
@@ -26,7 +28,7 @@ export const AccordionRang = ({name}: {name: string}) => {
             aria-controls="panel1-content"
             id="panel1-header"
         >
-            Fights {fights.length}
+            {t('Profile.fights')} {fights.length}
         </AccordionSummary>
         <AccordionDetails className='flex flex-col flex-wrap gap-2'>
             {fights.map(fight => <ElementFight item={fight} user={name}/>)}

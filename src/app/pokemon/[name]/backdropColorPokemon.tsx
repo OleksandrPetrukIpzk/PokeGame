@@ -1,17 +1,10 @@
 import {useEffect, useState} from "react";
 import {COLOR_OF_ABILITIES, EMPTY_STRING, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import {Ability} from "@/constants/types";
-type Type = {
-    type:{
-        name: string,
-        url:string
-    }
-}
-type Types = {
-    types: Type[],
-}
+import {useTranslate} from "@tolgee/react";
 
 export const BackdropColorPokemon = ({types}: Ability[]) =>{
+    const {t} = useTranslate()
     const [selectedColor, setSelectedColor] = useState(EMPTY_STRING);
     const [currentIndex, setCurrentIndex] = useState(NUMBER_ZERO);
     const [isChange, setIsChange] = useState(true);
@@ -34,7 +27,7 @@ export const BackdropColorPokemon = ({types}: Ability[]) =>{
         }
     }
     return(<>
-        {isChange && <button className='m-auto  flex bg-white p-3 hoverBG rounded-full' onClick={() => changeBg()}>Change BG</button>}
+        {isChange && <button className='m-auto  flex bg-white p-3 hoverBG rounded-full' onClick={() => changeBg()}>{t('Pokemon.BG')}</button>}
         <div style={{backgroundColor: selectedColor}} className='backdrop-pokemon'>
         </div>
     </>)

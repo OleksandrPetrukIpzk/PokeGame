@@ -31,6 +31,7 @@ import {addAchives} from "@/functions/achives";
 import {addClick, addCountOfLose, addCountOfRichCoins, addCountOfWins} from "@/redux/features/achievements";
 import {changeCountOfMoney} from "@/redux/features/auth-slice";
 import {sendWinner} from "@/functions/figts";
+import {useTranslate} from "@tolgee/react";
 type UserInfo = {
     data: object[],
     sumaryHp?: number,
@@ -40,6 +41,7 @@ type UserInfo = {
     selectedPokemon: string,
 }
 export default function Arena () {
+    const {t} = useTranslate()
     const [usersList, setUsersList] = useState([INITIAL_USER]);
     const [selectedUser, setSelectedUser] = useState(DEFAULT_TEMPLATE_USER_FOR_FIGHT);
     const [gameStatus, setGameStatus] = useState(EMPTY_STRING);
@@ -77,8 +79,8 @@ export default function Arena () {
             setGameStatus(WIN);
             youWin(setStatsCurrentUser, setSelectedUser, 0);
             sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang);
-            addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins);
-            addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins);
+            addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins);
+            addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins);
         } else{
             if(isHit(statsCurrentUser, selectedUser)){
                 if(activeID === 7){
@@ -87,13 +89,13 @@ export default function Arena () {
                     hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack);
                 }
 
-                addAchives(userId, 'click', click, dispatch, ids, 'you hit enemy ', addClick)
+                addAchives(userId, 'click', click, dispatch, ids, t("Notification.hit"), addClick)
 
             } else if(isYouLose(statsCurrentUser, selectedUser)){
                 setGameStatus(LOSE)
                 youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
                 sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, userId, rang)
-                addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, 'you lose enemy ', addCountOfLose);
+                addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, t("Notification.lose"), addCountOfLose);
             } else if(isYouWin(statsCurrentUser, selectedUser)){
                 setGameStatus(WIN)
                 youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
@@ -103,8 +105,8 @@ export default function Arena () {
                 else {
                     sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang,)
                 }
-                addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, 'you win enemy ', addCountOfWins)
-                addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, 'You win coins ', addCountOfRichCoins)
+                addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins)
+                addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins)
             }
         }
     }
@@ -171,7 +173,7 @@ export default function Arena () {
                     : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight} activeID={activeID} setActiveID={setActiveID} setStatsCurrentUser={setStatsCurrentUser} statsCurrentUser={statsCurrentUser} setSelectedUser={setSelectedUser}/>
                     }
         </Modal>
-        <div className=''>
+        <div>
             {usersList.map((user) => user.selectedPokemon && user.name !== name && <User id={user._id} img={user.img} rang={user.rang} name={user.name} selectedPokemon={user.selectedPokemon} coins={user.coins} email={user.email} choiceUserForFight={choiceUserForFight} userHp={statsCurrentUser.sumaryHp} userAttack={statsCurrentUser.sumaryAttack} userSpeed={statsCurrentUser.speed}/>)}
         </div>
     </main>)

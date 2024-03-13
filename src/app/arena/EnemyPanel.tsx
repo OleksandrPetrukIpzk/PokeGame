@@ -13,8 +13,10 @@ import {useDispatch} from "react-redux";
 import UserServices from "@/services/userServices";
 import {isTheSame} from "@/functions/logic";
 import {checkTypes} from "@/functions/figts";
+import {useTranslate} from "@tolgee/react";
 
 export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, setStatsCurrentUser, statsCurrentUser, setSelectedUser}: {selectedUser: OnlineFighters, setIsFight: Dispatch<SetStateAction<boolean>>, activeID: number, setActiveID: Dispatch<SetStateAction<number>>, setStatsCurrentUser: Dispatch<SetStateAction<any>>, statsCurrentUser: any, setSelectedUser: Dispatch<SetStateAction<any>>}) =>{
+    const { t } = useTranslate()
     const arrPotions = useAppSelector((state) => state.authReducer.value.arrPotions);
     const id = useAppSelector((state) => state.authReducer.value.id);
     const dispatch = useDispatch();
@@ -75,18 +77,18 @@ export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, set
         <div className='flex justify-between  items-start mb-5'>
             <IconPokemon id={selectedUser?.data?.name} size={100}/>
             <div className='flex flex-col'>
-                <p>Name: {selectedUser.data.name}</p>
-                <p>Types:</p>
+                <p>{t('Arena.nameOfPlayer')} {selectedUser.data.name}</p>
+                <p>{t('Arena.typesOfPokemon')}</p>
                 <Abilities types={selectedUser?.types} isLoaded={false}/>
-                <p>Select potions:</p>
+                <p>{t('Arena.choicePotion')}</p>
                 {arrPotions.map(potion => {
                     const indexIMG = IMAGE_POTIONS.findIndex(item => item.id === potion.id);
                    return potion.count > 0 && <Button variant={activeID === potion.id ? 'contained' : 'outlined'} onClick={() => setActiveID(potion.id)}>
                     <Image src={IMAGE_POTIONS[indexIMG].image} alt={potion.name} width={50} height={50}/>
-                       <p>{potion.name}, count: {potion.count}</p>
+                       <p>{potion.name}, {t('Arena.countOfPotion')} {potion.count}</p>
                    </Button>
                 })}
-                <Button variant="contained" color="error" endIcon={<SportsMmaOutlinedIcon/>} onClick={() => startFight()}>Lets fight</Button>
+                <Button variant="contained" color="error" endIcon={<SportsMmaOutlinedIcon/>} onClick={() => startFight()}>{t('Arena.fight')}</Button>
             </div>
         </div>
        </Box>

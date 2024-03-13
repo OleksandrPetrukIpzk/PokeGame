@@ -11,7 +11,9 @@ import AuthServices from "@/services/authServices";
 import Typography from "@mui/material/Typography";
 import {NAME_OF_TOKEN} from "@/constants/pokemons";
 import Cookies from "js-cookie";
+import {useTranslate} from "@tolgee/react";
 export const DeleteAccount = () =>{
+    const { t } = useTranslate();
     const [isOpen, setIsOpen] = useState(false);
     const userId = useAppSelector((state) => state.authReducer.value.id);
     const dispatch = useDispatch()
@@ -27,7 +29,7 @@ export const DeleteAccount = () =>{
         }
     }
     return(<>
-        <Button variant='contained' color="error" onClick={() => setIsOpen(true)}>Delete account</Button>
+        <Button variant='contained' color="error" onClick={() => setIsOpen(true)}>{t('Profile.delete')}</Button>
         <Modal open={isOpen}  onClose={() => setIsOpen(false)}>
             <ModalDialog
                 color="danger"
@@ -35,8 +37,8 @@ export const DeleteAccount = () =>{
                 variant="soft"
             >
                 <ModalClose />
-                <Typography>Do you want delete account?</Typography>
-                <Button variant='contained' color="error" onClick={() => deleteAccount()}>Delete account</Button>
+                <Typography>{t('Profile.isDelete')}</Typography>
+                <Button variant='contained' color="error" onClick={() => deleteAccount()}>{t('Profile.delete')}</Button>
             </ModalDialog>
         </Modal>
     </>)

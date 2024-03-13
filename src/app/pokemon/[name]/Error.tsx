@@ -1,9 +1,10 @@
 import React from "react";
+import {useTranslate} from "@tolgee/react";
 
 export const Error = ({name}: {name: string}) =>{
-
-    return <div>
-        <p>Error 404 </p>
-        <p>the {name} is no include in our website</p>
+    const {t} = useTranslate()
+    return <div className={'flex justify-center items-center'}>
+        <p>{t('Pokemon.404')}</p>
+        <p>{t('Pokemon.404Name', {name})}</p>
     </div>
 }
