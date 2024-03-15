@@ -1,8 +1,6 @@
-import {Button, Modal} from "@mui/material";
+import {Button} from "@mui/material";
 import React, {useState} from "react";
 import {ChangeModal} from "@/app/cabinet/my/ChangeModal";
-import UserServices from "@/services/userServices";
-import AuthServices from "@/services/authServices";
 import {DeleteAccount} from "@/app/cabinet/my/DeleteAccount";
 import {useTranslate} from "@tolgee/react";
 import {tolgee} from "@/app/layout";
@@ -26,9 +24,9 @@ export const ChangePanel = () =>{
     }
     return <div className='items-center mt-4 gap-1 flex justify-center'>
         <div>
-            <Button variant={tolgee.getLanguage() === 'ua' ? 'solid' : 'outlined'} size="lg"
+            <Button variant={tolgee.getLanguage() === 'ua' ? 'contained' : 'outlined'} size="large"
                     onClick={() => changeLang('ua')}>🇺🇦</Button>
-            <Button variant={tolgee.getLanguage() === 'en' ? 'solid' : 'outlined'} size="lg"
+            <Button variant={tolgee.getLanguage() === 'en' ? 'contained' : 'outlined'} size="large"
                     onClick={() => changeLang('en')}>🇺🇸</Button>
         </div>
         <Button variant='contained'

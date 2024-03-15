@@ -6,8 +6,7 @@ import {youHaveAchive} from "@/functions/pocemons";
 import UserServices from "@/services/userServices";
 import {useTranslate} from "@tolgee/react";
 
-export const addAchives = async (userId: string, key:  keyof typeof ACHIEVEMENT, count: number, dispatch: Dispatch<AnyAction>, ids: number[], text: string, functions: Function) =>{
-    const {t} = useTranslate()
+export const addAchives = async (userId: string, key:  keyof typeof ACHIEVEMENT, count: number, dispatch: Dispatch<AnyAction>, ids: number[], text: string, functions: Function, t: Function) =>{
     const index = ACHIEVEMENT[key].findIndex((item) => !ids.includes(item.id) && item.count > count);
     if(index >= 0){
         const id = ACHIEVEMENT[key][index].id;

@@ -79,8 +79,8 @@ export default function Arena () {
             setGameStatus(WIN);
             youWin(setStatsCurrentUser, setSelectedUser, 0);
             sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang);
-            addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins);
-            addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins);
+            addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins, t);
+            addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t);
         } else{
             if(isHit(statsCurrentUser, selectedUser)){
                 if(activeID === 7){
@@ -89,13 +89,13 @@ export default function Arena () {
                     hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack);
                 }
 
-                addAchives(userId, 'click', click, dispatch, ids, t("Notification.hit"), addClick)
+                addAchives(userId, 'click', click, dispatch, ids, t("Notification.hit"), addClick, t)
 
             } else if(isYouLose(statsCurrentUser, selectedUser)){
                 setGameStatus(LOSE)
                 youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
                 sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, userId, rang)
-                addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, t("Notification.lose"), addCountOfLose);
+                addAchives(userId, 'countOfLose', countOfLose, dispatch, ids, t("Notification.lose"), addCountOfLose, t);
             } else if(isYouWin(statsCurrentUser, selectedUser)){
                 setGameStatus(WIN)
                 youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
@@ -105,8 +105,8 @@ export default function Arena () {
                 else {
                     sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang,)
                 }
-                addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins)
-                addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins)
+                addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins, t)
+                addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t)
             }
         }
     }

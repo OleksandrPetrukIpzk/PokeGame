@@ -51,15 +51,15 @@ export default function AfkArena () {
     const hitPokemon = () =>{
         if(isHit(yourPokemon, enemyPokemon)){
             hit(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack, enemyPokemon.sumaryAttack)
-            addAchives(id, 'click', click, dispatch, ids, t('Notification.hit'), addClick)
+            addAchives(id, 'click', click, dispatch, ids, t('Notification.hit'), addClick, t)
         } else if(isYouLose(yourPokemon, enemyPokemon)){
             setGameStatus(LOSE)
             youLose(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack);
         } else if(isYouWin(yourPokemon, enemyPokemon)){
-            setGameStatus(WIN)
-            youWin(setYourPokemon, setEnemyPokemon, enemyPokemon.sumaryAttack)
-            addAchives(id, 'countOfStage', countOfStage, dispatch, ids, t('Notification.stage'), addCountOfStage)
-            addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t('Notification.winCoins'), addCountOfRichCoins)
+            setGameStatus(WIN);
+            youWin(setYourPokemon, setEnemyPokemon, enemyPokemon.sumaryAttack);
+            addAchives(id, 'countOfStage', countOfStage, dispatch, ids, t('Notification.stage'), addCountOfStage, t);
+            addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t('Notification.winCoins'), addCountOfRichCoins, t);
         }
     }
     const handleLeave = () =>{

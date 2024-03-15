@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import { useState} from "react";
+import {useState} from "react";
 import {useAppSelector} from "@/redux/store";
 import {useDispatch} from "react-redux";
 import {Header} from "@/Header/Header";
@@ -23,7 +23,6 @@ import {changeCountOfMoney, setPotions} from "@/redux/features/auth-slice";
 import {IconPokemon} from "@/IconPokemon/iconPokemon";
 import Link from "next/link";
 import {IMAGE_POTIONS, POTIONS} from "@/constants/user";
-import $api from "@/http";
 import {useTranslate} from "@tolgee/react";
 export default function Store () {
     const {t} = useTranslate()
@@ -48,8 +47,8 @@ export default function Store () {
                     await UserServices.changeCountOfMoney(id, number);
                     setIsClicked(true);
                     dispatch(changeCountOfMoney(coins - NUMBER_ONE))
-                    addAchives(id, 'countOfPokemons', countOfPokemons, dispatch, ids, t('Notification.pokemons'), addCountOfPokemons)
-                    addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, t('Notification.loseCoins'), addCountOfLoseCoins)
+                    addAchives(id, 'countOfPokemons', countOfPokemons, dispatch, ids, t('Notification.pokemons'), addCountOfPokemons, t);
+                    addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, t('Notification.loseCoins'), addCountOfLoseCoins, t);
                 } else{
                     dispatch(changeCountOfMoney(coins + NUMBER_ONE))
                     const number = coins + NUMBER_ONE;
@@ -72,7 +71,7 @@ export default function Store () {
             }
             dispatch(setPotions(updatedArrPotions));
             dispatch(changeCountOfMoney(coins - NUMBER_ONE));
-            addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, 'You lose coins ', addCountOfLoseCoins);
+            addAchives(id, 'countOfLoseCoins', countOfLoseCoins, dispatch, ids, t('Notification.loseCoins'), addCountOfLoseCoins, t);
             await UserServices.setPotions(id, updatedArrPotions);
             await UserServices.changeCountOfMoney(id, coins - NUMBER_ONE);
         }
