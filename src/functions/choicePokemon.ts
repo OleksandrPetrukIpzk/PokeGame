@@ -2,9 +2,35 @@ import axios from "axios";
 import {DEFAULT_LINK, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import {checkCurrentImage} from "@/functions/pocemons";
 import {Dispatch, SetStateAction} from "react";
-
-export const choicePokemon = (setNextId: Dispatch<SetStateAction<string>>, setPrevId: Dispatch<SetStateAction<string>>, setPokemonInfo: Dispatch<SetStateAction<any>>, setTypes: Dispatch<SetStateAction<any>>, setIsError: Dispatch<SetStateAction<boolean>>, name: string) =>{
-    axios.get(DEFAULT_LINK + 'pokemon/' + name).then(info => {
+export const searchEvolvedPokemons = (evolutionChain: any, level = 1, evolutionDatas: any) : any=>{
+    if (!evolutionChain.evolves_to.length) {
+        return evolutionDatas.push({
+            pokemon: {
+                ...evolutionChain.species,
+                url: evolutionChain.species.url.replace(
+                    "pokemon-species",
+                    "pokemon"
+                ),
+            },
+            level,
+        });
+    }
+    evolutionDatas.push({
+        pokemon: {
+            ...evolutionChain.species,
+            url: evolutionChain.species.url.replace("pokemon-species", "pokemon"),
+        },
+        level,
+    });
+    return searchEvolvedPokemons(
+        evolutionChain.evolves_to[0],
+        level + 1,
+        evolutionDatas
+    );
+}
+export const choicePokemon = async (setNextId: Dispatch<SetStateAction<string>>, setPrevId: Dispatch<SetStateAction<string>>, setPokemonInfo: Dispatch<SetStateAction<any>>, setTypes: Dispatch<SetStateAction<any>>, setIsError: Dispatch<SetStateAction<boolean>>, name: string, setEvolutionData: Dispatch<SetStateAction<any>>) =>{
+    const arr = [];
+  await axios.get(DEFAULT_LINK + 'pokemon/' + name).then(info => {
             setNextId((info.data.id + NUMBER_ONE).toString());
             if (info.data.id - NUMBER_ONE > NUMBER_ZERO) {
                 setPrevId((info.data.id - NUMBER_ONE).toString());
@@ -27,6 +53,16 @@ export const choicePokemon = (setNextId: Dispatch<SetStateAction<string>>, setPr
                 types: info.data.types,
             });
             setTypes(info.data.types);
+      arr.push(info.data)
         }
     ).catch(() => setIsError(true));
+    const {
+        data: {
+            evolution_chain: { url: evolutionURL },
+        },
+    } = await axios.get('https://pokeapi.co/api/v2/pokemon-species/'+ arr[0].id.toString());
+    const { data: evolutionData } = await axios.get(evolutionURL);
+    const evolvData: any[] = [];
+  searchEvolvedPokemons(evolutionData.chain, 1, evolvData);
+  setEvolutionData(evolvData);
 }

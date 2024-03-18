@@ -24,7 +24,6 @@ export default function BestPlayers (){
     }, []);
     const handleChange = ( event: React.SyntheticEvent | null,
                            newValue: string | null,) => {
-        console.log(newValue)
         if(newValue == 'count'){
             const sortedArr = JSON.parse(JSON.stringify(users));
             setUsers(sortedArr.sort((a, b) => b.arrPokemons.length - a.arrPokemons.length));

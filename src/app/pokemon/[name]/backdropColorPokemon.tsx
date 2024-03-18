@@ -1,11 +1,10 @@
-import {useEffect, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {COLOR_OF_ABILITIES, EMPTY_STRING, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import {Ability} from "@/constants/types";
 import {useTranslate} from "@tolgee/react";
 
-export const BackdropColorPokemon = ({types}: Ability[]) =>{
+export const BackdropColorPokemon = ({types, setBgColor}: {types: any, setBgColor: Dispatch<SetStateAction<string>>}) =>{
     const {t} = useTranslate()
-    const [selectedColor, setSelectedColor] = useState(EMPTY_STRING);
     const [currentIndex, setCurrentIndex] = useState(NUMBER_ZERO);
     const [isChange, setIsChange] = useState(true);
     const firstIndex = NUMBER_ONE;
@@ -16,7 +15,7 @@ export const BackdropColorPokemon = ({types}: Ability[]) =>{
         else{
             setIsChange(true);
         }
-        setSelectedColor(COLOR_OF_ABILITIES[types[currentIndex].type?.name]);
+        setBgColor(COLOR_OF_ABILITIES[types[currentIndex].type?.name]);
     },[types, currentIndex, isChange]);
     const changeBg = () =>{
         if(COLOR_OF_ABILITIES[types[currentIndex+ NUMBER_ONE]?.type?.name]){
@@ -28,7 +27,5 @@ export const BackdropColorPokemon = ({types}: Ability[]) =>{
     }
     return(<>
         {isChange && <button className='m-auto  flex bg-white p-3 hoverBG rounded-full' onClick={() => changeBg()}>{t('Pokemon.BG')}</button>}
-        <div style={{backgroundColor: selectedColor}} className='backdrop-pokemon'>
-        </div>
     </>)
 }
