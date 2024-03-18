@@ -60,7 +60,7 @@ export default function Pokemon({params: {name}}: Props) {
         }
         await UserServices.removePokemon(id, idUpdate);
         await UserServices.addPokemon(id, pokemonId);
-        await UserServices.changeCountOfMoney(id, coins - lvl);
+        await UserServices.changeCountOfMoney(id, coins - (lvl * 20));
         router.push('/pokemon/' + pokemonId);
     }
     useEmptyAuth()
