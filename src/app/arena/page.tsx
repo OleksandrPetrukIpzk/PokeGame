@@ -32,6 +32,7 @@ import {addClick, addCountOfLose, addCountOfRichCoins, addCountOfWins} from "@/r
 import {changeCountOfMoney} from "@/redux/features/auth-slice";
 import {sendWinner} from "@/functions/figts";
 import {useTranslate} from "@tolgee/react";
+import {IUser} from "@/models/user";
 type UserInfo = {
     data: object[],
     sumaryHp?: number,
@@ -60,10 +61,22 @@ export default function Arena () {
     const countOfLose = useAppSelector(state => state.achiveReducer.value.countOfLose)
     const countOfRichCoins = useAppSelector(state => state.achiveReducer.value.countOfRichCoins)
     const ids  = useAppSelector((state) => state.achiveReducer.value.ids)
+
+    const filterUsers = (users: IUser[], radius: number): IUser[] => {
+        const filteredUsers: IUser[] = users.filter(user =>Math.abs(user.rang - rang) <= radius);
+        if(filteredUsers.length < 4){
+            return filterUsers(users, radius + 20);
+        }
+        return filteredUsers;
+    }
     const getUsers = async () =>{
         const response = await UserServices.getAll();
-        setUsersList(response.data);
+        const users = response.data;
+        const filteredUsers = filterUsers(users, 20);
+        const sortedFiltered = filteredUsers.sort((a, b) => b.rang - a.rang)
+        setUsersList(sortedFiltered);
     }
+
     const choiceUserForFight = async (userInfo:UserInfo) =>{
         const userDetailInfo = userInfo;
         userDetailInfo.data = await getPokemonInfoById(userInfo.selectedPokemon);
@@ -157,7 +170,7 @@ export default function Arena () {
                }))
            })
        }
-    }, [isSelectedUser]);
+    }, [isSelectedUser, rang]);
     return(<main>
         <Header/>
         <Modal open={isSelectedUser} onClose={() => {
