@@ -30,8 +30,9 @@ import {isTheSame} from "@/functions/logic";
 import {FightersPreview} from "@/app/storyMode/FightersPrewiev";
 import '../globals.css'
 import {addAchives} from "@/functions/achives";
-import {addClick, addCountOfRichCoins, addCountOfStage} from "@/redux/features/achievements";
+import {addClick, addCountOfRichCoins, addCountOfStage, addCountOfWins} from "@/redux/features/achievements";
 import {useTranslate} from "@tolgee/react";
+import {checkTypes, sendWinner} from "@/functions/figts";
 export default function AfkArena () {
     const {t} = useTranslate();
     const [isFight, setIsFight] = useState(false);
@@ -85,6 +86,35 @@ export default function AfkArena () {
         setIsFight(true);
         scaleDMG(enemyPokemon, yourPokemon, setYourPokemon, setEnemyPokemon);
     }
+    const specialHit = () => {
+        let startDmgCurrentUser = 1;
+        yourPokemon.types?.forEach(item => {
+            enemyPokemon.types.forEach((type: any) => {
+                startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
+            })
+        })
+        hit(setYourPokemon, setEnemyPokemon, yourPokemon.specialAttack * 100 * startDmgCurrentUser, 0);
+        if (enemyPokemon.sumaryHp - yourPokemon.specialAttack * 100 * startDmgCurrentUser <= 0) {
+            setGameStatus(WIN);
+            youWin(setYourPokemon, setEnemyPokemon, enemyPokemon.sumaryAttack);
+            addAchives(id, 'countOfStage', countOfStage, dispatch, ids, t('Notification.stage'), addCountOfStage, t);
+            addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t('Notification.winCoins'), addCountOfRichCoins, t);
+        }
+    }
+    const specialHealth = () => {
+        let startDmgCurrentUser = 1;
+        yourPokemon.types?.forEach(item => {
+            enemyPokemon.types.forEach((type: any) => {
+                startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
+            })
+        })
+        setYourPokemon(prev =>{
+            return{
+                ...prev,
+                sumaryHp: prev.sumaryHp + (prev.specialDefence * 100 * startDmgCurrentUser)
+            }
+        })
+    }
 
     useEmptyAuth([stageInOfflineArena])
     useEffect(() => {
@@ -98,7 +128,7 @@ export default function AfkArena () {
             {isFight && <Box sx={{...STYLES_FOR_MODAL, width: 800}} className='box__fight'>
               <GameStatus gameStatus={gameStatus}/>
             <Fighters yourPokemon={yourPokemon} enemyPokemon={enemyPokemon} />
-                <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon}/>
+                <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon} types={yourPokemon.types} specialHealth={specialHealth} specialHit={specialHit}/>
             </Box>}
             <FightersPreview yourPokemon={yourPokemon} startFight={startFight} isFight={isFight} enemyPokemon={enemyPokemon}/>
         </main>)

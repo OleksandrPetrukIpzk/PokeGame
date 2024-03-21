@@ -31,6 +31,29 @@ export const COLOR_OF_ABILITIES: ColorOfAbilities = {
     shadow: '#c5c5c5'
 }
 
+export const SPECIFIC_OF_ABILITIES: ColorOfAbilities = {
+    normal: 'damage',
+    fighting: 'damage',
+    flying: 'health',
+    poison: 'damage',
+    ground: 'health',
+    rock: 'damage',
+    bug: 'health',
+    ghost: 'health',
+    steel: 'damage',
+    fire: 'damage',
+    water: 'health',
+    grass: 'health',
+    electric: 'damage',
+    psychic: 'health',
+    ice: ' damage',
+    dragon: 'damage',
+    dark: 'damage',
+    fairy: 'health',
+    unknown: 'health',
+    shadow: 'health'
+}
+
 export const DEFAULT_IMAGE:string = 'https://w7.pngwing.com/pngs/540/278/png-transparent-unown-pokemon-go-pokedex-poke-ball-formes-game-cat-like-mammal-carnivoran.png'
 
 export const DEFAULT_LINK:string = 'https://pokeapi.co/api/v2/'

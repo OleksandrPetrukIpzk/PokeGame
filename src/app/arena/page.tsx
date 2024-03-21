@@ -30,7 +30,7 @@ import {INITIAL_USER} from "@/constants/user";
 import {addAchives} from "@/functions/achives";
 import {addClick, addCountOfLose, addCountOfRichCoins, addCountOfWins} from "@/redux/features/achievements";
 import {changeCountOfMoney} from "@/redux/features/auth-slice";
-import {sendWinner} from "@/functions/figts";
+import {checkTypes, sendWinner} from "@/functions/figts";
 import {useTranslate} from "@tolgee/react";
 import {IUser} from "@/models/user";
 type UserInfo = {
@@ -76,6 +76,8 @@ export default function Arena () {
         const sortedFiltered = filteredUsers.sort((a, b) => b.rang - a.rang)
         setUsersList(sortedFiltered);
     }
+
+
 
     const choiceUserForFight = async (userInfo:UserInfo) =>{
         const userDetailInfo = userInfo;
@@ -123,7 +125,42 @@ export default function Arena () {
             }
         }
     }
+    const specialHit = () =>{
+        let startDmgCurrentUser = 1;
+        selectedUser.types?.forEach(item => {
+            statsCurrentUser.types.forEach((type: any) => {
+                startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
+            })
+        })
+        hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.specialAttack * 100 * startDmgCurrentUser, 0);
+        if(selectedUser.sumaryHp - statsCurrentUser.specialAttack * 100 * startDmgCurrentUser <= 0){
+            setGameStatus(WIN)
+            youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
+            if(activeID === 4){
+                sendWinner(name, selectedUser.name,  name, userId, rang + 20, selectedUser.id, selectedUser.rang)
+            }
+            else {
+                sendWinner(name, selectedUser.name,  name, userId, rang, selectedUser.id, selectedUser.rang,)
+            }
+            addAchives(userId, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins, t)
+            addAchives(userId, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t)
+        }
+    }
 
+    const specialHealth = () => {
+        let startDmgCurrentUser = 1;
+        selectedUser.types?.forEach(item => {
+            statsCurrentUser.types.forEach((type: any) => {
+                startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
+            })
+        })
+        setStatsCurrentUser(prev =>{
+            return{
+                ...prev,
+                sumaryHp: prev.sumaryHp + (prev.specialDefence * 100 * startDmgCurrentUser)
+            }
+        })
+    }
     const handleLeave = () =>{
         if(statsCurrentUser.speed > selectedUser.speed || activeID === 1){
             setIsSelectedUser(false);
@@ -166,6 +203,8 @@ export default function Arena () {
                    sumaryHp: (userDetailInfo.data.stats[0].base_stat * userDetailInfo.data.stats[2].base_stat) * (userDetailInfo.data.stats[4].base_stat / 2),
                    sumaryAttack: userDetailInfo.data.stats[1].base_stat * userDetailInfo.data.stats[3].base_stat,
                    speed: userDetailInfo.data.stats[5]?.base_stat,
+                   specialAttack: userDetailInfo.data.stats[3].base_stat,
+                   specialDefence: userDetailInfo.data.stats[4].base_stat,
                    types: userDetailInfo.data.types
                }))
            })
@@ -178,10 +217,10 @@ export default function Arena () {
             setIsFight(false);
         }}>
                 {isFight ?
-                    <Box sx={{ ...STYLES_FOR_MODAL, width: 500 }} className='box__fight'>
+                    <Box sx={{ ...STYLES_FOR_MODAL, width: 800 }} className='box__fight'>
                         <GameStatus gameStatus={gameStatus}/>
                         <FightPanel statsCurrentUser={statsCurrentUser} selectedPokemon={selectedPokemon} selectedUser={selectedUser}/>
-                        <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon}/>
+                        <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon} types={statsCurrentUser.types} specialHit={specialHit} specialHealth={specialHealth}/>
                     </Box>
                     : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight} activeID={activeID} setActiveID={setActiveID} setStatsCurrentUser={setStatsCurrentUser} statsCurrentUser={statsCurrentUser} setSelectedUser={setSelectedUser}/>
                     }
