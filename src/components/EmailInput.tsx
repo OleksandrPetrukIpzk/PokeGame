@@ -3,47 +3,31 @@ import Stack from '@mui/joy/Stack';
 import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
 import Typography from '@mui/joy/Typography';
-import {validateEmail} from "@/functions/auth";
+import {handleChangeEmail, validateEmail} from "@/functions/auth";
 import {Email} from "@mui/icons-material";
 import {useTranslate} from "@tolgee/react";
-export const EmailInput = ({email, setEmail, setErrors}: {email: string, setEmail: Dispatch<SetStateAction<string>>, setErrors: Dispatch<SetStateAction<string[]>>}) =>{
+
+type EmailInputT = {
+    email: string, setEmail: Dispatch<SetStateAction<string>>,
+    setErrors: Dispatch<SetStateAction<string[]>>
+}
+
+export const EmailInput = ({email, setEmail, setErrors}: EmailInputT) =>{
    const {t} = useTranslate()
     const [isValid, setIsValid] = useState(false);
-    const handleChange = (value: string) => {
-        if(validateEmail(value)){
-            setIsValid(true)
-            setErrors((prev: string[]) => {
-                if (prev.includes('email')) {
-                    const index = prev.findIndex(item => item === 'email');
-                    prev.splice(index, 1);
-                }
-                return prev;
-            });
-        } else{
-            setIsValid(false)
-            setErrors((prev: string[]) => {
-                if (!prev.includes('email')) {
-                    prev.push('email');
-                }
-                return prev;
-            });
-        }
-        setEmail(value);
-    }
+
     return (<Stack
             spacing={0.5}
             sx={{
                 '--hue': isValid ? 120 : 0,
-            }}
-        >
+            }}>
             <Input
                 type="email"
                 placeholder={t('Login.emailPlaceholder')}
                 startDecorator={<Email />}
                 value={email}
-                onChange={(event) => handleChange(event.target.value)}
-                size="lg"
-            />
+                onChange={(event) => handleChangeEmail(event.target.value, setIsValid, setErrors, setEmail)}
+                size="lg"/>
             <LinearProgress
                 determinate
                 size="sm"
@@ -51,12 +35,10 @@ export const EmailInput = ({email, setEmail, setErrors}: {email: string, setEmai
                 sx={{
                     bgcolor: 'background.level3',
                     color: 'hsl(var(--hue) 80% 40%)',
-                }}
-            />
+                }}/>
             <Typography
                 level="body-xs"
-                sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
-            >
+                sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}>
                 {isValid ? t('Login.emailGood') : t('Login.emailBad')}
             </Typography>
         </Stack>)

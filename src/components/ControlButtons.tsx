@@ -2,7 +2,14 @@ import Button from "@mui/joy/Button";
 import React, {Dispatch, SetStateAction} from "react";
 import {useTranslate} from "@tolgee/react";
 
-export const ControlButtons = ({previousUrl, setBaseUrl, setIsLoaded, nextUrl}: {previousUrl: string, setBaseUrl: Dispatch<SetStateAction<string>>,setIsLoaded: Dispatch<SetStateAction<boolean>>, nextUrl: string}) =>{
+type ControlT = {
+    previousUrl: string,
+    setBaseUrl: Dispatch<SetStateAction<string>>,
+    setIsLoaded: Dispatch<SetStateAction<boolean>>,
+    nextUrl: string
+}
+
+export const ControlButtons = ({previousUrl, setBaseUrl, setIsLoaded, nextUrl}: ControlT) =>{
     const {t} = useTranslate();
     return (<div className={'w-max flex gap-3 items-center m-auto'}>
         <Button

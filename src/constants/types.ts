@@ -35,3 +35,9 @@ export type Rang = {
     whoWin: string,
     timeFight: Date
 }
+
+export type TypeForBackDrop = {
+    type: {
+        name: string
+    }
+}

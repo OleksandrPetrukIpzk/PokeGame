@@ -1,15 +1,19 @@
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
-import {COLOR_OF_ABILITIES, EMPTY_STRING, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
-import {Ability} from "@/constants/types";
+import {COLOR_OF_ABILITIES, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
+import {TypeForBackDrop} from "@/constants/types";
 import {useTranslate} from "@tolgee/react";
 
-export const BackdropColorPokemon = ({types, setBgColor}: {types: any, setBgColor: Dispatch<SetStateAction<string>>}) =>{
+type BackdropT = {
+    types: TypeForBackDrop[],
+    setBgColor: Dispatch<SetStateAction<string>>
+}
+
+export const BackdropColorPokemon = ({types, setBgColor}: BackdropT) =>{
     const {t} = useTranslate()
     const [currentIndex, setCurrentIndex] = useState(NUMBER_ZERO);
     const [isChange, setIsChange] = useState(true);
-    const firstIndex = NUMBER_ONE;
     useEffect(() =>{
-        if(!COLOR_OF_ABILITIES[types[firstIndex]?.type?.name]) {
+        if(!COLOR_OF_ABILITIES[types[NUMBER_ONE]?.type?.name]) {
             setIsChange(false);
         }
         else{

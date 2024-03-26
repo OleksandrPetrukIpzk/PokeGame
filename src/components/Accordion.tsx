@@ -4,7 +4,11 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {ImagePokemonWithLinks} from "@/components/ImagePokemonWithLinks";
 import {useTranslate} from "@tolgee/react";
-export const AccordionPokemons = ({arrPokemons}: {arrPokemons: string[]}) => {
+
+type AccordionPokemon = {
+    arrPokemons: string[]
+}
+export const AccordionPokemons = ({arrPokemons}: AccordionPokemon) => {
     const {t} = useTranslate();
     return  <Accordion>
         <AccordionSummary

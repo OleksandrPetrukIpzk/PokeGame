@@ -86,3 +86,24 @@ export const logout = async (dispatch: AppDispatch, router: AppRouterInstance) =
 }
 
 
+export const handleChangeEmail = (value: string, setIsValid: Dispatch<SetStateAction<boolean>>, setErrors: Dispatch<SetStateAction<string[]>>, setEmail: Dispatch<SetStateAction<string>>) => {
+    if(validateEmail(value)){
+        setIsValid(true)
+        setErrors((prev: string[]) => {
+            if (prev.includes('email')) {
+                const index = prev.findIndex(item => item === 'email');
+                prev.splice(index, 1);
+            }
+            return prev;
+        });
+    } else{
+        setIsValid(false)
+        setErrors((prev: string[]) => {
+            if (!prev.includes('email')) {
+                prev.push('email');
+            }
+            return prev;
+        });
+    }
+    setEmail(value);
+}

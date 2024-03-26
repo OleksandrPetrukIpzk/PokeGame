@@ -5,13 +5,14 @@ import {DeleteAccount} from "@/components/DeleteAccount";
 import {useTranslate} from "@tolgee/react";
 import {tolgee} from "@/app/layout";
 import Cookies from "js-cookie";
+import {EMPTY_STRING} from "@/constants/pokemons";
 
 export const ChangePanel = () =>{
     const { t } = useTranslate();
     const [open, setOpen] = useState(false);
-    const [header, setHeader] = useState('');
-    const [textButton, setTextButton] = useState('');
-    const [changeFunck, setChangeFunk] = useState('')
+    const [header, setHeader] = useState(EMPTY_STRING);
+    const [textButton, setTextButton] = useState(EMPTY_STRING);
+    const [changeFunck, setChangeFunk] = useState(EMPTY_STRING)
     const handleChoise = (logo: string, mainContent: string, func: string) => {
         setOpen(true)
         setHeader(logo);

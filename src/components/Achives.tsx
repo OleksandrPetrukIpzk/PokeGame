@@ -4,14 +4,7 @@ import {useTranslate} from "@tolgee/react";
 
 export const Achives = () =>{
     const { t } = useTranslate();
-    const click = useAppSelector(state => state.achiveReducer.value.click)
-    const countOfWins= useAppSelector((state) => state.achiveReducer.value.countOfWins)
-    const countOfLose = useAppSelector((state) => state.achiveReducer.value.countOfLose)
-    const countOfPokemons = useAppSelector((state) => state.achiveReducer.value.countOfPokemons)
-    const countOfStage = useAppSelector((state) => state.achiveReducer.value.countOfStage)
-    const countOfLoseCoins = useAppSelector((state) => state.achiveReducer.value.countOfLoseCoins)
-    const countOfRichCoins = useAppSelector((state) => state.achiveReducer.value.countOfRichCoins)
-
+    const { click, countOfWins, countOfLose, countOfPokemons, countOfStage, countOfLoseCoins, countOfRichCoins } = useAppSelector(state => state.achiveReducer.value);
 
     return <>
         <PanelAchives state={click} index={0} text={t('Achive.click') + "👆"}/>

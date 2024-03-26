@@ -1,10 +1,16 @@
-import {IconPokemon} from "@/components/iconPokemon";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {useTranslate} from "@tolgee/react";
 
-export const IconUser = ({id, img, rang, name}: {id: string, img: string, rang: number, name: string}) =>{
+type IconUserT = {
+    id: string,
+    img: string,
+    rang: number,
+    name: string
+}
+
+export const IconUser = ({id, img, rang, name}: IconUserT) =>{
     const { t } = useTranslate();
     return <div className='flex items-center items-stretch'>
         <Link href={'/cabinet/'+ id}>

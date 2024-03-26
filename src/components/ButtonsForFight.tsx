@@ -8,8 +8,19 @@ import {useTranslate} from "@tolgee/react";
 import {useEffect, useState} from "react";
 import {SPECIFIC_OF_ABILITIES} from "@/constants/pokemons";
 import {isTheSame} from "@/functions/logic";
+import {TypeForBackDrop} from "@/constants/types";
 
-export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon, types, specialHit, specialHealth}: {gameStatus: string, sendResult: Function, handleLeave: Function, hitPokemon: Function, types: [{slot: string, type: {name: string, url: string}}], specialHealth: Function, specialHit: Function}) =>{
+type ButtonsT = {
+    gameStatus: string,
+    sendResult: Function,
+    handleLeave: Function,
+    hitPokemon: Function,
+    types: TypeForBackDrop[],
+    specialHealth: Function,
+    specialHit: Function
+}
+
+export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon, types, specialHit, specialHealth}: ButtonsT) =>{
     const [isDash, setIsDash] = useState(false);
     const [isHeal, setIsHeal] = useState(false);
     const [countOfHealth, setCountOfHealth] = useState(5);

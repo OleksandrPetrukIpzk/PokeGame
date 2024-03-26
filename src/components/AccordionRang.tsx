@@ -2,25 +2,23 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Accordion from "@mui/material/Accordion";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {Rang} from "@/constants/types";
-import ArenaService from "@/services/arenaService";
 import {ElementFight} from "@/components/ElementFight";
 import {useTranslate} from "@tolgee/react";
+import {getAllFights} from "@/functions/asyncFynctions";
 
-export const AccordionRang = ({name}: {name: string}) => {
-    const {t} = useTranslate()
+type AccordionR = {
+    name: string
+}
+
+export const AccordionRang = ({name}: AccordionR) => {
+    const {t} = useTranslate();
     const [fights, setFights] = useState<Rang[]>([]);
-
+    const fetchFights = useCallback(() => getAllFights(name, setFights), [name]);
     useEffect(() => {
-        const getAllFights = async () =>{
-            if(name !== ''){
-                const response = await ArenaService.getFightForUserByName(name);
-                setFights(response.data);
-            }
-        }
-        getAllFights()
-    }, [name]);
+        fetchFights();
+    }, [fetchFights]);
 
     return<Accordion>
         <AccordionSummary

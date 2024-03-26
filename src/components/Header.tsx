@@ -10,8 +10,7 @@ import {Button} from "@mui/material";
 import {useTranslate} from "@tolgee/react";
 export const Header = () =>{
     const {t} = useTranslate();
-    const userName =  useAppSelector((state) => state.authReducer.value.name);
-    const coins = useAppSelector((state) => state.authReducer.value.coins)
+    const {name, coins} =  useAppSelector((state) => state.authReducer.value);
     const dispatch = useDispatch()
     const router = useRouter()
     return(
@@ -20,7 +19,7 @@ export const Header = () =>{
             <Search/>
             <Link className='nav-link' href='/menu'>{t('Header.menu')}</Link>
             <Link className='nav-link' href='/cabinet/my'>{t('Header.profile')}</Link>
-            <p className='nav-link'>{t('Header.coins', {userName, coins})}</p>
+            <p className='nav-link'>{t('Header.coins', {name, coins})}</p>
             <Button  color='error' onClick={() => logout(dispatch, router)}>{t('Header.logout')}</Button>
             <ToastContainer/>
         </header>

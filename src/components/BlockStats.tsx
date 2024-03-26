@@ -1,12 +1,15 @@
-
 import React from "react";
 import {useTranslate} from "@tolgee/react";
 import {HeightSVG, WeightSVG} from "@/components/SVGs";
 
-export const BlockStats = ({pokemonInfo}: {pokemonInfo: {
+type PokemonInfo = {
+    pokemonInfo: {
         weight: number,
         height: number
-    }}) =>{
+    }
+}
+
+export const BlockStats = ({pokemonInfo}: PokemonInfo) =>{
     const {t} = useTranslate();
      return  <div className='flex'>
          <div className='pr-5 mr-5 border-r-2'>

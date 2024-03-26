@@ -8,16 +8,22 @@ import UserServices from "@/services/userServices";
 import {selectPokemon} from "@/redux/features/auth-slice";
 import {useDispatch} from "react-redux";
 import Link from "next/link";
+import {NUMBER_ONE} from "@/constants/pokemons";
 
-export const EvolutedPokemon = ({name, link, lvl, maxLvl, updatePokemon}: {name: string, lvl: number, maxLvl: number, link: string, updatePokemon: Function}) => {
+type EvolutionT = {
+    name: string,
+    lvl: number,
+    maxLvl: number,
+    link: string,
+    updatePokemon: Function
+}
+
+export const EvolutedPokemon = ({name, link, lvl, maxLvl, updatePokemon}: EvolutionT) => {
     const {t} = useTranslate();
-    const arrPokemons = useAppSelector((state) => state.authReducer.value.arrPokemons);
-    const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
-    const id = useAppSelector((state) => state.authReducer.value.id);
-    const coins = useAppSelector(state => state.authReducer.value.coins);
+    const {arrPokemons, selectedPokemon, id, coins} = useAppSelector(state => state.authReducer.value);
     const segments = link.split('/');
     const pokemonId = segments[segments.length - 2];
-    const nextPokemonId = parseInt(pokemonId) + 1;
+    const nextPokemonId = parseInt(pokemonId) + NUMBER_ONE;
     const isInclude = arrPokemons.includes(pokemonId);
     const isNextInclude = arrPokemons.includes(nextPokemonId.toString());
     const isMaxLvl = isTheSame(lvl, maxLvl);
