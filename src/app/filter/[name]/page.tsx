@@ -1,9 +1,9 @@
 'use client'
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import '../../globals.css'
-import {CardPokemon} from "@/app/cardPokemon";
+import {CardPokemon} from "@/components/cardPokemon";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 
 type Props = {

@@ -3,8 +3,8 @@ import Button from '@mui/joy/Button';
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {DEFAULT_LINK, INITIAL_POKEMON} from "@/constants/pokemons";
-import {IconUser} from "@/app/arena/IconUser";
-import {PokemonInfo} from "@/app/arena/PokemonInfo";
+import {IconUser} from "@/components/IconUser";
+import {PokemonInfo} from "@/components/PokemonInfo";
 import {useTranslate} from "@tolgee/react";
 
 type CreatedUserArena = {

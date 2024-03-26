@@ -10,7 +10,7 @@ import {useAuth} from "@/hooks/useAuth";
 import {EMPTY_STRING, NAME_OF_TOKEN} from "@/constants/pokemons";
 import {errorNotification} from "@/functions/pocemons";
 import {validateEmail} from "@/functions/auth";
-import {InputsContainer} from "@/app/login/InputsContainer";
+import {InputsContainer} from "@/components/InputsContainer";
 import Button from "@mui/joy/Button";
 import Cookies from "js-cookie";
 import {useTranslate} from "@tolgee/react";

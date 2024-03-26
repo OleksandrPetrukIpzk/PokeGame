@@ -1,5 +1,5 @@
 import {OnlineFighters} from "@/constants/types";
-import {Health} from "@/app/arena/Health";
+import {Health} from "@/components/Health";
 
 export const FightPanel = ({statsCurrentUser, selectedPokemon, selectedUser}: {statsCurrentUser: OnlineFighters, selectedPokemon: string, selectedUser: OnlineFighters}) =>{
     return <div className='flex justify-between '>

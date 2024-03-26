@@ -2,7 +2,7 @@ import {Button} from "@mui/material";
 import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 import {Fighter} from "@/constants/pokemons";
 import React from "react";
-import {PreviewPokemon} from "@/app/storyMode/PreviewPokemon";
+import {PreviewPokemon} from "@/components/PreviewPokemon";
 import {useTranslate} from "@tolgee/react";
 
 export const FightersPreview = ({yourPokemon, startFight, isFight, enemyPokemon}: {yourPokemon: Fighter, startFight: Function, isFight: boolean, enemyPokemon: Fighter}) => {

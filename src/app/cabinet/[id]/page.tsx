@@ -1,6 +1,6 @@
 'use client'
-import {Header} from "@/Header/Header";
-import {MainContent} from "@/app/cabinet/MainContent";
+import {Header} from "@/components/Header";
+import {MainContent} from "@/components/MainContent";
 import {useEffect, useState} from "react";
 import {IUser} from "@/models/user";
 import {getUserById} from "@/functions/auth";

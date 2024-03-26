@@ -1,4 +1,4 @@
-import {CheckAchives} from "@/app/achievements/CheckAchives";
+import {CheckAchives} from "@/components/CheckAchives";
 import {KEYS_ACHIEVEMENTS} from "@/constants/achievement";
 
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {Search} from "@/Header/Search";
+import {Search} from "@/components/Search";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useAppSelector} from "@/redux/store";

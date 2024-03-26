@@ -1,6 +1,6 @@
 import {isTheSame} from "@/functions/logic";
 import {useAppSelector} from "@/redux/store";
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {IconPokemon} from "@/components/iconPokemon";
 import {Button} from "@mui/material";
 import React from "react";
 import {useTranslate} from "@tolgee/react";

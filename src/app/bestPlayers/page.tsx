@@ -1,5 +1,5 @@
 'use client'
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import {useEffect, useState} from "react";
 import UserServices from "@/services/userServices";
 import '../globals.css'
@@ -7,7 +7,7 @@ import {IUser} from "@/models/user";
 import Image from "next/image";
 import Link from "next/link";
 import {Option, Select} from "@mui/joy";
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {IconPokemon} from "@/components/iconPokemon";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {useTranslate} from "@tolgee/react";
 export default function BestPlayers (){

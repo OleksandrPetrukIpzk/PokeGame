@@ -1,5 +1,5 @@
 'use client'
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import Link from "next/link";
 import {Button} from "@mui/material";
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';

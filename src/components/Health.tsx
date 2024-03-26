@@ -1,4 +1,4 @@
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {IconPokemon} from "@/components/iconPokemon";
 
 export const Health = ({sumaryHp, selectedPokemon}: {sumaryHp: number, selectedPokemon: string}) =>{
     return(<div>

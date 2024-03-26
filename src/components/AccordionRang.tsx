@@ -5,7 +5,7 @@ import Accordion from "@mui/material/Accordion";
 import {useEffect, useState} from "react";
 import {Rang} from "@/constants/types";
 import ArenaService from "@/services/arenaService";
-import {ElementFight} from "@/ElementFight/ElementFight";
+import {ElementFight} from "@/components/ElementFight";
 import {useTranslate} from "@tolgee/react";
 
 export const AccordionRang = ({name}: {name: string}) => {

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import {NUMBER_ONE, NUMBER_ZERO, STYLES_FOR_MODAL} from "@/constants/pokemons";
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
-import {Abilities} from "@/app/pokemon/[name]/abilities";
+import {IconPokemon} from "@/components/iconPokemon";
+import {Abilities} from "@/components/abilities";
 import {Box, Button} from "@mui/material";
 import SportsMmaOutlinedIcon from "@mui/icons-material/SportsMmaOutlined";
 import {OnlineFighters} from "@/constants/types";

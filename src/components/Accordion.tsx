@@ -2,7 +2,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {ImagePokemonWithLinks} from "@/app/cabinet/my/ImagePokemonWithLinks";
+import {ImagePokemonWithLinks} from "@/components/ImagePokemonWithLinks";
 import {useTranslate} from "@tolgee/react";
 export const AccordionPokemons = ({arrPokemons}: {arrPokemons: string[]}) => {
     const {t} = useTranslate();

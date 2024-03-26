@@ -9,7 +9,7 @@ import {logIn} from "@/redux/features/auth-slice";
 import {useRouter} from "next/navigation";
 import {EMPTY_STRING, NAME_OF_TOKEN} from "@/constants/pokemons";
 import {useAuth} from "@/hooks/useAuth";
-import {InputsContainer} from "@/app/login/InputsContainer";
+import {InputsContainer} from "@/components/InputsContainer";
 import Button from "@mui/joy/Button";
 import Cookies from 'js-cookie';
 import {configureAchives} from "@/functions/auth";

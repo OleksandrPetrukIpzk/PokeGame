@@ -3,7 +3,7 @@ import Image from "next/image";
 import {useState} from "react";
 import {useAppSelector} from "@/redux/store";
 import {useDispatch} from "react-redux";
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import UserServices from "@/services/userServices";
 import {NUMBER_ONE} from "@/constants/pokemons";
 import {
@@ -20,7 +20,7 @@ import '../globals.css'
 import {addAchives} from "@/functions/achives";
 import {addCountOfLoseCoins, addCountOfPokemons} from "@/redux/features/achievements";
 import {changeCountOfMoney, setPotions} from "@/redux/features/auth-slice";
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {IconPokemon} from "@/components/iconPokemon";
 import Link from "next/link";
 import {IMAGE_POTIONS, POTIONS} from "@/constants/user";
 import {useTranslate} from "@tolgee/react";

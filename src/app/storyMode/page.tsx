@@ -7,7 +7,7 @@ import {
     EMPTY_STRING, LOSE, NUMBER_ONE,
     STYLES_FOR_MODAL, WIN
 } from "@/constants/pokemons";
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 
 import {Box} from "@mui/material";
 import UserServices from "@/services/userServices";
@@ -23,11 +23,11 @@ import {
     youWin
 } from "@/functions/pocemons";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
-import {GameStatus} from "@/app/storyMode/GameStatus";
-import {Fighters} from "@/app/storyMode/Fighters";
-import {ButtonsForFight} from "@/app/storyMode/ButtonsForFight";
+import {GameStatus} from "@/components/GameStatus";
+import {Fighters} from "@/components/Fighters";
+import {ButtonsForFight} from "@/components/ButtonsForFight";
 import {isTheSame} from "@/functions/logic";
-import {FightersPreview} from "@/app/storyMode/FightersPrewiev";
+import {FightersPreview} from "@/components/FightersPrewiev";
 import '../globals.css'
 import {addAchives} from "@/functions/achives";
 import {addClick, addCountOfRichCoins, addCountOfStage, addCountOfWins} from "@/redux/features/achievements";

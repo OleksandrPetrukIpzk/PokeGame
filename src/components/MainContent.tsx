@@ -1,11 +1,11 @@
 import Image from "next/image";
-import LinearBarWithLabel from "@/app/cabinet/LinearBarWithLabel";
+import LinearBarWithLabel from "@/components/LinearBarWithLabel";
 import {COUNT_ACHIVES} from "@/constants/achievement";
 import {achivePercent} from "@/functions/achives";
 import {isTheSame} from "@/functions/logic";
-import {AccordionPokemons} from "@/app/cabinet/Accordion";
-import {ImagePokemonWithLinks} from "@/app/cabinet/my/ImagePokemonWithLinks";
-import {AccordionRang} from "@/app/cabinet/AccordionRang";
+import {AccordionPokemons} from "@/components/Accordion";
+import {ImagePokemonWithLinks} from "@/components/ImagePokemonWithLinks";
+import {AccordionRang} from "@/components/AccordionRang";
 import {useTranslate} from "@tolgee/react";
 
 type Content = {

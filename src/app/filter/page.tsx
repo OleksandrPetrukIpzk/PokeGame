@@ -1,5 +1,5 @@
 'use client'
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import '../globals.css'
 import {useEffect, useState} from "react";
 import axios from "axios";

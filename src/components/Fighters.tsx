@@ -1,5 +1,5 @@
 import {Fighter} from "@/constants/pokemons";
-import {Health} from "@/app/arena/Health";
+import {Health} from "@/components/Health";
 
 export const Fighters = ({yourPokemon, enemyPokemon}: {yourPokemon:Fighter, enemyPokemon:Fighter}) =>{
     return(

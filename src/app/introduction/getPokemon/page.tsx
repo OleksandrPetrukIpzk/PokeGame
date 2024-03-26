@@ -1,7 +1,7 @@
 'use client'
 import {useEffect, useState} from "react";
 import Image from "next/image";
-import {CardPokemon} from "@/app/cardPokemon";
+import {CardPokemon} from "@/components/cardPokemon";
 import { NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import '../../globals.css'
 import {useAppSelector} from "@/redux/store";
@@ -11,7 +11,7 @@ import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {randomPokemonNumber} from "@/functions/pocemons";
 import {isTheSame} from "@/functions/logic";
 import UserServices from "@/services/userServices";
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {IconPokemon} from "@/components/iconPokemon";
 import {useTranslate} from "@tolgee/react";
 export default function GetPokemon () {
     const {t} = useTranslate();

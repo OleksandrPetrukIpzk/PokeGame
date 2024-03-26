@@ -1,7 +1,7 @@
 'use client'
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
-import {Header} from "@/Header/Header";
-import {Achives} from "./Achives";
+import {Header} from "@/components/Header";
+import {Achives} from "../../components/Achives";
 import '../globals.css'
 export default function Achievements (){
     useEmptyAuth()

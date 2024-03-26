@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {Abilities} from "@/app/pokemon/[name]/abilities";
+import {Abilities} from "@/components/abilities";
 import React from "react";
 import {Fighter} from "@/constants/pokemons";
 import {useTranslate} from "@tolgee/react";

@@ -1,6 +1,7 @@
-import {HeightSVG, WeightSVG} from "@/app/pokemon/[name]/SVGs";
+
 import React from "react";
 import {useTranslate} from "@tolgee/react";
+import {HeightSVG, WeightSVG} from "@/components/SVGs";
 
 export const BlockStats = ({pokemonInfo}: {pokemonInfo: {
         weight: number,

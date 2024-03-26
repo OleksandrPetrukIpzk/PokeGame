@@ -1,14 +1,14 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {CardPokemon} from "@/app/cardPokemon";
+import {CardPokemon} from "@/components/cardPokemon";
 import '../globals.css'
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import {errorNotification} from "@/functions/pocemons";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {EMPTY_STRING} from "@/constants/pokemons";
 import Button from "@mui/joy/Button";
-import {ControlButtons} from "@/app/library/ControlButtons";
+import {ControlButtons} from "@/components/ControlButtons";
 import {useTranslate} from "@tolgee/react";
 
 type GetAxios = {

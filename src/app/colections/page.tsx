@@ -1,10 +1,10 @@
 'use client'
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import {useAppSelector} from "@/redux/store";
-import {CardPokemon} from "@/app/cardPokemon";
+import {CardPokemon} from "@/components/cardPokemon";
 import '../globals.css'
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {IconPokemon} from "@/components/iconPokemon";
 import {useTranslate} from "@tolgee/react";
 export default function Colections () {
     const {t} = useTranslate();

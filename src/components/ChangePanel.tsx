@@ -1,7 +1,7 @@
 import {Button} from "@mui/material";
 import React, {useState} from "react";
-import {ChangeModal} from "@/app/cabinet/my/ChangeModal";
-import {DeleteAccount} from "@/app/cabinet/my/DeleteAccount";
+import {ChangeModal} from "@/components/ChangeModal";
+import {DeleteAccount} from "@/components/DeleteAccount";
 import {useTranslate} from "@tolgee/react";
 import {tolgee} from "@/app/layout";
 import Cookies from "js-cookie";

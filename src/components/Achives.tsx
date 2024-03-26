@@ -1,5 +1,5 @@
 import {useAppSelector} from "@/redux/store";
-import {PanelAchives} from "@/app/achievements/PanelAchives";
+import {PanelAchives} from "@/components/PanelAchives";
 import {useTranslate} from "@tolgee/react";
 
 export const Achives = () =>{

@@ -6,9 +6,9 @@ import {useRouter} from "next/navigation";
 import {useAppSelector} from "@/redux/store";
 import {NUMBER_ZERO} from "@/constants/pokemons";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
-import {ContainerSVG} from "@/app/introduction/SVGs";
+import {ContainerSVG} from "@/components/SVGs";
 import {isTheSame} from "@/functions/logic";
-import {InteractiveText} from "@/app/introduction/InteractiveText";
+import {InteractiveText} from "@/components/InteractiveText";
 export default function Introduction () {
     const arrPokemons = useAppSelector((state) => state.authReducer.value.arrPokemons);
     const router = useRouter()

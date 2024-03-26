@@ -1,9 +1,9 @@
 'use client'
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import {useAppSelector} from "@/redux/store";
-import {MainContent} from "@/app/cabinet/MainContent";
+import {MainContent} from "@/components/MainContent";
 import '../../globals.css'
-import {ChangePanel} from "@/app/cabinet/my/ChangePanel";
+import {ChangePanel} from "@/components/ChangePanel";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 export default function MyCabinet(){
     const img = useAppSelector(state =>  state.authReducer.value.img);

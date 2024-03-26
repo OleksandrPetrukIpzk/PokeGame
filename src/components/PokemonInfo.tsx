@@ -1,4 +1,4 @@
-import {IconPokemon} from "@/IconPokemon/iconPokemon";
+import {IconPokemon} from "@/components/iconPokemon";
 import {Tooltip} from "@mui/material";
 import Image from "next/image";
 import React from "react";

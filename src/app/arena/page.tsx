@@ -1,9 +1,9 @@
 'use client'
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import {useEffect, useState} from "react";
 import UserServices from "@/services/userServices";
 import {useDispatch} from "react-redux";
-import {User} from "@/app/arena/user";
+import {User} from "@/components/user";
 import '../globals.css'
 import {Box, Modal} from "@mui/material";
 import {
@@ -22,10 +22,10 @@ import {
 } from "@/constants/pokemons";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {isTheSame} from "@/functions/logic";
-import {GameStatus} from "@/app/storyMode/GameStatus";
-import {FightPanel} from "@/app/arena/FIghtPanel";
-import {ButtonsForFight} from "@/app/storyMode/ButtonsForFight";
-import {EnemyPanel} from "@/app/arena/EnemyPanel";
+import {GameStatus} from "@/components/GameStatus";
+import {FightPanel} from "@/components/FIghtPanel";
+import {ButtonsForFight} from "@/components/ButtonsForFight";
+import {EnemyPanel} from "@/components/EnemyPanel";
 import {INITIAL_USER} from "@/constants/user";
 import {addAchives} from "@/functions/achives";
 import {addClick, addCountOfLose, addCountOfRichCoins, addCountOfWins} from "@/redux/features/achievements";

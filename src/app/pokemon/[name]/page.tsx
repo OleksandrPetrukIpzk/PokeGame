@@ -1,10 +1,10 @@
 'use client'
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
-import {Abilities} from "@/app/pokemon/[name]/abilities";
-import {BackdropColorPokemon} from "@/app/pokemon/[name]/backdropColorPokemon";
+import {Abilities} from "@/components/abilities";
+import {BackdropColorPokemon} from "@/components/backdropColorPokemon";
 import '../../globals.css'
-import {Header} from "@/Header/Header";
+import {Header} from "@/components/Header";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "@/redux/store";
 import {selectPokemon} from "@/redux/features/auth-slice";
@@ -12,17 +12,14 @@ import UserServices from "@/services/userServices";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {Button} from "@mui/material";
 import {choicePokemon} from "@/functions/choicePokemon";
-import {Error} from "@/app/pokemon/[name]/Error";
-import {SwitchButton} from "@/app/pokemon/[name]/SwithButton";
+import {Error} from "@/components/Error";
+import {SwitchButton} from "@/components/SwithButton";
 import {isTheSame} from "@/functions/logic";
-import {PokemonInfo} from "@/app/pokemon/[name]/PokemonInfo";
+import {PokemonDetailInfo} from "@/components/PokemonDetailInfo";
 import {Ability} from "@/constants/types";
 import {useTranslate} from "@tolgee/react";
-import axios from "axios";
-import {EvolutedPokemon} from "@/app/pokemon/[name]/EvolutedPokemon";
+import {EvolutedPokemon} from "@/components/EvolutedPokemon";
 import {useRouter} from "next/navigation";
-import {addAchives} from "@/functions/achives";
-import {addCountOfLoseCoins} from "@/redux/features/achievements";
 
 type Props = {
     params: {
@@ -86,7 +83,7 @@ export default function Pokemon({params: {name}}: Props) {
                         {arrPokemons.includes(pokemonInfo.id?.toString()) && !isTheSame(selectedPokemon, pokemonInfo.id?.toString()) &&
                             <Button onClick={() => clickHandleSelectPokemon()}>{t('Pokemon.select')}</Button>}
                     </div>
-                    <PokemonInfo pokemonInfo={pokemonInfo}/>
+                    <PokemonDetailInfo pokemonInfo={pokemonInfo}/>
                     <div className="flex justify-center">
                         {evolutionData.map(pokemon => <EvolutedPokemon lvl={pokemon.level} maxLvl={evolutionData.length}
                                                                        name={pokemon.pokemon.name}
