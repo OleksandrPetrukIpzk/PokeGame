@@ -2,22 +2,23 @@
 import {Header} from "@/components/Header";
 import '../globals.css'
 import {useEffect, useState} from "react";
-import axios from "axios";
 import Link from "next/link";
-import {COLOR_OF_ABILITIES, DEFAULT_LINK, EMPTY_STRING} from "@/constants/pokemons";
-import {errorNotification} from "@/functions/pocemons";
+import {COLOR_OF_ABILITIES,} from "@/constants/pokemons";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
+import {TypesT} from "@/constants/types";
+import {getAllPokemonsTypes} from "@/functions/asyncFynctions";
+import {TypeLink} from "@/components/TypeLink";
 export default function Filter() {
-    const [filter, setFilter] = useState([{name:EMPTY_STRING, url: EMPTY_STRING}]);
+    const [filter, setFilter] = useState<TypesT[]>([]);
     useEmptyAuth();
     useEffect(() => {
-    axios.get(DEFAULT_LINK +'type').then(data => setFilter(data.data.results)).catch(() => errorNotification);
+        getAllPokemonsTypes(setFilter);
     }, []);
     return(
         <div className='main'>
         <Header/>
             <main className='flex flex-wrap justify-center'>
-                {filter.map(group =><Link className='filter-element' style={{border: `4px solid ${COLOR_OF_ABILITIES[group.name]}`}} href={'/filter/'+group.name}><p>{group.name}</p></Link>)}
+                {filter.map(group => <TypeLink name={group.name}/>)}
             </main>
         </div>
     )

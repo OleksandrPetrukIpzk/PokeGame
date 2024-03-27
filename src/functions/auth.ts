@@ -8,6 +8,7 @@ import {ACHIEVEMENT, KEYS_ACHIEVEMENTS} from "@/constants/achievement";
 import {Dispatch, SetStateAction} from "react";
 import {IUser} from "@/models/user";
 import Cookies from "js-cookie";
+import {AnyAction} from "redux";
 
 export const validateEmail = (email: string) =>{
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,7 +60,7 @@ export  const getAuth = async (dispatch: AppDispatch, id: string, router: AppRou
     }
 }
 
-export const configureAchives = async (response: any, dispatch: AppDispatch) =>{
+export const configureAchives = async (response: any, dispatch: Dispatch<AnyAction>) =>{
     const arrCounts: number[] = []
     applyAllAchives(response, arrCounts)
     dispatch(start({

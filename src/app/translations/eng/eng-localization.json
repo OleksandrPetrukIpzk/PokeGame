@@ -105,7 +105,7 @@
   "Register.login": "Login",
   "Header.menu": "Menu",
   "Header.profile": "My profile",
-  "Header.coins": "Hello {userName} you have coins: {coins}",
+  "Header.coins": "Hello {name} you have coins: {coins}",
   "Header.logout": "LogOut",
   "Header.placeHolder": "I want find...",
   "Header.search": "Search",

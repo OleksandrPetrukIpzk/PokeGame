@@ -1,6 +1,5 @@
 'use client'
 import {Header} from "@/components/Header";
-import Link from "next/link";
 import {Button} from "@mui/material";
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
@@ -10,9 +9,9 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import StadiumOutlinedIcon from '@mui/icons-material/StadiumOutlined';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
-import '../globals.css'
 import {useAuth} from "@/hooks/useAuth";
 import {useTranslate} from "@tolgee/react";
+import '../globals.css'
 export default function Menu (){
     const {t} = useTranslate();
     useAuth('menu', 'login');

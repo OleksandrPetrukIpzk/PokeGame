@@ -1,12 +1,13 @@
 import Image from "next/image";
 import React from "react";
 import {useTranslate} from "@tolgee/react";
+import {PokemonDetailInfoT} from "@/constants/types";
 
-type PokemonStatsT = {
-    pokemonInfo: Record<string, number>
+type PokemonDetailT = {
+    pokemonInfo: PokemonDetailInfoT
 }
 
-export const PokemonStats = ({pokemonInfo}: PokemonStatsT) =>{
+export const PokemonStats = ({pokemonInfo}: PokemonDetailT) =>{
     const {t} = useTranslate()
     return <div>
         <p className='pokemon-name mt-10' style={{color: '#B8B8B8'}}>{t('Pokemon.stats')}</p>

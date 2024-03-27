@@ -41,3 +41,40 @@ export type TypeForBackDrop = {
         name: string
     }
 }
+
+export type PokemonsByFilterT = {
+    pokemon: {
+        name: string,
+        pokemon: object
+    }
+}
+
+export type TypesT = {
+    name: string,
+}
+
+export type PokemonDetailInfoT = {
+    id: string,
+    name: string,
+    weight: number,
+    height: number,
+    hp: number,
+    attack: number,
+    defense: number,
+    specialAttack: number,
+    specialDefense: number,
+    speed: number,
+    photoURL: string,
+    altPhotoURL: string,
+    types: Ability
+}
+
+export type EvolutionT = {
+    id: number,
+    level: number,
+    pokemon: {
+        url: string,
+        name: string
+
+    }
+}

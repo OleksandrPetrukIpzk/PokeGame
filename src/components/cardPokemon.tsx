@@ -34,7 +34,7 @@ export const CardPokemon = ({pokemon, isLoaded}: any): JSX.Element => {
         <>
         {isLoaded &&
             <Link href={'/pokemon/'+pokemonInfo.name} className='flex justify-between w-max flex-col items-center relative mb-20 mr-20'>
-             <Image className='relative z-10 image-pocemon' width={200} height={200} src={pokemonInfo.photoURL} decoding={"async"} alt={pokemonInfo.altPhotoURL} loading={'lazy'}/>
+             <Image className='relative z-10 image-pocemon' width={200} height={200} src={pokemonInfo.photoURL} decoding={"async"} alt={pokemonInfo.name} loading={'lazy'}/>
             <div className='w-52 absolute h-36 block-gradient z-0 top-16'></div>
             <p className='pt-2 z-10  bg-white text-subtitle h-10'>{pokemonInfo.name}</p>
         </Link>}

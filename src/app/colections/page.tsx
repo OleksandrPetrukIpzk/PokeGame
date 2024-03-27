@@ -2,14 +2,13 @@
 import {Header} from "@/components/Header";
 import {useAppSelector} from "@/redux/store";
 import {CardPokemon} from "@/components/cardPokemon";
-import '../globals.css'
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
 import {IconPokemon} from "@/components/iconPokemon";
 import {useTranslate} from "@tolgee/react";
+import '../globals.css'
 export default function Colections () {
     const {t} = useTranslate();
-    const arrPokemons = useAppSelector((state) => state.authReducer.value.arrPokemons);
-    const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
+    const {arrPokemons, selectedPokemon} = useAppSelector((state) => state.authReducer.value);
     useEmptyAuth()
     return(<>
         <main className='main'>

@@ -15,38 +15,17 @@ import Button from "@mui/joy/Button";
 import Cookies from "js-cookie";
 import {useTranslate} from "@tolgee/react";
 import {tolgee} from "@/app/layout";
+import {clickRegistration} from "@/functions/asyncFynctions";
 export default function Registration () {
     const {t} = useTranslate();
     const [email, setEmail] = useState(EMPTY_STRING);
     const [password, setPassword] = useState(EMPTY_STRING);
     const [name, setName] = useState(EMPTY_STRING);
     const [errors, setErrors] = useState<string[]>([]);
-    const [errorFromBack, setErrorFromBack] = useState('');
+    const [errorFromBack, setErrorFromBack] = useState(EMPTY_STRING);
     const router = useRouter()
     const dispatch = useDispatch();
-    const  clickRegistration = async () => {
-        try {
-            const response = await AuthServices.create(name, email, password);
-            dispatch(logIn({
-                id: response.data.user._id,
-                name: response.data.user.name,
-                email: response.data.user.email,
-                password: response.data.user.password,
-                img: response.data.user.img,
-                selectedPokemon: response.data.user.selectedPokemon,
-                coins: response.data.user.coins,
-                rang: response.data.user.rang,
-                stageInOfflineArena: response.data.user.stageInOfflineArena,
-                arrPokemons: response.data.user.arrPokemons,
-                arrAchives: response.data.user.arrAchives,
-                arrPotions: response.data.user.arrPotions,
-            }));
-            Cookies.set(NAME_OF_TOKEN, response.data.access_token)
-            router.push('/introduction')
-        } catch (e: any) {
-            setErrorFromBack(e.response.data.error);
-        }
-    }
+
     const changeLang = (value: string) => {
         Cookies.set('lang', value);
         tolgee.changeLanguage(value);
@@ -68,7 +47,7 @@ export default function Registration () {
                 <p className=' font-sans text-lg mb-4 font-medium'> {t('Register.info')}</p>
                 <InputsContainer setErrors={setErrors} email={email} name={name} setEmail={setEmail} setName={setName}
                                  password={password} setPassword={setPassword}/>
-                <Button onClick={() => clickRegistration()}   size="lg" color="success" variant="solid" disabled={errors.length !== 0 || name.length === 0}> {t('Register.button')}</Button>
+                <Button onClick={() => clickRegistration(name, email, password, dispatch, router, setErrorFromBack)}   size="lg" color="success" variant="solid" disabled={errors.length !== 0 || name.length === 0}> {t('Register.button')}</Button>
                 {errorFromBack.length > 0 && <p className='mt-2 mb-1 text-red-800'>{errorFromBack}</p>}
                 <span className=' font-sans text-lg mt-4 font-medium'>
                {t('Register.have')}

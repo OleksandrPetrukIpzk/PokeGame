@@ -105,7 +105,7 @@
   "Register.login": "Логін",
   "Header.menu": "Головне меню",
   "Header.profile": "Мій профіль",
-  "Header.coins": "Привіт {userName} Ви маєте {coins} монет",
+  "Header.coins": "Привіт {name} Ви маєте {coins} монет",
   "Header.logout": "Вийти з аккаунту",
   "Header.placeHolder": "Я хочу знайти...",
   "Header.search": "Пошук",

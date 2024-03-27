@@ -1,21 +1,23 @@
 'use client'
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {Header} from "@/components/Header";
-import '../../globals.css'
 import {CardPokemon} from "@/components/cardPokemon";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
+import {PokemonsByFilterT} from "@/constants/types";
+import {getPokemonsByType} from "@/functions/asyncFynctions";
+import '../../globals.css'
 
 type Props = {
     params:{
         name: string,
     }
 }
+
 export default function Pokemons({params: {name}}: Props) {
-    const [listOfPokemons, setListOfPokemons] = useState([{}]);
+    const [listOfPokemons, setListOfPokemons] = useState<PokemonsByFilterT[]>([]);
     useEmptyAuth();
     useEffect(() => {
-        axios?.get('https://pokeapi.co/api/v2/type/'+ name).then(a => setListOfPokemons(a.data.pokemon)).catch((e) => console.log(e));
+       getPokemonsByType(name, setListOfPokemons);
     }, []);
     return(
         <div className='main'>

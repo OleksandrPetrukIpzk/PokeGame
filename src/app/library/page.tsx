@@ -43,9 +43,8 @@ export default function Home() {
           <main className='h-max pl-20 pt-10'>
               <ControlButtons previousUrl={previousUrl} setBaseUrl={setBaseUrl} setIsLoaded={setIsLoaded} nextUrl={nextUrl}/>
               <div className='flex flex-wrap justify-center'>
-              {isLoaded ? pokemons.map((pokemon: object): JSX.Element => <CardPokemon key={pokemon.name}
-                                                                                      pokemon={pokemon}
-                                                                                      isLoaded={isLoaded}></CardPokemon>) :
+              {isLoaded ? pokemons.map((pokemon: object): JSX.Element =>
+                      <CardPokemon key={pokemon.name} pokemon={pokemon} isLoaded={isLoaded}/>) :
                   <p>{t('Library.loading')}</p>}
               </div>
               <ControlButtons previousUrl={previousUrl} setBaseUrl={setBaseUrl} setIsLoaded={setIsLoaded} nextUrl={nextUrl}/>
