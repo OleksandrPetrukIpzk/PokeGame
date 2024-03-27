@@ -30,23 +30,18 @@ import {isTheSame} from "@/functions/logic";
 import {FightersPreview} from "@/components/FightersPrewiev";
 import '../globals.css'
 import {addAchives} from "@/functions/achives";
-import {addClick, addCountOfRichCoins, addCountOfStage, addCountOfWins} from "@/redux/features/achievements";
+import {addClick, addCountOfRichCoins, addCountOfStage} from "@/redux/features/achievements";
 import {useTranslate} from "@tolgee/react";
 import {checkTypes, sendWinner} from "@/functions/figts";
+import {Ability, FighterT} from "@/constants/types";
 export default function AfkArena () {
     const {t} = useTranslate();
-    const [isFight, setIsFight] = useState(false);
-    const [gameStatus, setGameStatus] = useState(EMPTY_STRING);
-    const [yourPokemon, setYourPokemon] = useState(DEFAULT_TEMPLATE_FOR_FIGHT);
-    const [enemyPokemon, setEnemyPokemon] = useState(DEFAULT_TEMPLATE_FOR_FIGHT);
-    const id = useAppSelector((state) => state.authReducer.value.id);
-    const coins = useAppSelector((state) => state.authReducer.value.coins);
-    const stageInOfflineArena = useAppSelector((state) => state.authReducer.value.stageInOfflineArena);
-    const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
-    const click = useAppSelector((state) => state.achiveReducer.value.click)
-    const countOfRichCoins = useAppSelector(state => state.achiveReducer.value.countOfRichCoins)
-    const countOfStage = useAppSelector((state) => state.achiveReducer.value.countOfStage)
-    const ids  = useAppSelector((state) => state.achiveReducer.value.ids)
+    const [isFight, setIsFight] = useState<boolean>(false);
+    const [gameStatus, setGameStatus] = useState<string>(EMPTY_STRING);
+    const [yourPokemon, setYourPokemon] = useState<FighterT>(DEFAULT_TEMPLATE_FOR_FIGHT);
+    const [enemyPokemon, setEnemyPokemon] = useState<FighterT>(DEFAULT_TEMPLATE_FOR_FIGHT);
+    const {id,coins, stageInOfflineArena,selectedPokemon  } = useAppSelector((state) => state.authReducer.value);
+    const {click, countOfRichCoins, countOfStage, ids} = useAppSelector((state) => state.achiveReducer.value)
     const dispatch = useDispatch();
 
     const hitPokemon = () =>{
@@ -71,7 +66,6 @@ export default function AfkArena () {
             youCantLeave()
         }
     }
-
     const sendResult = async () =>{
         if(isTheSame(gameStatus, WIN)){
             const response = await UserServices.changeCountOfMoney(id, coins + NUMBER_ONE);
@@ -81,15 +75,14 @@ export default function AfkArena () {
         setIsFight(false);
         setGameStatus(EMPTY_STRING);
     }
-
     const startFight = () => {
         setIsFight(true);
         scaleDMG(enemyPokemon, yourPokemon, setYourPokemon, setEnemyPokemon);
     }
     const specialHit = () => {
         let startDmgCurrentUser = 1;
-        yourPokemon.types?.forEach(item => {
-            enemyPokemon.types.forEach((type: any) => {
+        yourPokemon.types?.forEach((item: Ability) => {
+            enemyPokemon.types.forEach((type: Ability) => {
                 startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
             })
         })
@@ -103,24 +96,22 @@ export default function AfkArena () {
     }
     const specialHealth = () => {
         let startDmgCurrentUser = 1;
-        yourPokemon.types?.forEach(item => {
-            enemyPokemon.types.forEach((type: any) => {
+        yourPokemon.types?.forEach((item: Ability) => {
+            enemyPokemon.types.forEach((type: Ability) => {
                 startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
             })
         })
-        setYourPokemon(prev =>{
+        setYourPokemon((prev: FighterT) =>{
             return{
                 ...prev,
                 sumaryHp: prev.sumaryHp + (prev.specialDefence * 100 * startDmgCurrentUser)
             }
         })
     }
-
-    useEmptyAuth([stageInOfflineArena])
+    useEmptyAuth([stageInOfflineArena]);
     useEffect(() => {
        configurePokemons(setEnemyPokemon, setYourPokemon, selectedPokemon, stageInOfflineArena);
-
-    },[stageInOfflineArena, gameStatus])
+    },[stageInOfflineArena, gameStatus]);
 
     return(<main className='main'>
             <Header/>

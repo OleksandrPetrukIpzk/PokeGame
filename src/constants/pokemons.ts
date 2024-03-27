@@ -1,4 +1,4 @@
-import {ColorOfAbilities} from "@/constants/types";
+import {Ability, ColorOfAbilities, FighterT} from "@/constants/types";
 export const EMPTY_STRING = ''
 export type Fighter = {
     name: string,
@@ -63,13 +63,14 @@ export const NUMBER_ONE :number = 1;
 
 export const BASE_URL:string = 'http://localhost:3001/'
 
-export const DEFAULT_TEMPLATE_FOR_FIGHT: Fighter = {
-    name: EMPTY_STRING,
-    img: EMPTY_STRING,
-    sumaryHp: NUMBER_ZERO,
-    sumaryAttack: NUMBER_ZERO,
-    speed: NUMBER_ZERO,
-    types: [{}]
+export const DEFAULT_TEMPLATE_FOR_FIGHT: FighterT = {
+    name: '',
+    sumaryAttack: 0,
+    speed: 0,
+    specialAttack: 0,
+    sumaryHp: 0,
+    specialDefence: 0,
+    types: []
 }
 
 export const STYLES_FOR_MODAL:object = {
@@ -104,11 +105,11 @@ export const DEFAULT_TEMPLATE_USER_FOR_FIGHT = {
     sumaryHp: NUMBER_ZERO,
     speed: NUMBER_ZERO,
     userName: EMPTY_STRING,
-    data: {
-        name: EMPTY_STRING,
-        types: []
-    },
-
+    id: EMPTY_STRING,
+    rang: 0,
+    types: [],
+    specialAttack: 0,
+    specialDefence: 0
 }
 
 export const DEFAULT_POKEMON_INFO = {

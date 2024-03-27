@@ -1,10 +1,10 @@
-import {OnlineFighters} from "@/constants/types";
+import {ArenaFightT, OnlineFighters} from "@/constants/types";
 import {Health} from "@/components/Health";
 
 type FightPanel = {
-    statsCurrentUser: OnlineFighters,
+    statsCurrentUser: ArenaFightT,
     selectedPokemon: string,
-    selectedUser: OnlineFighters
+    selectedUser: ArenaFightT
 }
 
 export const FightPanel = ({statsCurrentUser, selectedPokemon, selectedUser}: FightPanel) =>{

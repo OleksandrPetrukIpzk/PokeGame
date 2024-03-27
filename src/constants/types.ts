@@ -1,4 +1,4 @@
-import {Fighter} from "@/constants/pokemons";
+import {EMPTY_STRING, Fighter, NUMBER_ZERO} from "@/constants/pokemons";
 
 export type OnlineFighters  = Fighter & {
     selectedPokemon: string,
@@ -77,4 +77,34 @@ export type EvolutionT = {
         name: string
 
     }
+}
+
+export type FighterT = {
+    name: string,
+    sumaryAttack: number,
+    speed: number,
+    specialAttack: number,
+    sumaryHp: number,
+    specialDefence: number,
+    types: Ability[],
+}
+
+type StatsT = {
+    base_stat: number
+}
+
+export type ArenaFightT = {
+    id: string,
+    email: string,
+    name: string,
+    coins: number,
+    selectedPokemon: string,
+    sumaryAttack: number,
+    sumaryHp: number,
+    speed: number,
+    userName: string,
+    rang: number,
+    types: Ability[]
+    specialAttack: number,
+    specialDefence: number
 }

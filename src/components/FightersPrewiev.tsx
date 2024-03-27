@@ -4,12 +4,13 @@ import {Fighter} from "@/constants/pokemons";
 import React from "react";
 import {PreviewPokemon} from "@/components/PreviewPokemon";
 import {useTranslate} from "@tolgee/react";
+import {FighterT} from "@/constants/types";
 
 type FightersPrewievT = {
-    yourPokemon: Fighter,
+    yourPokemon: FighterT,
     startFight: Function,
     isFight: boolean,
-    enemyPokemon: Fighter
+    enemyPokemon: FighterT
 }
 
 export const FightersPreview = ({yourPokemon, startFight, isFight, enemyPokemon}: FightersPrewievT) => {

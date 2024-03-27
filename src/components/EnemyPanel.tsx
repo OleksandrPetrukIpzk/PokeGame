@@ -4,7 +4,7 @@ import {IconPokemon} from "@/components/iconPokemon";
 import {Abilities} from "@/components/abilities";
 import {Box, Button} from "@mui/material";
 import SportsMmaOutlinedIcon from "@mui/icons-material/SportsMmaOutlined";
-import {OnlineFighters} from "@/constants/types";
+import {ArenaFightT, OnlineFighters} from "@/constants/types";
 import {Dispatch, SetStateAction} from "react";
 import {useAppSelector} from "@/redux/store";
 import {IMAGE_POTIONS, POTIONS} from "@/constants/user";
@@ -15,7 +15,7 @@ import {isTheSame} from "@/functions/logic";
 import {checkTypes} from "@/functions/figts";
 import {useTranslate} from "@tolgee/react";
 
-export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, setStatsCurrentUser, statsCurrentUser, setSelectedUser}: {selectedUser: OnlineFighters, setIsFight: Dispatch<SetStateAction<boolean>>, activeID: number, setActiveID: Dispatch<SetStateAction<number>>, setStatsCurrentUser: Dispatch<SetStateAction<any>>, statsCurrentUser: any, setSelectedUser: Dispatch<SetStateAction<any>>}) =>{
+export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, setStatsCurrentUser, statsCurrentUser, setSelectedUser}: {selectedUser: ArenaFightT, setIsFight: Dispatch<SetStateAction<boolean>>, activeID: number, setActiveID: Dispatch<SetStateAction<number>>, setStatsCurrentUser: Dispatch<SetStateAction<ArenaFightT>>, statsCurrentUser: ArenaFightT, setSelectedUser: Dispatch<SetStateAction<ArenaFightT>>}) =>{
     const { t } = useTranslate()
     const arrPotions = useAppSelector((state) => state.authReducer.value.arrPotions);
     const id = useAppSelector((state) => state.authReducer.value.id);

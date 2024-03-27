@@ -3,6 +3,7 @@ import axios from "axios";
 import {COUNT_OF_POKEMONS, DEFAULT_IMAGE, DEFAULT_LINK, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import {Dispatch, SetStateAction} from "react";
 import {checkTypes} from "@/functions/figts";
+import {ArenaFightT, FighterT} from "@/constants/types";
 
 export const errorNotification = (params = 'Something went wrong') =>{
     return toast.error(params, {position: "top-right",
@@ -60,14 +61,14 @@ type Fighter = {
 }
 
 
-export const isHit = (yourPokemon:Fighter, enemyPokemon:Fighter) =>{
+export const isHit = (yourPokemon:FighterT, enemyPokemon:FighterT) =>{
     return yourPokemon.sumaryHp - enemyPokemon.sumaryAttack > NUMBER_ZERO && enemyPokemon.sumaryHp - yourPokemon.sumaryAttack > NUMBER_ZERO
 }
-export const isYouLose= (yourPokemon:Fighter, enemyPokemon:Fighter) => {
+export const isYouLose= (yourPokemon:FighterT, enemyPokemon:FighterT) => {
     return yourPokemon.sumaryHp - enemyPokemon.sumaryAttack <= NUMBER_ZERO
 }
 
-export const isYouWin = (yourPokemon:Fighter, enemyPokemon:Fighter) => {
+export const isYouWin = (yourPokemon:FighterT, enemyPokemon:FighterT) => {
     return enemyPokemon.sumaryHp - yourPokemon.sumaryAttack <= 0
 }
 type CurrentImage = {
@@ -100,14 +101,14 @@ export const isMoreOneCoin = (coins:number) =>{
     return coins > NUMBER_ZERO
 }
 
-export const hit = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPokemon: Dispatch<SetStateAction<any>>, yourAttack: number, enemyAttack: number) =>{
-    setYourPokemon((prev: any) => {
+export const hit = (setYourPokemon: Dispatch<SetStateAction<ArenaFightT>>, setEnemyPokemon: Dispatch<SetStateAction<ArenaFightT>>, yourAttack: number, enemyAttack: number) =>{
+    setYourPokemon((prev: ArenaFightT) => {
         return {
             ...prev,
             sumaryHp: prev.sumaryHp - enemyAttack
         }
     })
-    setEnemyPokemon((prev: any) => {
+    setEnemyPokemon((prev: ArenaFightT) => {
         return {
             ...prev,
             sumaryHp: prev.sumaryHp - yourAttack
@@ -115,14 +116,14 @@ export const hit = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPokem
     })
 }
 
-export const youLose = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPokemon: Dispatch<SetStateAction<any>>, yourAttack: number) =>{
-    setYourPokemon((prev: any) => {
+export const youLose = (setYourPokemon: Dispatch<SetStateAction<FighterT>>, setEnemyPokemon: Dispatch<SetStateAction<FighterT>>, yourAttack: number) =>{
+    setYourPokemon((prev: FighterT) => {
         return {
             ...prev,
             sumaryHp: NUMBER_ZERO
         }
     })
-    setEnemyPokemon((prev: any) => {
+    setEnemyPokemon((prev: FighterT) => {
         return {
             ...prev,
             sumaryHp: prev.sumaryHp - yourAttack
