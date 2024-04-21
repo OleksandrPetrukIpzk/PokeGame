@@ -111,7 +111,7 @@ export default function AfkArena () {
     useEmptyAuth([stageInOfflineArena]);
     useEffect(() => {
        configurePokemons(setEnemyPokemon, setYourPokemon, selectedPokemon, stageInOfflineArena);
-    },[stageInOfflineArena, gameStatus]);
+    },[stageInOfflineArena]);
 
     return(<main className='main'>
             <Header/>

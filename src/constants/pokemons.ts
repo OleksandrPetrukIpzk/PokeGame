@@ -130,3 +130,25 @@ export const INITIAL_POKEMON = {
     sumaryAttack: NUMBER_ZERO,
     speed: NUMBER_ZERO,
 }
+
+export const ARR_OF_ICONS = [{
+    hp: 100,
+    value: '😈',
+}, {
+    hp: 75,
+    value: '😡',
+}, {
+    hp: 50,
+    value: '😨',
+}, {
+    hp: 35,
+    value: '☹️',
+},
+    {
+        hp: 15,
+        value: '🥴',
+    },
+    {
+        hp: 1,
+        value: '💩',
+    }];
