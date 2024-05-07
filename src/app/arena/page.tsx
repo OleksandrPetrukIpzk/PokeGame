@@ -89,6 +89,11 @@ export default function Arena () {
     }
     const hitPokemon = () => {
         if(activeID === 5){
+            const element = document.querySelector('#pokemon__left');
+            element.classList.add('pokemon__animation__right');
+            setTimeout(()=>{
+                element.classList.remove('pokemon__animation__right');
+            }, 2000)
             setGameStatus(WIN);
             youWin(setStatsCurrentUser, setSelectedUser, 0);
             sendWinner(name, selectedUser.name,  name, id, rang, selectedUser.id, selectedUser.rang);
@@ -96,6 +101,16 @@ export default function Arena () {
             addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t);
         } else{
             if(isHit(statsCurrentUser, selectedUser)){
+                const element = document.querySelector('#pokemon__left');
+                const elementEnemy = document.querySelector('#pokemon__right');
+                element.classList.add('pokemon__animation__right');
+                setTimeout(()=>{
+                    element.classList.remove('pokemon__animation__right');
+                    elementEnemy.classList.add('pokemon__animation__left');
+                    setTimeout( () =>{
+                        elementEnemy.classList.remove('pokemon__animation__left');
+                    }, 2000)
+                }, 2000)
                 if(activeID === 7){
                     hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack + selectedUser.sumaryAttack, selectedUser.sumaryAttack / 2);
                 } else{
@@ -105,11 +120,21 @@ export default function Arena () {
                 addAchives(id, 'click', click, dispatch, ids, t("Notification.hit"), addClick, t)
 
             } else if(isYouLose(statsCurrentUser, selectedUser)){
+                const elementEnemy = document.querySelector('#pokemon__right');
+                elementEnemy.classList.add('pokemon__animation__left');
+                setTimeout(()=>{
+                    elementEnemy.classList.remove('pokemon__animation__left');
+                }, 2000)
                 setGameStatus(LOSE)
                 youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
                 sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, id, rang)
                 addAchives(id, 'countOfLose', countOfLose, dispatch, ids, t("Notification.lose"), addCountOfLose, t);
             } else if(isYouWin(statsCurrentUser, selectedUser)){
+                const element = document.querySelector('#pokemon__left');
+                element.classList.add('pokemon__animation__right');
+                setTimeout(()=>{
+                    element.classList.remove('pokemon__animation__right');
+                }, 2000)
                 setGameStatus(WIN)
                 youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
                 if(activeID === 4){
@@ -124,6 +149,11 @@ export default function Arena () {
         }
     }
     const specialHit = () =>{
+        const element = document.querySelector('#pokemon__left');
+        element.classList.add('pokemon__animation__right');
+        setTimeout(()=>{
+            element.classList.remove('pokemon__animation__right');
+        }, 2000)
         let startDmgCurrentUser = 1;
         selectedUser.types?.forEach(item => {
             statsCurrentUser.types.forEach((type: any) => {
@@ -146,6 +176,11 @@ export default function Arena () {
     }
 
     const specialHealth = () => {
+        const element = document.querySelector('.health__true');
+        element.classList.add('health__animation__true');
+        setTimeout(() => {
+            element.classList.remove('health__animation__true');
+        }, 2000)
         let startDmgCurrentUser = 1;
         selectedUser.types?.forEach(item => {
             statsCurrentUser.types.forEach((type: any) => {
@@ -161,11 +196,21 @@ export default function Arena () {
     }
     const handleLeave = () =>{
         if(statsCurrentUser.speed > selectedUser.speed || activeID === 1){
-            setIsSelectedUser(false);
-            setIsFight(false);
-            setActiveID(0);
+            const element = document.querySelector('#pokemon__left');
+            element.classList.add('pokemon__animation__leave__right');
+            setTimeout(() =>{
+                setIsFight(false);
+                setIsSelectedUser(false);
+                setActiveID(0);
+                element.classList.remove('pokemon__animation__leave__right');
+            }, 2000)
         } else{
             youCantLeave()
+            const element = document.querySelector('#pokemon__left');
+            element.classList.add('pokemon__animation__cantLeave__right');
+            setTimeout(()=>{
+                element.classList.remove('pokemon__animation__cantLeave__right');
+            }, 2000)
         }
     }
     const sendResult = async () =>{

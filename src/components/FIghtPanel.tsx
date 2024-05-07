@@ -1,6 +1,5 @@
-import {ArenaFightT, OnlineFighters} from "@/constants/types";
+import {ArenaFightT} from "@/constants/types";
 import {Health} from "@/components/Health";
-import LinearProgress from "@mui/joy/LinearProgress";
 
 type FightPanel = {
     statsCurrentUser: ArenaFightT,
@@ -10,8 +9,8 @@ type FightPanel = {
 
 export const FightPanel = ({statsCurrentUser, selectedPokemon, selectedUser}: FightPanel) =>{
     return <div className='flex justify-between '>
-        <Health sumaryHp={statsCurrentUser.sumaryHp} selectedPokemon={selectedPokemon}/>
-        <Health sumaryHp={selectedUser.sumaryHp} selectedPokemon={selectedUser.selectedPokemon}/>
+        <Health isMyPokemon={true} sumaryHp={statsCurrentUser.sumaryHp} selectedPokemon={selectedPokemon}/>
+        <Health isMyPokemon={false} sumaryHp={selectedUser.sumaryHp} selectedPokemon={selectedUser.selectedPokemon}/>
 
     </div>
 }

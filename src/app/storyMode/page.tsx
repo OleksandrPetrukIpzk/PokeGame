@@ -32,7 +32,7 @@ import '../globals.css'
 import {addAchives} from "@/functions/achives";
 import {addClick, addCountOfRichCoins, addCountOfStage} from "@/redux/features/achievements";
 import {useTranslate} from "@tolgee/react";
-import {checkTypes, sendWinner} from "@/functions/figts";
+import {checkTypes} from "@/functions/figts";
 import {Ability, FighterT} from "@/constants/types";
 export default function AfkArena () {
     const {t} = useTranslate();
@@ -46,12 +46,32 @@ export default function AfkArena () {
 
     const hitPokemon = () =>{
         if(isHit(yourPokemon, enemyPokemon)){
+            const element = document.querySelector('#pokemon__left');
+            const elementEnemy = document.querySelector('#pokemon__right');
+            element.classList.add('pokemon__animation__right');
+            setTimeout(()=>{
+                element.classList.remove('pokemon__animation__right');
+                elementEnemy.classList.add('pokemon__animation__left');
+                setTimeout( () =>{
+                    elementEnemy.classList.remove('pokemon__animation__left');
+                }, 2000)
+            }, 2000)
             hit(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack, enemyPokemon.sumaryAttack)
             addAchives(id, 'click', click, dispatch, ids, t('Notification.hit'), addClick, t)
         } else if(isYouLose(yourPokemon, enemyPokemon)){
+            const elementEnemy = document.querySelector('#pokemon__right');
+            elementEnemy.classList.add('pokemon__animation__left');
+            setTimeout(()=>{
+                elementEnemy.classList.remove('pokemon__animation__left');
+            }, 2000)
             setGameStatus(LOSE)
             youLose(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack);
         } else if(isYouWin(yourPokemon, enemyPokemon)){
+            const element = document.querySelector('#pokemon__left');
+            element.classList.add('pokemon__animation__right');
+            setTimeout(()=>{
+                element.classList.remove('pokemon__animation__right');
+            }, 2000)
             setGameStatus(WIN);
             youWin(setYourPokemon, setEnemyPokemon, enemyPokemon.sumaryAttack);
             addAchives(id, 'countOfStage', countOfStage, dispatch, ids, t('Notification.stage'), addCountOfStage, t);
@@ -60,10 +80,20 @@ export default function AfkArena () {
     }
     const handleLeave = () =>{
         if(isBiggest(yourPokemon.speed, enemyPokemon.speed)){
-            setIsFight(false);
+            const element = document.querySelector('#pokemon__left');
+            element.classList.add('pokemon__animation__leave__right');
+            setTimeout(() =>{
+                setIsFight(false);
+                element.classList.remove('pokemon__animation__leave__right');
+            }, 2000)
         }
         else{
-            youCantLeave()
+            youCantLeave();
+            const element = document.querySelector('#pokemon__left');
+            element.classList.add('pokemon__animation__cantLeave__right');
+            setTimeout(()=>{
+                element.classList.remove('pokemon__animation__cantLeave__right');
+            }, 2000)
         }
     }
     const sendResult = async () =>{
@@ -80,6 +110,11 @@ export default function AfkArena () {
         scaleDMG(enemyPokemon, yourPokemon, setYourPokemon, setEnemyPokemon);
     }
     const specialHit = () => {
+        const element = document.querySelector('#pokemon__left');
+        element.classList.add('pokemon__animation__right');
+        setTimeout(()=>{
+            element.classList.remove('pokemon__animation__right');
+        }, 2000)
         let startDmgCurrentUser = 1;
         yourPokemon.types?.forEach((item: Ability) => {
             enemyPokemon.types.forEach((type: Ability) => {
@@ -95,6 +130,11 @@ export default function AfkArena () {
         }
     }
     const specialHealth = () => {
+        const element = document.querySelector('.health__true');
+        element.classList.add('health__animation__true');
+        setTimeout(() => {
+            element.classList.remove('health__animation__true');
+        }, 2000)
         let startDmgCurrentUser = 1;
         yourPokemon.types?.forEach((item: Ability) => {
             enemyPokemon.types.forEach((type: Ability) => {

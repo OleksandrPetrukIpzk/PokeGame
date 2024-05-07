@@ -250,3 +250,68 @@ body {
 .button_margin{
   margin-right: 20px !important;
 }
+.dead__pokemon{
+  filter: invert(41%) sepia(99%) saturate(9%) hue-rotate(331deg) brightness(100%) contrast(87%);
+  opacity: 0.5;
+}
+.pokemon__animation__right{
+  position: relative;
+  animation: pokemonRight;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+}
+
+@keyframes pokemonRight {
+  0%   {left: 0px; top: 0px;}
+  70%  {left: 500px; top: 0px;}
+  100%  {left: 500px; top: 0px;}
+}
+.pokemon__animation__left{
+  position: relative;
+  animation: pokemonLeft;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+}
+@keyframes pokemonLeft{
+  0%   {right: 0px; top: 0px;}
+  70%  {right: 500px; top: 0px;}
+  100%  {right: 500px; top: 0px;}
+}
+
+.pokemon__animation__cantLeave__right{
+  position: relative;
+  animation: pokemonCantLeave;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+}
+@keyframes pokemonCantLeave{
+  0%   {right: 30px; top: 0px;}
+  100%   {left: 30px; top: 0px;}
+}
+.pokemon__animation__leave__right{
+  position: relative;
+  animation: pokemonLeave;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+}
+@keyframes pokemonLeave{
+  0%   {opacity: 1}
+  100%   {opacity: 0;}
+}
+.health__animation__true{
+  position: relative;
+  animation: addHealth;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-direction: normal;
+}
+@keyframes addHealth{
+  0% { color: white; }
+  40% { color: pink; }
+  70% { color: hotpink; }
+  100% {color: deeppink; }
+ }
