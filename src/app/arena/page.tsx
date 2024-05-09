@@ -34,6 +34,7 @@ import {checkTypes, sendWinner} from "@/functions/figts";
 import {useTranslate} from "@tolgee/react";
 import {IUser} from "@/models/user";
 import {Ability, ArenaFightT, FighterT} from "@/constants/types";
+import {PotionPanel} from "@/components/PotionPanel";
 type UserInfo = {
     data: {
         stats: {
@@ -56,9 +57,10 @@ export default function Arena () {
     const [isSelectedUser, setIsSelectedUser] = useState(false);
     const [isFight, setIsFight] = useState(false);
     const [statsCurrentUser, setStatsCurrentUser] = useState<ArenaFightT>(DEFAULT_TEMPLATE_USER_FOR_FIGHT);
-    const [activeID, setActiveID] = useState(0);
     const dispatch = useDispatch()
     const {selectedPokemon, id, rang, name, coins} = useAppSelector((state) => state.authReducer.value);
+    const [rewardRang, setRewardRang] = useState(rang);
+    const [rewardCoins, setRewardCoins] = useState(coins);
     const {click, countOfWins, countOfLose, countOfRichCoins, ids} = useAppSelector((state) => state.achiveReducer.value);
     const filterUsers = (users: IUser[], radius: number): IUser[] => {
         const filteredUsers: IUser[] = users.filter(user =>Math.abs(user.rang - rang) <= radius);
@@ -87,19 +89,79 @@ export default function Arena () {
         setSelectedUser(userDetailInfo);
         setIsSelectedUser(true);
     }
+
+    const handleChoicePotion = (idPotion: number) =>{
+        switch(idPotion){
+            case 1:{
+                // todo: add animation
+                setStatsCurrentUser(prev => {
+                    return {
+                        ...prev,
+                        speed: prev.sumaryAttack + 100000
+                    }
+                });
+                break;
+            }
+            case 2: {
+                setStatsCurrentUser(prev =>{
+                    return {
+                        ...prev,
+                        sumaryHp: prev.sumaryHp * 2,
+                    }
+                });
+                break;
+            }
+            case 3: {
+                setStatsCurrentUser(prev =>{
+                    return {
+                        ...prev,
+                        sumaryAttack: prev.sumaryAttack * 2,
+                    }
+                })
+                break;
+            }
+            case 4:{
+                setRewardRang(prev => prev + 20);
+                break;
+            }
+            case 5: {
+                const element = document.querySelector('#pokemon__left');
+                element.classList.add('pokemon__animation__right');
+                setTimeout(()=>{
+                    element.classList.remove('pokemon__animation__right');
+                }, 2000)
+                setGameStatus(WIN);
+                youWin(setStatsCurrentUser, setSelectedUser, 0);
+                sendWinner(name, selectedUser.name,  name, id, rewardRang, selectedUser.id, selectedUser.rang);
+                addAchives(id, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins, t);
+                addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t);
+                break;
+            }
+            case 6: {
+                setRewardRang(prev => prev + 1);
+                break;
+            }
+            case 7: {
+                // todo: add animation
+                setStatsCurrentUser(prev => {
+                   return {
+                       ...prev,
+                       sumaryAttack: prev.sumaryAttack + selectedUser.sumaryAttack
+                   }
+                });
+                setSelectedUser(prev => {
+                    return {
+                        ...prev,
+                        sumaryAttack: prev.sumaryAttack / 2
+                    }
+                });
+                break;
+            }
+        }
+
+    }
+
     const hitPokemon = () => {
-        if(activeID === 5){
-            const element = document.querySelector('#pokemon__left');
-            element.classList.add('pokemon__animation__right');
-            setTimeout(()=>{
-                element.classList.remove('pokemon__animation__right');
-            }, 2000)
-            setGameStatus(WIN);
-            youWin(setStatsCurrentUser, setSelectedUser, 0);
-            sendWinner(name, selectedUser.name,  name, id, rang, selectedUser.id, selectedUser.rang);
-            addAchives(id, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins, t);
-            addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t);
-        } else{
             if(isHit(statsCurrentUser, selectedUser)){
                 const element = document.querySelector('#pokemon__left');
                 const elementEnemy = document.querySelector('#pokemon__right');
@@ -111,12 +173,7 @@ export default function Arena () {
                         elementEnemy.classList.remove('pokemon__animation__left');
                     }, 2000)
                 }, 2000)
-                if(activeID === 7){
-                    hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack + selectedUser.sumaryAttack, selectedUser.sumaryAttack / 2);
-                } else{
                     hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack);
-                }
-
                 addAchives(id, 'click', click, dispatch, ids, t("Notification.hit"), addClick, t)
 
             } else if(isYouLose(statsCurrentUser, selectedUser)){
@@ -127,7 +184,7 @@ export default function Arena () {
                 }, 2000)
                 setGameStatus(LOSE)
                 youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
-                sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, id, rang)
+                sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, id, rewardRang)
                 addAchives(id, 'countOfLose', countOfLose, dispatch, ids, t("Notification.lose"), addCountOfLose, t);
             } else if(isYouWin(statsCurrentUser, selectedUser)){
                 const element = document.querySelector('#pokemon__left');
@@ -137,16 +194,11 @@ export default function Arena () {
                 }, 2000)
                 setGameStatus(WIN)
                 youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
-                if(activeID === 4){
-                    sendWinner(name, selectedUser.name,  name, id, rang + 20, selectedUser.id, selectedUser.rang)
-                }
-                else {
-                    sendWinner(name, selectedUser.name,  name, id, rang, selectedUser.id, selectedUser.rang)
-                }
+                    sendWinner(name, selectedUser.name,  name, id, rewardRang, selectedUser.id, selectedUser.rang)
                 addAchives(id, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins, t)
                 addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t)
             }
-        }
+
     }
     const specialHit = () =>{
         const element = document.querySelector('#pokemon__left');
@@ -164,12 +216,7 @@ export default function Arena () {
         if(selectedUser.sumaryHp - statsCurrentUser.specialAttack * 100 * startDmgCurrentUser <= 0){
             setGameStatus(WIN)
             youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
-            if(activeID === 4){
-                sendWinner(name, selectedUser.name,  name, id, rang + 20, selectedUser.id, selectedUser.rang)
-            }
-            else {
-                sendWinner(name, selectedUser.name,  name, id, rang, selectedUser.id, selectedUser.rang,)
-            }
+                sendWinner(name, selectedUser.name,  name, id, rewardRang, selectedUser.id, selectedUser.rang,)
             addAchives(id, 'countOfWins', countOfWins, dispatch, ids, t("Notification.win"), addCountOfWins, t)
             addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t)
         }
@@ -195,13 +242,12 @@ export default function Arena () {
         })
     }
     const handleLeave = () =>{
-        if(statsCurrentUser.speed > selectedUser.speed || activeID === 1){
+        if(statsCurrentUser.speed > selectedUser.speed){
             const element = document.querySelector('#pokemon__left');
             element.classList.add('pokemon__animation__leave__right');
             setTimeout(() =>{
                 setIsFight(false);
                 setIsSelectedUser(false);
-                setActiveID(0);
                 element.classList.remove('pokemon__animation__leave__right');
             }, 2000)
         } else{
@@ -218,13 +264,8 @@ export default function Arena () {
         let reward = NUMBER_ONE;
         if(isTheSame(gameStatus, WIN)){
             winner = id;
-            if(activeID === 6){
-                reward += coins + reward;
-            }
-            else{
-                reward += coins;
-            }
-            dispatch(changeCountOfMoney(reward));
+           setRewardCoins(prev => prev + 1);
+            dispatch(changeCountOfMoney(rewardCoins));
         }else{
             winner = selectedUser.id
             reward += selectedUser.coins
@@ -233,7 +274,6 @@ export default function Arena () {
         setIsSelectedUser(false);
         setIsFight(false);
         setGameStatus(EMPTY_STRING);
-        setActiveID(0);
     }
 
     useEmptyAuth()
@@ -264,8 +304,9 @@ export default function Arena () {
                         <GameStatus gameStatus={gameStatus}/>
                         <FightPanel statsCurrentUser={statsCurrentUser} selectedPokemon={selectedPokemon} selectedUser={selectedUser}/>
                         <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon} types={statsCurrentUser.types} specialHit={specialHit} specialHealth={specialHealth}/>
+                        <PotionPanel handleChange={handleChoicePotion}/>
                     </Box>
-                    : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight} activeID={activeID} setActiveID={setActiveID} setStatsCurrentUser={setStatsCurrentUser} statsCurrentUser={statsCurrentUser} setSelectedUser={setSelectedUser}/>
+                    : <EnemyPanel selectedUser={selectedUser} setIsFight={setIsFight} setStatsCurrentUser={setStatsCurrentUser} statsCurrentUser={statsCurrentUser} setSelectedUser={setSelectedUser}/>
                     }
         </Modal>
         <div>

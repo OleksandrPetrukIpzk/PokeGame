@@ -15,43 +15,11 @@ import {isTheSame} from "@/functions/logic";
 import {checkTypes} from "@/functions/figts";
 import {useTranslate} from "@tolgee/react";
 
-export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, setStatsCurrentUser, statsCurrentUser, setSelectedUser}: {selectedUser: ArenaFightT, setIsFight: Dispatch<SetStateAction<boolean>>, activeID: number, setActiveID: Dispatch<SetStateAction<number>>, setStatsCurrentUser: Dispatch<SetStateAction<ArenaFightT>>, statsCurrentUser: ArenaFightT, setSelectedUser: Dispatch<SetStateAction<ArenaFightT>>}) =>{
+export const EnemyPanel = ({selectedUser, setIsFight, setStatsCurrentUser, statsCurrentUser, setSelectedUser}: {selectedUser: ArenaFightT, setIsFight: Dispatch<SetStateAction<boolean>>,  setStatsCurrentUser: Dispatch<SetStateAction<ArenaFightT>>, statsCurrentUser: ArenaFightT, setSelectedUser: Dispatch<SetStateAction<ArenaFightT>>}) =>{
     const { t } = useTranslate()
-    const arrPotions = useAppSelector((state) => state.authReducer.value.arrPotions);
-    const id = useAppSelector((state) => state.authReducer.value.id);
-    const dispatch = useDispatch();
+
     const startFight = async () =>{
         setIsFight(true);
-        if(activeID > NUMBER_ZERO){
-            const updatedArrPotions = JSON.parse(JSON.stringify(arrPotions));
-            let index = NUMBER_ZERO;
-            if(!isTheSame(arrPotions.findIndex(item => isTheSame(item.id.toString(), activeID.toString())), -1)){
-                index = arrPotions.findIndex(item => isTheSame(item.id, activeID));
-                const updateCount = updatedArrPotions[index].count - NUMBER_ONE;
-                updatedArrPotions[index].count = updateCount;
-            } else {
-                index = POTIONS.findIndex(item => isTheSame(item.id, activeID));
-                updatedArrPotions?.push(POTIONS[index]);
-            }
-            dispatch(setPotions(updatedArrPotions));
-            await UserServices.setPotions(id, updatedArrPotions);
-            if(isTheSame(activeID, 2)){
-                setStatsCurrentUser(prev =>{
-                    return {
-                        ...prev,
-                        sumaryHp: prev.sumaryHp * 2,
-                    }
-                })
-            }
-            if(isTheSame(activeID, 3)){
-                setStatsCurrentUser(prev =>{
-                    return {
-                        ...prev,
-                        sumaryAttack: prev.sumaryAttack * 2,
-                    }
-                })
-            }
-        }
         let startDmgCurrentUser = 1;
         let startDmgSelectedUser = 1;
         selectedUser.types?.forEach(item => {
@@ -81,13 +49,7 @@ export const EnemyPanel = ({selectedUser, setIsFight, activeID, setActiveID, set
                 <p>{t('Arena.typesOfPokemon')}</p>
                 <Abilities types={selectedUser?.types} isLoaded={false}/>
                 <p>{t('Arena.choicePotion')}</p>
-                {arrPotions.map(potion => {
-                    const indexIMG = IMAGE_POTIONS.findIndex(item => item.id === potion.id);
-                   return potion.count > 0 && <Button variant={activeID === potion.id ? 'contained' : 'outlined'} onClick={() => setActiveID(potion.id)}>
-                    <Image src={IMAGE_POTIONS[indexIMG].image} alt={potion.name} width={50} height={50}/>
-                       <p>{potion.name}, {t('Arena.countOfPotion')} {potion.count}</p>
-                   </Button>
-                })}
+
                 <Button variant="contained" color="error" endIcon={<SportsMmaOutlinedIcon/>} onClick={() => startFight()}>{t('Arena.fight')}</Button>
             </div>
         </div>
