@@ -115,6 +115,24 @@ export const hit = (setYourPokemon: Dispatch<SetStateAction<ArenaFightT>>, setEn
         }
     })
 }
+export const hitThree = (setYourPokemon: Dispatch<SetStateAction<FighterT[]>>, activeId: number, setEnemyPokemon: Dispatch<SetStateAction<FighterT[]>>, yourAttack: number, enemyAttack: number, enemyActiveid: number) =>{
+    setYourPokemon((prev: FighterT[]) => {
+        return prev.map((item: FighterT, id: number) =>
+            activeId === id ?  {
+                ...item,
+                sumaryHp: item.sumaryHp - enemyAttack
+            } : item
+        )
+    })
+    setEnemyPokemon((prev: FighterT[]) => {
+        return prev.map((item: FighterT, id: number) =>
+            enemyActiveid === id ?  {
+                ...item,
+                sumaryHp: item.sumaryHp - yourAttack
+            } : item
+        )
+    })
+}
 
 export const youLose = (setYourPokemon: Dispatch<SetStateAction<FighterT>>, setEnemyPokemon: Dispatch<SetStateAction<FighterT>>, yourAttack: number) =>{
     setYourPokemon((prev: FighterT) => {
@@ -131,6 +149,25 @@ export const youLose = (setYourPokemon: Dispatch<SetStateAction<FighterT>>, setE
     })
 }
 
+export const youLoseThree = (setYourPokemon: Dispatch<SetStateAction<FighterT[]>>, activeId: number, activeEnemyId: number, setEnemyPokemon: Dispatch<SetStateAction<FighterT[]>>, yourAttack: number) =>{
+    setYourPokemon((prev: FighterT[]) => {
+        return prev.map((item: FighterT, id: number) =>
+            activeId === id ?  {
+                ...item,
+                sumaryHp: NUMBER_ZERO
+            } : item
+        )
+    })
+    setEnemyPokemon((prev: FighterT[]) => {
+        return prev.map((item: FighterT, id: number) =>
+            activeEnemyId === id ?  {
+                ...item,
+                sumaryHp: item.sumaryHp - yourAttack
+            } : item
+        )
+    })
+}
+
 export const youWin = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPokemon: Dispatch<SetStateAction<any>>, enemyAttack: number) =>{
     setYourPokemon((prev: any) => {
         return {
@@ -143,6 +180,25 @@ export const youWin = (setYourPokemon: Dispatch<SetStateAction<any>>, setEnemyPo
             ...prev,
             sumaryHp: NUMBER_ZERO
         }
+    })
+}
+
+export const youWinThree = (setYourPokemon: Dispatch<SetStateAction<FighterT[]>>, setEnemyPokemon: Dispatch<SetStateAction<FighterT[]>>, enemyAttack: number, activeId: number, activeEnemyId: number) =>{
+    setYourPokemon((prev: FighterT[]) => {
+        return prev.map((item: FighterT, id: number) =>
+            activeId === id ?  {
+                ...item,
+                sumaryHp: item.sumaryHp - enemyAttack
+            } : item
+        )
+    })
+    setEnemyPokemon((prev: FighterT[]) => {
+        return prev.map((item: FighterT, id: number) =>
+            activeEnemyId === id ?  {
+                ...item,
+                sumaryHp: NUMBER_ZERO
+            } : item
+        )
     })
 }
 

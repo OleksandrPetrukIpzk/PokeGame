@@ -26,6 +26,7 @@ export default function Menu (){
                 <Button variant='contained' aria-label='Offline arena' href='/storyMode' startIcon={<StadiumOutlinedIcon/>}>{t('Menu.Offline')}</Button>
                 <Button variant='contained' aria-label='Library of pokemons' href='/achievements' startIcon={<WorkspacePremiumIcon/>}>{t('Menu.Achive')}</Button>
                 <Button variant='contained' aria-label='Top players in simulator' href='/bestPlayers' startIcon={<MilitaryTechIcon/>}>{t('Menu.Top')}</Button>
+                <Button variant='contained' aria-label='Offline arena' href='/threeForThree' startIcon={<StadiumOutlinedIcon/>}>{t('Menu.Offline')}</Button>
             </div>
         </main>)
 }

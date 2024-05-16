@@ -22,7 +22,7 @@ export const Health = ({sumaryHp, selectedPokemon, isMyPokemon}: HealthT) =>{
       else if(ARR_OF_ICONS[index + 1]?.hp >= hpInPercent){
          setActiveSmile(ARR_OF_ICONS[index + 1].value);
       }
-    }, [hpInPercent]);
+    }, [hpInPercent, selectedPokemon]);
     return(<div className='flex flex-col'>
         <p className={`text-white text-lg ${'health__'+isMyPokemon}`}>❤️ {sumaryHp}</p>
         <IconPokemon isMyPokemon={isMyPokemon} hp={hpInPercent} id={selectedPokemon} size={100}/>
