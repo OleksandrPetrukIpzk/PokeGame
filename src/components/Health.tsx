@@ -10,6 +10,7 @@ type HealthT = {
 }
 
 export const Health = ({sumaryHp, selectedPokemon, isMyPokemon}: HealthT) =>{
+
     const [startHealthPokemon, setStartHealthPokemon] = useState<number>(sumaryHp);
     const [activeSmile, setActiveSmile] = useState<string>('😈');
     const hpInPercent =  100 - (((startHealthPokemon - sumaryHp) / startHealthPokemon) * 100);
@@ -22,7 +23,11 @@ export const Health = ({sumaryHp, selectedPokemon, isMyPokemon}: HealthT) =>{
       else if(ARR_OF_ICONS[index + 1]?.hp >= hpInPercent){
          setActiveSmile(ARR_OF_ICONS[index + 1].value);
       }
-    }, [hpInPercent, selectedPokemon]);
+    }, [hpInPercent]);
+    useEffect(() => {
+        setStartHealthPokemon(sumaryHp);
+        setActiveSmile('😈');
+    }, [selectedPokemon]);
     return(<div className='flex flex-col'>
         <p className={`text-white text-lg ${'health__'+isMyPokemon}`}>❤️ {sumaryHp}</p>
         <IconPokemon isMyPokemon={isMyPokemon} hp={hpInPercent} id={selectedPokemon} size={100}/>
