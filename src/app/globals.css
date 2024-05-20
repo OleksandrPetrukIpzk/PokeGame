@@ -121,10 +121,6 @@ body {
   color: black;
   font-size: 20px;
 }
-.nav-link:hover{
-  color: white;
-  text-decoration: #1D1D1D;
-}
 .filter-element{
   color: black;
   margin: 20px;

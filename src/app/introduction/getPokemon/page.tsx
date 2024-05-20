@@ -1,31 +1,31 @@
 'use client'
 import {useEffect, useState} from "react";
 import Image from "next/image";
-import {CardPokemon} from "@/components/cardPokemon";
-import { NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
+import {EMPTY_STRING, NUMBER_ONE, NUMBER_ZERO} from "@/constants/pokemons";
 import '../../globals.css'
 import {useAppSelector} from "@/redux/store";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
 import {useEmptyAuth} from "@/hooks/useEmptyAuth";
-import {randomPokemonNumber} from "@/functions/pocemons";
 import {isTheSame} from "@/functions/logic";
-import UserServices from "@/services/userServices";
 import {IconPokemon} from "@/components/iconPokemon";
 import {useTranslate} from "@tolgee/react";
 import {getFirstPokemon} from "@/functions/asyncFynctions";
+
 export default function GetPokemon () {
     const {t} = useTranslate();
     const [isClicked, setIsClicked] = useState(false);
     const [numberPokemon, setNumberPokemon] = useState(NUMBER_ONE);
     const arrPokemons = useAppSelector((state) => state.authReducer.value.arrPokemons);
+    const selectedPokemon = useAppSelector((state) => state.authReducer.value.selectedPokemon);
     const id = useAppSelector((state) => state.authReducer.value.id);
     const router = useRouter()
 
     useEmptyAuth();
     useEffect(() => {
-        if(!isTheSame(arrPokemons.length, NUMBER_ZERO)){
-            router.push('/menu')
+
+        if(!isTheSame(arrPokemons.length, NUMBER_ZERO) || !isTheSame(selectedPokemon, EMPTY_STRING)){
+            router.push('/menu');
         }
     }, []);
     return(<main className='get-pokemon flex justify-center flex-col align-middle items-center'>
