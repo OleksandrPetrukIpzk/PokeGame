@@ -54,7 +54,7 @@ export const NameInput = ({name, setName, setErrors}: {name: string, setName: Di
     <Typography
     level="body-xs"
     sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}>
-    {name.length < 3 && t('Login.veryWeak')}
+    {name.length >= 1 && name.length < 3 && t('Login.veryWeak')}
     {name.length >= 3 && name.length < 6 && t('Login.weak')}
     {name.length >= 6 && name.length < 11 && t('Login.strong')}
     {name.length >= 11 && t('Login.veryStrong')}

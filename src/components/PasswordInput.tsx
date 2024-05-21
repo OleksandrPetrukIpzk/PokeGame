@@ -55,7 +55,7 @@ export const PasswordInput = ({password, setPassword, setErrors}: {password: str
                 level="body-xs"
                 sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
             >
-                {password.length < 5 && t('Login.veryWeak')}
+                {password.length >= 1 && password.length < 5 && t('Login.veryWeak')}
                 {password.length >= 5 && password.length < 8 && t('Login.weak')}
                 {password.length >= 8 && password.length < 11 && t('Login.strong')}
                 {password.length >= 11 && t('Login.veryStrong')}

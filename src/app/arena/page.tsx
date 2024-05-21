@@ -265,7 +265,8 @@ export default function Arena () {
         if(isTheSame(gameStatus, WIN)){
             winner = id;
            setRewardCoins(prev => prev + 1);
-            dispatch(changeCountOfMoney(rewardCoins));
+            dispatch(changeCountOfMoney(rewardCoins+1));
+            reward = rewardCoins + 1;
         }else{
             winner = selectedUser.id
             reward += selectedUser.coins

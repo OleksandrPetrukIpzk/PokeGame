@@ -39,7 +39,7 @@ export const EmailInput = ({email, setEmail, setErrors}: EmailInputT) =>{
             <Typography
                 level="body-xs"
                 sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}>
-                {isValid ? t('Login.emailGood') : t('Login.emailBad')}
+                {email.length >= 1 && (isValid ? t('Login.emailGood') : t('Login.emailBad'))}
             </Typography>
         </Stack>)
 }

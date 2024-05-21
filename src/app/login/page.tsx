@@ -42,7 +42,7 @@ export default function Login () {
                 <div className='flex flex-col items-center w-screen justify-center '>
                  <p className=' font-sans text-lg mb-4 font-medium' >{t('Login.login')}</p>
                 <InputsContainer setErrors={setErrors} email={email} name={name} setEmail={setEmail} setName={setName} password={password} setPassword={setPassword}/>
-                    <Button onClick={() => clickLogin(name, email, password, dispatch, router, setErrorFromBack)} size="lg" color="success" variant="solid" disabled={!isTheSame(errors.length, 0) || isTheSame(name, 0) || isTheSame(password, 0)}>{t('Login.loginButton')}</Button>
+                    <Button onClick={() => clickLogin(name, email, password, dispatch, router, setErrorFromBack)} size="lg" color="success" variant="solid" disabled={!isTheSame(errors.length, 0) || isTheSame(name.length, 0) || isTheSame(password.length, 0)}>{t('Login.loginButton')}</Button>
                     {errorFromBack.length > 0 && <p className='mt-2 mb-1 text-red-800'>{errorFromBack}</p>}
             <span className=' font-sans text-lg mt-4 font-medium'>
                 {t('Login.youDontHave')}
