@@ -34,12 +34,15 @@ import {addClick, addCountOfRichCoins, addCountOfStage} from "@/redux/features/a
 import {useTranslate} from "@tolgee/react";
 import {checkTypes} from "@/functions/figts";
 import {Ability, FighterT} from "@/constants/types";
+import {useWindowSize} from "@/hooks/useWindowSize";
+import {PotionPanel} from "@/components/PotionPanel";
 export default function AfkArena () {
     const {t} = useTranslate();
     const [isFight, setIsFight] = useState<boolean>(false);
     const [gameStatus, setGameStatus] = useState<string>(EMPTY_STRING);
     const [yourPokemon, setYourPokemon] = useState<FighterT>(DEFAULT_TEMPLATE_FOR_FIGHT);
     const [enemyPokemon, setEnemyPokemon] = useState<FighterT>(DEFAULT_TEMPLATE_FOR_FIGHT);
+    const {isMobile} = useWindowSize();
     const {id,coins, stageInOfflineArena,selectedPokemon  } = useAppSelector((state) => state.authReducer.value);
     const {click, countOfRichCoins, countOfStage, ids} = useAppSelector((state) => state.achiveReducer.value)
     const dispatch = useDispatch();
@@ -148,6 +151,72 @@ export default function AfkArena () {
             }
         })
     }
+    const handleChoicePotion = (idPotion: number) =>{
+        switch(idPotion){
+            case 1:{
+                // todo: add animation
+                setYourPokemon(prev => {
+                    return {
+                        ...prev,
+                        speed: prev.sumaryAttack + 100000
+                    }
+                });
+                break;
+            }
+            case 2: {
+                setYourPokemon(prev =>{
+                    return {
+                        ...prev,
+                        sumaryHp: prev.sumaryHp * 2,
+                    }
+                });
+                break;
+            }
+            case 3: {
+                setYourPokemon(prev =>{
+                    return {
+                        ...prev,
+                        sumaryAttack: prev.sumaryAttack * 2,
+                    }
+                })
+                break;
+            }
+            case 4:{
+                break;
+            }
+            case 5: {
+                const element = document.querySelector('#pokemon__left');
+                element.classList.add('pokemon__animation__right');
+                setTimeout(()=>{
+                    element.classList.remove('pokemon__animation__right');
+                }, 2000)
+                setGameStatus(WIN);
+                youWin(setYourPokemon, setEnemyPokemon, 0);
+                addAchives(id, 'countOfRichCoins', countOfRichCoins, dispatch, ids, t("Notification.winCoins"), addCountOfRichCoins, t);
+                break;
+            }
+            case 6: {
+                break;
+            }
+            case 7: {
+                // todo: add animation
+                setYourPokemon(prev => {
+                    return {
+                        ...prev,
+                        sumaryAttack: prev.sumaryAttack + enemyPokemon.sumaryAttack
+                    }
+                });
+                setEnemyPokemon(prev => {
+                    return {
+                        ...prev,
+                        sumaryAttack: prev.sumaryAttack / 2
+                    }
+                });
+                break;
+            }
+        }
+
+    }
     useEmptyAuth([stageInOfflineArena]);
     useEffect(() => {
        configurePokemons(setEnemyPokemon, setYourPokemon, selectedPokemon, stageInOfflineArena);
@@ -156,10 +225,11 @@ export default function AfkArena () {
     return(<main className='main'>
             <Header/>
             <p className='text-center text-2xl'>{t('Arena.Stage')} {stageInOfflineArena}</p>
-            {isFight && <Box sx={{...STYLES_FOR_MODAL, width: 800}} className='box__fight'>
+            {isFight && <Box sx={{...STYLES_FOR_MODAL, width: isMobile ? 300 : 800}} className='box__fight'>
               <GameStatus gameStatus={gameStatus}/>
             <Fighters yourPokemon={yourPokemon} enemyPokemon={enemyPokemon} />
                 <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon} types={yourPokemon.types} specialHealth={specialHealth} specialHit={specialHit}/>
+                <PotionPanel handleChange={handleChoicePotion}/>
             </Box>}
             <FightersPreview yourPokemon={yourPokemon} startFight={startFight} isFight={isFight} enemyPokemon={enemyPokemon}/>
         </main>)
