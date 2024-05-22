@@ -68,7 +68,7 @@ export default function Pokemon({params: {name}}: Props) {
                 <SwitchButton id={prevId} styles={'absolute link-swith-pokemon left-4'} text={t('Library.prev')}/>
                 <BackdropColorPokemon types={types} setBgColor={setBgColor}/>
                 <SwitchButton id={nextId} styles={'absolute link-swith-pokemon link-right'} text={t('Library.next')}/>
-                <Image className='m-auto relative top-5' style={{width: '400px', height: '400px'}} width={300} height={300} src={pokemonInfo.photoURL} decoding={"async"}
+                <Image className='m-auto relative top-5' width={300} height={300} src={pokemonInfo.photoURL} decoding={"async"}
                        alt={pokemonInfo.name}/>
                 <div className='flex m-auto text-center items-center flex-col pt-10 rounded-3xl ml-10 mr-10'
                      style={{background: '#FFF'}}>

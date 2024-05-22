@@ -35,7 +35,7 @@ export default function Store () {
    useEmptyAuth();
     return(<main className='get-pokemon flex  flex-col main'>
                 <Header/>
-                <div className='flex align-middle justify-center items-center'>
+                <div className='flex align-middle justify-center items-center flex-wrap'>
                     <div className='flex flex-col items-center'>
                     {isClicked ?<Link href={'/pokemon/' + numberPokemon.toString()}>
                         <IconPokemon id={numberPokemon.toString()} size={200} /></Link>
