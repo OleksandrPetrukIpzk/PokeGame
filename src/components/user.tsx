@@ -23,6 +23,7 @@ type CreatedUserArena = {
 export const User = ({id, img, rang, name, selectedPokemon, coins, email, choiceUserForFight, userAttack, userHp, userSpeed}: CreatedUserArena) =>{
     const { t } = useTranslate();
     const [statsPokemon, setStatsPokemon] = useState(INITIAL_POKEMON);
+
     useEffect(() => {
         const fetchData = async () => {
             if(selectedPokemon){

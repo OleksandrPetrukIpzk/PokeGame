@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 import {SPECIFIC_OF_ABILITIES} from "@/constants/pokemons";
 import {isTheSame} from "@/functions/logic";
 import {TypeForBackDrop} from "@/constants/types";
+import {useWindowSize} from "@/hooks/useWindowSize";
 
 type ButtonsT = {
     gameStatus: string,
@@ -39,7 +40,7 @@ export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon
         setIsDisable(true);
         setTimeout(()=>{
             setIsDisable(false);
-        }, 4001)
+        }, 2001)
         setCountOfHealth((prev: number) => {
             if(prev > 0){
               return prev - 1
@@ -60,7 +61,7 @@ export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon
         setIsDisable(true);
         setTimeout(()=>{
             setIsDisable(false);
-        }, 2001)
+        }, 1001)
         specialHealth();
         setCountOfHealth(5);
     }
@@ -68,7 +69,7 @@ export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon
         setIsDisable(true);
         setTimeout(()=>{
             setIsDisable(false);
-        }, 2001)
+        }, 1001)
         specialHit()
         setCountOfHit(5);
     }
@@ -83,7 +84,7 @@ export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon
             }
         })
     }, [types]);
-    return  (<div className={'flex gap-5'}>
+    return  (<div className={'flex flex-wrap gap-5'}>
         {!gameStatus && <Button disabled={isDisable} variant="solid" endDecorator={<SportsMmaOutlinedIcon/>} onClick={hit}>{t('Arena.hit')}</Button>}
         {!gameStatus && <Button disabled={isDisable} variant="solid" endDecorator={<DirectionsRunIcon/>} onClick={leave}>{t('Arena.leave')}</Button>}
         {!gameStatus && isDash && <Button disabled={isDisable} loading={countOfHit > 0} loadingIndicator={t('Arena.countHit', {countOfHit})} variant="solid" endDecorator={<SwipeRightIcon/>} onClick={specialA}>{t('Arena.UltraHit')}</Button>}

@@ -253,7 +253,7 @@ body {
 .pokemon__animation__right{
   position: relative;
   animation: pokemonRight;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-timing-function: ease-in;
   animation-direction: normal;
 }
@@ -263,10 +263,15 @@ body {
   70%  {left: 500px; top: 0px;}
   100%  {left: 500px; top: 0px;}
 }
+@keyframes pokemonRightMobile {
+  0%   {left: 0px; top: 0px;}
+  70%  {left: 40px; top: 0px;}
+  100%  {left: 60px; top: 0px;}
+}
 .pokemon__animation__left{
   position: relative;
   animation: pokemonLeft;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-timing-function: ease-in;
   animation-direction: normal;
 }
@@ -274,6 +279,11 @@ body {
   0%   {right: 0px; top: 0px;}
   70%  {right: 500px; top: 0px;}
   100%  {right: 500px; top: 0px;}
+}
+@keyframes pokemonLeftMobile{
+  0%   {right: 0px; top: 0px;}
+  70%  {right: 40px; top: 0px;}
+  100%  {right: 60px; top: 0px;}
 }
 
 .pokemon__animation__cantLeave__right{
@@ -301,7 +311,7 @@ body {
 .health__animation__true{
   position: relative;
   animation: addHealth;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-timing-function: ease-in;
   animation-direction: normal;
 }
@@ -330,6 +340,20 @@ nav {
 }
 
 @media only screen and (max-width: 670px) {
+  .pokemon__animation__right{
+    position: relative;
+    animation: pokemonRightMobile;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: normal;
+  }
+  .pokemon__animation__left{
+    position: relative;
+    animation: pokemonLeftMobile;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: normal;
+  }
   header .nav-btn {
     visibility: visible;
     opacity: 1;

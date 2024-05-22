@@ -35,6 +35,7 @@ import {useTranslate} from "@tolgee/react";
 import {IUser} from "@/models/user";
 import {Ability, ArenaFightT, FighterT} from "@/constants/types";
 import {PotionPanel} from "@/components/PotionPanel";
+import {useWindowSize} from "@/hooks/useWindowSize";
 type UserInfo = {
     data: {
         stats: {
@@ -57,6 +58,7 @@ export default function Arena () {
     const [isSelectedUser, setIsSelectedUser] = useState(false);
     const [isFight, setIsFight] = useState(false);
     const [statsCurrentUser, setStatsCurrentUser] = useState<ArenaFightT>(DEFAULT_TEMPLATE_USER_FOR_FIGHT);
+    const {isMobile} = useWindowSize();
     const dispatch = useDispatch()
     const {selectedPokemon, id, rang, name, coins} = useAppSelector((state) => state.authReducer.value);
     const [rewardRang, setRewardRang] = useState(rang);
@@ -301,7 +303,7 @@ export default function Arena () {
             setIsFight(false);
         }}>
                 {isFight ?
-                    <Box sx={{ ...STYLES_FOR_MODAL, width: 800 }} className='box__fight'>
+                    <Box sx={{ ...STYLES_FOR_MODAL, width: isMobile ? 300 : 800 }} className='box__fight'>
                         <GameStatus gameStatus={gameStatus}/>
                         <FightPanel statsCurrentUser={statsCurrentUser} selectedPokemon={selectedPokemon} selectedUser={selectedUser}/>
                         <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon} types={statsCurrentUser.types} specialHit={specialHit} specialHealth={specialHealth}/>
