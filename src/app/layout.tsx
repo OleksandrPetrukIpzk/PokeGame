@@ -4,8 +4,8 @@ import {DevTools, FormatSimple, Tolgee} from "@tolgee/web";
 import engLocalization from './translations/eng/eng-localization.json'
 import uaLocalization from './translations/ua/ua-localization.json'
 import {TolgeeProvider} from "@tolgee/react";
-import {useAppSelector} from "@/redux/store";
 import Cookies from "js-cookie";
+
 
 export const tolgee = Tolgee().use(DevTools()).use(FormatSimple()).init({
     staticData: {
