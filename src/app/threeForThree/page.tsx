@@ -25,9 +25,7 @@ import {addClick, addCountOfRichCoins, addCountOfStage} from "@/redux/features/a
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "@/redux/store";
 import {checkTypes} from "@/functions/figts";
-import {isTheSame} from "@/functions/logic";
 import UserServices from "@/services/userServices";
-import {changeStage} from "@/redux/features/auth-slice";
 import {useWindowSize} from "@/hooks/useWindowSize";
 
 export default function ThreeForThreePage ()  {
