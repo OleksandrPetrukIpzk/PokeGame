@@ -23,7 +23,7 @@ export const ChangePanel = () =>{
         Cookies.set('lang', value);
         tolgee.changeLanguage(value);
     }
-    return <div className='items-center mt-4 gap-1 flex justify-center'>
+    return <div className='items-center mt-4 gap-1 flex flex-wrap justify-center'>
         <div>
             <Button variant={tolgee.getLanguage() === 'ua' ? 'contained' : 'outlined'} size="large"
                     onClick={() => changeLang('ua')}>🇺🇦</Button>

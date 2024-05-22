@@ -10,6 +10,7 @@ import '../globals.css'
 export default function BestPlayers (){
     const [users, setUsers] = useState<IUser[]>([]);
     const [defaultUsers, setDefaultUsers] = useState<IUser[]>([]);
+
     useEffect(() => {
         getAllUsersForRating(setUsers, setDefaultUsers);
     }, []);
