@@ -4,8 +4,9 @@ import {DEFAULT_LINK, EMPTY_STRING, NUMBER_ONE} from "@/constants/pokemons";
 import {FighterT} from "@/constants/types";
 import {IconPokemon} from "@/components/iconPokemon";
 import ReactLoading from 'react-loading';
+import {useWindowSize} from "@/hooks/useWindowSize";
 export const ThreeForThreeEnemyPokemon = ({setEnemyPokemons, idPokemon, enemyPokemons}: {setEnemyPokemons: Dispatch<SetStateAction<FighterT[]>>, idPokemon: number, enemyPokemons: FighterT[]}) => {
-
+    const {isMobile} = useWindowSize();
     useEffect(() => {
         const randomPokemonId = Math.floor(Math.random() * 1000) + NUMBER_ONE;
         if(enemyPokemons[idPokemon - 1]?.name === EMPTY_STRING){
@@ -31,7 +32,7 @@ export const ThreeForThreeEnemyPokemon = ({setEnemyPokemons, idPokemon, enemyPok
         <div className='text-center center-align'>
             {enemyPokemons[idPokemon - 1]?.name !== "" ?
             <div>
-                <IconPokemon id={enemyPokemons[idPokemon - 1].name} size={190}/>
+                <IconPokemon id={enemyPokemons[idPokemon - 1].name} size={isMobile ? 80 : 190}/>
                 <p>{enemyPokemons[idPokemon - 1].name}</p>
             </div> : <ReactLoading type={'balls'} height={64} width={64} color={'black'} style={{ width: '190px' }} />}
         </div>

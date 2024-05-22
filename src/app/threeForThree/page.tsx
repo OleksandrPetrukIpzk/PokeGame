@@ -28,6 +28,7 @@ import {checkTypes} from "@/functions/figts";
 import {isTheSame} from "@/functions/logic";
 import UserServices from "@/services/userServices";
 import {changeStage} from "@/redux/features/auth-slice";
+import {useWindowSize} from "@/hooks/useWindowSize";
 
 export default function ThreeForThreePage ()  {
     const {t} = useTranslate();
@@ -35,6 +36,7 @@ export default function ThreeForThreePage ()  {
     const [activeId, setActiveId] = useState<number>(NUMBER_ZERO);
     const [activeEnemyId, setActiveEnemyId] = useState<number>(NUMBER_ZERO);
     const [gameStatus, setGameStatus] = useState<string>("");
+    const {isMobile} = useWindowSize();
     const [selectedPokemons, setSelectedPokemons] = useState<FighterT[]>([{
         name: '',
         sumaryAttack: 0,
@@ -333,7 +335,7 @@ export default function ThreeForThreePage ()  {
     return(<main>
     <Header/>
         <div className={'flex justify-between'}>
-        <div className={'flex gap-1 pl-5'}>
+        <div className={'flex gap-1 pl-5 flex-col flex-wrap'}>
         <SelectPokemon showModal={showModal} activeId={1} selectedPokemons={selectedPokemons}/>
         <SelectPokemon showModal={showModal} activeId={2} selectedPokemons={selectedPokemons}/>
         <SelectPokemon showModal={showModal} activeId={3} selectedPokemons={selectedPokemons}/>
@@ -341,14 +343,14 @@ export default function ThreeForThreePage ()  {
             <div className='flex flex-col items-center justify-center'>
             {!isFight && <Button disabled={selectedPokemons.findIndex(item => item.name === '') >= 0}  variant="contained" endIcon={<SportsKabaddiIcon/>} onClick={() => setIsFight(true)}>{t("Arena.fightButton")}</Button>}
             </div>
-            <div className={'flex '}>
+            <div className={'flex flex-col flex-wrap'}>
         <ThreeForThreeEnemyPokemon setEnemyPokemons={setEnemyPokemons} idPokemon={1} enemyPokemons={enemyPokemons}/>
         <ThreeForThreeEnemyPokemon setEnemyPokemons={setEnemyPokemons} idPokemon={2} enemyPokemons={enemyPokemons}/>
         <ThreeForThreeEnemyPokemon setEnemyPokemons={setEnemyPokemons} idPokemon={3} enemyPokemons={enemyPokemons}/>
             </div>
         </div>
-        {isFight &&  <Box sx={{...STYLES_FOR_MODAL, width: 800}} className='box__fight'>
-            <p>Stage {activeId + 1} VS {activeEnemyId + 1}</p>
+        {isFight &&  <Box sx={{...STYLES_FOR_MODAL, width: isMobile ? 300 : 800}} className='box__fight'>
+            <p className={'text-white'}>Stage {activeId + 1} VS {activeEnemyId + 1}</p>
             <Fighters yourPokemon={selectedPokemons[activeId]} enemyPokemon={enemyPokemons[activeEnemyId]} />
             <ButtonsForFight gameStatus={gameStatus} sendResult={sendResult} handleLeave={handleLeave} hitPokemon={hitPokemon} types={selectedPokemons[activeId].types} specialHealth={specialHealth} specialHit={specialHit}/>
         </Box>}
