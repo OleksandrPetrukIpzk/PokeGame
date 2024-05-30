@@ -1,0 +1,29 @@
+image: node:21.6.1
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+build-pages:
+  stage: build
+  script:
+    - rm -rf build
+    - CI=false npm install
+    - CI=false npm build
+    - rm -rf public
+    - cp build/index.html build/404.html
+    - mv build public
+  artifacts:
+    paths:
+     - public
+
+pages:
+  script:
+    - ls
+  artifacts:
+    paths:
+      - public

@@ -33,7 +33,7 @@ export const Health = ({sumaryHp, selectedPokemon, isMyPokemon}: HealthT) =>{
         <IconPokemon isMyPokemon={isMyPokemon} hp={hpInPercent} id={selectedPokemon} size={100}/>
         <div className='flex gap-4 items-center'>
             <p className='text-4xl'>{activeSmile}</p>
-        <LinearProgress determinate color="danger" variant={'soft'} value={hpInPercent} />
+        <LinearProgress determinate color="danger" variant={'solid'} value={hpInPercent} />
         </div>
     </div>)
 }
