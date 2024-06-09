@@ -61,7 +61,7 @@ export const DEFAULT_LINK:string = 'https://pokeapi.co/api/v2/'
 export const NUMBER_ZERO:number = 0;
 export const NUMBER_ONE :number = 1;
 
-export const BASE_URL:string = 'http://localhost:3001/'
+export const BASE_URL:string = 'https://pokegame-backend-nest-production.up.railway.app/'
 
 export const DEFAULT_TEMPLATE_FOR_FIGHT: FighterT = {
     name: '',
