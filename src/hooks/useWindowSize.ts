@@ -21,7 +21,7 @@ export const useWindowSize = (): WindowSize => {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < tablet) {
+            if (window.outerWidth < tablet) {
                 setDevice('mobile');
             }
              else{

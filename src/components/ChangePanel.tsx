@@ -39,6 +39,6 @@ export const ChangePanel = () =>{
         <Button variant='contained'
                 onClick={() => handleChoise(t('Profile.isYouChangeImage'), t('Profile.changeImage'), 'img')}>{t('Profile.changeImage')}</Button>
         <DeleteAccount/>
-        <ChangeModal mainText={header} children={textButton} func={changeFunck} open={open} setOpen={setOpen}/>
+        <ChangeModal mainText={header} children={textButton} func={changeFunck} open={open} setOpen={setOpen} />
     </div>
 }

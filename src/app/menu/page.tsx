@@ -64,7 +64,7 @@ export default function Menu (){
             <div className='p-1 border-2 rounded-lg border-black gap-5 flex flex-col justify-between w-72 h-72'>
                 <Image
                     style={{display: 'flex', flexGrow: 1}}
-                    src={'https://preview.redd.it/battle-arena-pokemon-v0-eyepg8yrbxna1.jpg?width=640&crop=smart&auto=webp&s=f1a06927bce5f670c84c572e02e74477091054b7'}
+                    src={'https://pokemongohub.net/wp-content/uploads/2018/12/Trainer-Battles-Arena.jpg'}
                     alt={'Image training pokemons'}
                     width={300} height={300}/>
                 <Button variant='contained' aria-label='Offline arena' href='/storyMode'

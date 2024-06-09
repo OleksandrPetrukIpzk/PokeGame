@@ -43,7 +43,7 @@ export const ChangeModal = ({mainText, children, func, open, setOpen}: ModalT) =
         aria-describedby="modal-modal-description"
     >
         <Box sx={{...STYLES_FOR_MODAL, width: 300}}>
-            <ModalClose />
+            <ModalClose onClick={() => setOpen(false)} />
             <Typography id="modal-modal-title" variant="h6" component="h2">
                 {mainText}
             </Typography>

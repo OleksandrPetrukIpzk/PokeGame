@@ -25,7 +25,7 @@ export default function BestPlayers (){
     useEmptyAuth();
     return(<main>
         <Header />
-       <SelectUsers handleChange={() => handleChange}/>
+       <SelectUsers handleChange={(e: any, newValue: any) => handleChange(e, newValue)}/>
         {users.map((user) =>{
             return <UserCard user={user}/>
         })}

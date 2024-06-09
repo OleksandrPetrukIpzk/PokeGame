@@ -40,7 +40,7 @@ export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon
         setIsDisable(true);
         setTimeout(()=>{
             setIsDisable(false);
-        }, 2001)
+        }, 3001)
         setCountOfHealth((prev: number) => {
             if(prev > 0){
               return prev - 1
@@ -69,7 +69,7 @@ export const ButtonsForFight = ({gameStatus, sendResult, handleLeave, hitPokemon
         setIsDisable(true);
         setTimeout(()=>{
             setIsDisable(false);
-        }, 1001)
+        }, 2001)
         specialHit()
         setCountOfHit(5);
     }
