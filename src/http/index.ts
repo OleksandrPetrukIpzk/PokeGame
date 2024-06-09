@@ -6,6 +6,9 @@ import Cookies from "js-cookie";
 const $api = axios.create({
     withCredentials: true,
     baseURL: BASE_URL,
+    headers:{
+        'Access-Control-Allow-Origin': '*',
+    }
 })
 
 $api.interceptors.request.use(
