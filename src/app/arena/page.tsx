@@ -141,7 +141,7 @@ export default function Arena () {
                 break;
             }
             case 6: {
-                setRewardRang(prev => prev + 1);
+                setRewardCoins(prev => prev + 1);
                 break;
             }
             case 7: {
