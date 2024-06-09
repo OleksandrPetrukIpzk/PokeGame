@@ -11,7 +11,7 @@ export const Search = () =>{
     const [text, setText] = useState(EMPTY_STRING);
     const router = useRouter();
     const searchPokemon = () =>{
-        axios.get(DEFAULT_LINK + 'pokemon/' + text.toLowerCase()).then(() => router.push('/pokemon/' + text)).catch(() =>{
+        axios.get(DEFAULT_LINK + 'pokemon/' + text.toLowerCase()).then(() => router.push('/pokemon/' + text.toLowerCase())).catch(() =>{
             errorNotification(t('Notification.doesntInclude'));
         });
     }
