@@ -33,6 +33,7 @@ type Props = {
 
 export default function Pokemon({params: {name}}: Props) {
     const {t} = useTranslate();
+    // @ts-ignore
     const [pokemonInfo, setPokemonInfo] = useState<PokemonDetailInfoT>({});
     const [nextId, setNextId] = useState("1");
     const [prevId, setPrevId] = useState("1");

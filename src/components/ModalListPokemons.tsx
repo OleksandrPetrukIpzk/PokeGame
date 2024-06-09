@@ -37,7 +37,7 @@ export const ModalListPokemons = ({isModalPokemonOpen, hideModal, activeId, sele
         }
     }, [selectedPokemons]);
     return(
-        <Modal open={isModalPokemonOpen} onClose={hideModal}>
+        <Modal open={isModalPokemonOpen}>
             <div className={'flex flex-wrap'}>
                 {arrIcons.map((itemId) => {
                   return(

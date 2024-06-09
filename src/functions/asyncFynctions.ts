@@ -31,6 +31,7 @@ import {addAchives} from "@/functions/achives";
 import {addCountOfLoseCoins, addCountOfPokemons} from "@/redux/features/achievements";
 import arg from "arg";
 import {POTIONS} from "@/constants/user";
+import {ColorType} from "@/components/ChangeModal";
 export const getAllFights = async (name: string, setFights: Dispatch<SetStateAction<Rang[]>>) =>{
     if(!isTheSame(name, EMPTY_STRING)){
         const response = await ArenaService.getFightForUserByName(name);
@@ -38,7 +39,7 @@ export const getAllFights = async (name: string, setFights: Dispatch<SetStateAct
     }
 }
 
-export const handleChangePersonalData = async (func: string, inputValue: string, setColorInput: Dispatch<SetStateAction<string>>, dispatch: Dispatch<AnyAction>, userId: string, setError: Dispatch<SetStateAction<string>>) =>{
+export const handleChangePersonalData = async (func: string, inputValue: string, setColorInput: Dispatch<SetStateAction<ColorType>>, dispatch: Dispatch<AnyAction>, userId: string, setError: Dispatch<SetStateAction<string>>) =>{
     switch (func){
         case 'name': {
             if(inputValue.length >= 3){

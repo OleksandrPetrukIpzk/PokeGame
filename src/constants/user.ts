@@ -1,6 +1,7 @@
 import {EMPTY_STRING, NUMBER_ZERO} from "@/constants/pokemons";
 import {IUser} from "@/models/user";
 
+// @ts-ignore
 export const INITIAL_USER: IUser = {
     id: EMPTY_STRING,
     name: EMPTY_STRING,

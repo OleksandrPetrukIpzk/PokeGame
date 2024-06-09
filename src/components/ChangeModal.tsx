@@ -2,11 +2,12 @@ import {Box, Button, Modal} from "@mui/material";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import Typography from "@mui/material/Typography";
 import {EMPTY_STRING, STYLES_FOR_MODAL} from "@/constants/pokemons";
-import Input from '@mui/joy/Input';
+import Input, {InputPropsColorOverrides} from '@mui/joy/Input';
 import {useAppSelector} from "@/redux/store";
 import {useDispatch} from "react-redux";
-import {ModalClose} from "@mui/joy";
+import {ColorPaletteProp, ModalClose} from "@mui/joy";
 import {handleChangePersonalData} from "@/functions/asyncFynctions";
+import {OverridableStringUnion} from "@mui/types";
 
 type ModalT = {
     mainText: string,
@@ -15,10 +16,11 @@ type ModalT = {
     open: boolean,
     setOpen: Dispatch<SetStateAction<boolean>>
 }
+export type ColorType = OverridableStringUnion<ColorPaletteProp, InputPropsColorOverrides>
 
 export const ChangeModal = ({mainText, children, func, open, setOpen}: ModalT) =>{
     const [inputValue, setInputValue] = useState(EMPTY_STRING);
-    const [colorInput, setColorInput] = useState<string>('neutral')
+    const [colorInput, setColorInput] = useState<ColorType>('neutral')
     const userId = useAppSelector((state) => state.authReducer.value.id);
    const [error, setError] = useState('');
     const dispatch = useDispatch()
@@ -32,6 +34,8 @@ export const ChangeModal = ({mainText, children, func, open, setOpen}: ModalT) =
     }
     const handleClose = () => setOpen(false);
 
+    // @ts-ignore
+    // @ts-ignore
     return<Modal
         open={open}
         onClose={handleClose}

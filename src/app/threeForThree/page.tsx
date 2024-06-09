@@ -173,10 +173,10 @@ export default function ThreeForThreePage ()  {
         if(isBiggest(selectedPokemons[activeId].speed, enemyPokemons[activeEnemyId].speed)){
             if(activeId === 2){
             const element = document.querySelector('#pokemon__left');
-            element.classList.add('pokemon__animation__leave__right');
+            element?.classList.add('pokemon__animation__leave__right');
             setTimeout(() =>{
                     setIsFight(false);
-                    element.classList.remove('pokemon__animation__leave__right');
+                    element?.classList.remove('pokemon__animation__leave__right');
             }, 2000)
                 setSelectedPokemons([{
                     name: '',
@@ -239,9 +239,9 @@ export default function ThreeForThreePage ()  {
         else{
             youCantLeave();
             const element = document.querySelector('#pokemon__left');
-            element.classList.add('pokemon__animation__cantLeave__right');
+            element?.classList.add('pokemon__animation__cantLeave__right');
             setTimeout(()=>{
-                element.classList.remove('pokemon__animation__cantLeave__right');
+                element?.classList.remove('pokemon__animation__cantLeave__right');
             }, 2000)
         }
     }
@@ -250,21 +250,21 @@ export default function ThreeForThreePage ()  {
         if(isHit(selectedPokemons[activeId], enemyPokemons[activeEnemyId])){
         const element = document.querySelector('#pokemon__left');
         const elementEnemy = document.querySelector('#pokemon__right');
-        element.classList.add('pokemon__animation__right');
+        element?.classList.add('pokemon__animation__right');
         setTimeout(()=>{
-            element.classList.remove('pokemon__animation__right');
-            elementEnemy.classList.add('pokemon__animation__left');
+            element?.classList.remove('pokemon__animation__right');
+            elementEnemy?.classList.add('pokemon__animation__left');
             setTimeout( () =>{
-                elementEnemy.classList.remove('pokemon__animation__left');
+                elementEnemy?.classList.remove('pokemon__animation__left');
             }, 2000)
         }, 2000)
         hitThree(setSelectedPokemons, activeId, setEnemyPokemons, selectedPokemons[activeId].sumaryAttack, enemyPokemons[activeEnemyId].sumaryAttack, activeEnemyId)
         addAchives(id, 'click', click, dispatch, ids, t('Notification.hit'), addClick, t)
     } else if(isYouLose(selectedPokemons[activeId], enemyPokemons[activeEnemyId])){
         const elementEnemy = document.querySelector('#pokemon__right');
-        elementEnemy.classList.add('pokemon__animation__left');
+        elementEnemy?.classList.add('pokemon__animation__left');
         setTimeout(()=>{
-            elementEnemy.classList.remove('pokemon__animation__left');
+            elementEnemy?.classList.remove('pokemon__animation__left');
         }, 2000)
         youLoseThree(setSelectedPokemons, activeId, activeEnemyId, setEnemyPokemons, selectedPokemons[activeId].sumaryAttack);
       if(activeId <= 1){
@@ -275,9 +275,9 @@ export default function ThreeForThreePage ()  {
       }
     } else if(isYouWin(selectedPokemons[activeId], enemyPokemons[activeEnemyId])){
         const element = document.querySelector('#pokemon__left');
-        element.classList.add('pokemon__animation__right');
+        element?.classList.add('pokemon__animation__right');
         setTimeout(()=>{
-            element.classList.remove('pokemon__animation__right');
+            element?.classList.remove('pokemon__animation__right');
         }, 2000)
         youWinThree(setSelectedPokemons, setEnemyPokemons, enemyPokemons[activeId].sumaryAttack, activeId, activeEnemyId);
         addAchives(id, 'countOfStage', countOfStage, dispatch, ids, t('Notification.stage'), addCountOfStage, t);
@@ -292,9 +292,9 @@ export default function ThreeForThreePage ()  {
 
     const specialHit = () => {
         const element = document.querySelector('#pokemon__left');
-        element.classList.add('pokemon__animation__right');
+        element?.classList.add('pokemon__animation__right');
         setTimeout(()=>{
-            element.classList.remove('pokemon__animation__right');
+            element?.classList.remove('pokemon__animation__right');
         }, 2000)
         let startDmgCurrentUser = 1;
         selectedPokemons[activeId].types?.forEach((item: Ability) => {
@@ -311,9 +311,9 @@ export default function ThreeForThreePage ()  {
     }
     const specialHealth = () => {
         const element = document.querySelector('.health__true');
-        element.classList.add('health__animation__true');
+        element?.classList.add('health__animation__true');
         setTimeout(() => {
-            element.classList.remove('health__animation__true');
+            element?.classList.remove('health__animation__true');
         }, 2000)
         let startDmgCurrentUser = 1;
         selectedPokemons[activeId].types?.forEach((item: Ability) => {

@@ -88,6 +88,7 @@ export default function Arena () {
         userDetailInfo.sumaryAttack = userDetailInfo.data.stats[1].base_stat * userDetailInfo.data.stats[3].base_stat;
         userDetailInfo.speed = userDetailInfo.data.stats[5]?.base_stat;
         userDetailInfo.types = userDetailInfo.data.types;
+        // @ts-ignore
         setSelectedUser(userDetailInfo);
         setIsSelectedUser(true);
     }
@@ -127,10 +128,10 @@ export default function Arena () {
                 break;
             }
             case 5: {
-                const element = document.querySelector('#pokemon__left');
-                element.classList.add('pokemon__animation__right');
+                const element: Element | null = document.querySelector('#pokemon__left');
+                element?.classList.add('pokemon__animation__right');
                 setTimeout(()=>{
-                    element.classList.remove('pokemon__animation__right');
+                    element?.classList.remove('pokemon__animation__right');
                 }, 2000)
                 setGameStatus(WIN);
                 youWin(setStatsCurrentUser, setSelectedUser, 0);
@@ -165,14 +166,14 @@ export default function Arena () {
 
     const hitPokemon = () => {
             if(isHit(statsCurrentUser, selectedUser)){
-                const element = document.querySelector('#pokemon__left');
-                const elementEnemy = document.querySelector('#pokemon__right');
-                element.classList.add('pokemon__animation__right');
+                const element: Element | null = document.querySelector('#pokemon__left');
+                const elementEnemy: Element | null = document.querySelector('#pokemon__right');
+                element?.classList.add('pokemon__animation__right');
                 setTimeout(()=>{
-                    element.classList.remove('pokemon__animation__right');
-                    elementEnemy.classList.add('pokemon__animation__left');
+                    element?.classList.remove('pokemon__animation__right');
+                    elementEnemy?.classList.add('pokemon__animation__left');
                     setTimeout( () =>{
-                        elementEnemy.classList.remove('pokemon__animation__left');
+                        elementEnemy?.classList.remove('pokemon__animation__left');
                     }, 2000)
                 }, 2000)
                     hit(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack, selectedUser.sumaryAttack);
@@ -180,19 +181,20 @@ export default function Arena () {
 
             } else if(isYouLose(statsCurrentUser, selectedUser)){
                 const elementEnemy = document.querySelector('#pokemon__right');
-                elementEnemy.classList.add('pokemon__animation__left');
+                elementEnemy?.classList.add('pokemon__animation__left');
                 setTimeout(()=>{
-                    elementEnemy.classList.remove('pokemon__animation__left');
+                    elementEnemy?.classList.remove('pokemon__animation__left');
                 }, 2000)
                 setGameStatus(LOSE)
+                // @ts-ignore
                 youLose(setStatsCurrentUser, setSelectedUser, statsCurrentUser.sumaryAttack);
                 sendWinner(name, selectedUser.name,  selectedUser.name, selectedUser.id, selectedUser.rang, id, rewardRang)
                 addAchives(id, 'countOfLose', countOfLose, dispatch, ids, t("Notification.lose"), addCountOfLose, t);
             } else if(isYouWin(statsCurrentUser, selectedUser)){
-                const element = document.querySelector('#pokemon__left');
-                element.classList.add('pokemon__animation__right');
+                const element: Element | null = document.querySelector('#pokemon__left');
+                element?.classList.add('pokemon__animation__right');
                 setTimeout(()=>{
-                    element.classList.remove('pokemon__animation__right');
+                    element?.classList.remove('pokemon__animation__right');
                 }, 2000)
                 setGameStatus(WIN)
                 youWin(setStatsCurrentUser, setSelectedUser, selectedUser.sumaryAttack)
@@ -203,10 +205,10 @@ export default function Arena () {
 
     }
     const specialHit = () =>{
-        const element = document.querySelector('#pokemon__left');
-        element.classList.add('pokemon__animation__right');
+        const element: Element | null = document.querySelector('#pokemon__left');
+        element?.classList.add('pokemon__animation__right');
         setTimeout(()=>{
-            element.classList.remove('pokemon__animation__right');
+            element?.classList.remove('pokemon__animation__right');
         }, 2000)
         let startDmgCurrentUser = 1;
         selectedUser.types?.forEach(item => {
@@ -225,10 +227,10 @@ export default function Arena () {
     }
 
     const specialHealth = () => {
-        const element = document.querySelector('.health__true');
-        element.classList.add('health__animation__true');
+        const element: Element | null = document.querySelector('.health__true');
+        element?.classList.add('health__animation__true');
         setTimeout(() => {
-            element.classList.remove('health__animation__true');
+            element?.classList.remove('health__animation__true');
         }, 2000)
         let startDmgCurrentUser = 1;
         selectedUser.types?.forEach(item => {
@@ -245,19 +247,19 @@ export default function Arena () {
     }
     const handleLeave = () =>{
         if(statsCurrentUser.speed > selectedUser.speed){
-            const element = document.querySelector('#pokemon__left');
-            element.classList.add('pokemon__animation__leave__right');
+            const element: Element | null = document.querySelector('#pokemon__left');
+            element?.classList.add('pokemon__animation__leave__right');
             setTimeout(() =>{
                 setIsFight(false);
                 setIsSelectedUser(false);
-                element.classList.remove('pokemon__animation__leave__right');
+                element?.classList.remove('pokemon__animation__leave__right');
             }, 2000)
         } else{
             youCantLeave()
             const element = document.querySelector('#pokemon__left');
-            element.classList.add('pokemon__animation__cantLeave__right');
+            element?.classList.add('pokemon__animation__cantLeave__right');
             setTimeout(()=>{
-                element.classList.remove('pokemon__animation__cantLeave__right');
+                element?.classList.remove('pokemon__animation__cantLeave__right');
             }, 2000)
         }
     }

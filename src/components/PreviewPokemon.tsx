@@ -14,7 +14,7 @@ export const PreviewPokemon = ({pokemon}: PreviewPokemonT ) =>{
     const {isMobile} = useWindowSize();
     return <div className='flex flex-col items-center'>
         <p className='text-lg'>{t('Arena.it')} {pokemon.name}</p>
-        <Image src={pokemon.img} alt={pokemon.name} width={isMobile ? 100 : 200} height={isMobile ? 100 : 200}/>
+        <Image src={pokemon.img ? pokemon.img : '' } alt={pokemon.name} width={isMobile ? 100 : 200} height={isMobile ? 100 : 200}/>
         <div className={isMobile ? 'flex flex-col mt-5' : 'flex mt-5'}>
             <div className='flex  items-center mr-5'>
                 <Image width={isMobile ? 15 : 30} height={isMobile ? 15 : 30} src='/Heart_corazón.svg.png' alt='Symbol hearth'/>
@@ -30,7 +30,7 @@ export const PreviewPokemon = ({pokemon}: PreviewPokemonT ) =>{
         </div>
         <div className='flex items-center'>
             <p className='my-3'>{t('Arena.typesOfPokemon')}</p>
-            <Abilities types={pokemon?.types} isLoaded={false}/>
+            <Abilities types={pokemon.types ? pokemon.types : []} isLoaded={false}/>
         </div>
     </div>
 }

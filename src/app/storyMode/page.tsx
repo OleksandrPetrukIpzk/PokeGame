@@ -51,29 +51,30 @@ export default function AfkArena () {
         if(isHit(yourPokemon, enemyPokemon)){
             const element = document.querySelector('#pokemon__left');
             const elementEnemy = document.querySelector('#pokemon__right');
-            element.classList.add('pokemon__animation__right');
+            element?.classList.add('pokemon__animation__right');
             setTimeout(()=>{
-                element.classList.remove('pokemon__animation__right');
-                elementEnemy.classList.add('pokemon__animation__left');
+                element?.classList.remove('pokemon__animation__right');
+                elementEnemy?.classList.add('pokemon__animation__left');
                 setTimeout( () =>{
-                    elementEnemy.classList.remove('pokemon__animation__left');
+                    elementEnemy?.classList.remove('pokemon__animation__left');
                 }, 2000)
             }, 2000)
+            // @ts-ignore
             hit(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack, enemyPokemon.sumaryAttack)
             addAchives(id, 'click', click, dispatch, ids, t('Notification.hit'), addClick, t)
         } else if(isYouLose(yourPokemon, enemyPokemon)){
             const elementEnemy = document.querySelector('#pokemon__right');
-            elementEnemy.classList.add('pokemon__animation__left');
+            elementEnemy?.classList.add('pokemon__animation__left');
             setTimeout(()=>{
-                elementEnemy.classList.remove('pokemon__animation__left');
+                elementEnemy?.classList.remove('pokemon__animation__left');
             }, 2000)
             setGameStatus(LOSE)
             youLose(setYourPokemon, setEnemyPokemon, yourPokemon.sumaryAttack);
         } else if(isYouWin(yourPokemon, enemyPokemon)){
             const element = document.querySelector('#pokemon__left');
-            element.classList.add('pokemon__animation__right');
+            element?.classList.add('pokemon__animation__right');
             setTimeout(()=>{
-                element.classList.remove('pokemon__animation__right');
+                element?.classList.remove('pokemon__animation__right');
             }, 2000)
             setGameStatus(WIN);
             youWin(setYourPokemon, setEnemyPokemon, enemyPokemon.sumaryAttack);
@@ -84,18 +85,18 @@ export default function AfkArena () {
     const handleLeave = () =>{
         if(isBiggest(yourPokemon.speed, enemyPokemon.speed)){
             const element = document.querySelector('#pokemon__left');
-            element.classList.add('pokemon__animation__leave__right');
+            element?.classList.add('pokemon__animation__leave__right');
             setTimeout(() =>{
                 setIsFight(false);
-                element.classList.remove('pokemon__animation__leave__right');
+                element?.classList.remove('pokemon__animation__leave__right');
             }, 2000)
         }
         else{
             youCantLeave();
             const element = document.querySelector('#pokemon__left');
-            element.classList.add('pokemon__animation__cantLeave__right');
+            element?.classList.add('pokemon__animation__cantLeave__right');
             setTimeout(()=>{
-                element.classList.remove('pokemon__animation__cantLeave__right');
+                element?.classList.remove('pokemon__animation__cantLeave__right');
             }, 2000)
         }
     }
@@ -114,9 +115,9 @@ export default function AfkArena () {
     }
     const specialHit = () => {
         const element = document.querySelector('#pokemon__left');
-        element.classList.add('pokemon__animation__right');
+        element?.classList.add('pokemon__animation__right');
         setTimeout(()=>{
-            element.classList.remove('pokemon__animation__right');
+            element?.classList.remove('pokemon__animation__right');
         }, 2000)
         let startDmgCurrentUser = 1;
         yourPokemon.types?.forEach((item: Ability) => {
@@ -124,6 +125,7 @@ export default function AfkArena () {
                 startDmgCurrentUser *= checkTypes(type.type.name, item.type.name);
             })
         })
+        // @ts-ignore
         hit(setYourPokemon, setEnemyPokemon, yourPokemon.specialAttack * 100 * startDmgCurrentUser, 0);
         if (enemyPokemon.sumaryHp - yourPokemon.specialAttack * 100 * startDmgCurrentUser <= 0) {
             setGameStatus(WIN);
@@ -134,9 +136,9 @@ export default function AfkArena () {
     }
     const specialHealth = () => {
         const element = document.querySelector('.health__true');
-        element.classList.add('health__animation__true');
+        element?.classList.add('health__animation__true');
         setTimeout(() => {
-            element.classList.remove('health__animation__true');
+            element?.classList.remove('health__animation__true');
         }, 2000)
         let startDmgCurrentUser = 1;
         yourPokemon.types?.forEach((item: Ability) => {
@@ -186,9 +188,9 @@ export default function AfkArena () {
             }
             case 5: {
                 const element = document.querySelector('#pokemon__left');
-                element.classList.add('pokemon__animation__right');
+                element?.classList.add('pokemon__animation__right');
                 setTimeout(()=>{
-                    element.classList.remove('pokemon__animation__right');
+                    element?.classList.remove('pokemon__animation__right');
                 }, 2000)
                 setGameStatus(WIN);
                 youWin(setYourPokemon, setEnemyPokemon, 0);
@@ -217,6 +219,7 @@ export default function AfkArena () {
         }
 
     }
+    // @ts-ignore
     useEmptyAuth([stageInOfflineArena]);
     useEffect(() => {
        configurePokemons(setEnemyPokemon, setYourPokemon, selectedPokemon, stageInOfflineArena);

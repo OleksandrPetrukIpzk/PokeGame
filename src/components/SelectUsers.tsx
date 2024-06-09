@@ -2,7 +2,7 @@ import {Option, Select} from "@mui/joy";
 import {useTranslate} from "@tolgee/react";
 
 type SelectUsersT = {
-    handleChange: Function
+    handleChange: () => void
 }
 
 export const SelectUsers = ({handleChange}: SelectUsersT) => {

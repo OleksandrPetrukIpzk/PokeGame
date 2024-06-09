@@ -31,7 +31,7 @@ export default function Login () {
     }
     useAuth('menu', 'login');
     return(
-        <main  className={!isMobile && 'h-screen flex justify-stretch items-stretch'}>
+        <main  className={!isMobile ? 'h-screen flex justify-stretch items-stretch' : ''}>
             {isMobile ?
                 <>
                     <div className='flex flex-col items-center w-screen justify-center '>

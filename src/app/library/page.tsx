@@ -37,13 +37,14 @@ export default function Home() {
     setIsLoaded(true);
   }).catch(() => errorNotification);
   },[baseUrl]);
-  return (
+
+    return (
       <div className='main'>
           <Header/>
           <main className='h-max pl-20 pt-10'>
               <ControlButtons previousUrl={previousUrl} setBaseUrl={setBaseUrl} setIsLoaded={setIsLoaded} nextUrl={nextUrl}/>
               <div className='flex flex-wrap justify-center'>
-              {isLoaded ? pokemons.map((pokemon: object): JSX.Element =>
+              {isLoaded ? pokemons.map((pokemon: {name: string}): JSX.Element =>
                       <CardPokemon key={pokemon.name} pokemon={pokemon} isLoaded={isLoaded}/>) :
                   <p>{t('Library.loading')}</p>}
               </div>

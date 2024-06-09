@@ -262,12 +262,14 @@ export const scaleDMG = (enemyPokemon: any, yourPokemon: any, setYourPokemon: Di
             startDmgSelectedUser *= checkTypes(item.type.name, type.type.name);
         })
     })
+    // @ts-ignore
     setYourPokemon(prev => {
         return{
             ...prev,
             sumaryAttack: prev.sumaryAttack * startDmgCurrentUser
         }
     })
+    // @ts-ignore
     setEnemyPokemon(prev => {
         return{
             ...prev,

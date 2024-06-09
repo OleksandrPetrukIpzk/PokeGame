@@ -34,7 +34,7 @@ export const EvolutedPokemon = ({name, link, lvl, maxLvl, updatePokemon}: Evolut
         dispatch(selectPokemon(pokemonId));
     }
 
-    return(<div className={isSelected ? 'bg-amber-200' : isInclude && 'bg-blue-200'} style={{borderRadius: 20, padding: 20, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    return(<div className={isSelected ? 'bg-amber-200' : isInclude ? 'bg-blue-200' : ''} style={{borderRadius: 20, padding: 20, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <IconPokemon id={pokemonId} size={200}/>
         <Link href={'/pokemon/'+pokemonId}>{name}</Link>
         <div className='flex flex-col'>

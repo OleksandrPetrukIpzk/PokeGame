@@ -17,11 +17,12 @@ import {FaBars, FaTimes} from "react-icons/fa";
 export const Header = () =>{
     const {t} = useTranslate();
     const {name, coins, img} =  useAppSelector((state) => state.authReducer.value);
-    const navRef = useRef();
+    const navRef = useRef<HTMLElement>(null);
     const {isMobile} = useWindowSize();
     const dispatch = useDispatch();
     const router = useRouter();
     const showNavbar = () => {
+        // @ts-ignore
         navRef.current.classList.toggle(
             "responsive_nav"
         );

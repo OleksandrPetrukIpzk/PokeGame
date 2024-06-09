@@ -34,7 +34,11 @@ export const ThreeForThreeEnemyPokemon = ({setEnemyPokemons, idPokemon, enemyPok
             <div>
                 <IconPokemon id={enemyPokemons[idPokemon - 1].name} size={isMobile ? 80 : 190}/>
                 <p>{enemyPokemons[idPokemon - 1].name}</p>
-            </div> : <ReactLoading type={'balls'} height={64} width={64} color={'black'} style={{ width: '190px' }} />}
+
+            </div> :
+                <div  style={{ width: '190px' }}>
+                <ReactLoading type={'balls'} height={64} width={64} color={'black'} />
+                </div>}
         </div>
     )
 }
